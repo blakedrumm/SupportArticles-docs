@@ -7,7 +7,7 @@ ms.reviewer: nicholad
 ---
 # Troubleshoot event ID 2115-related performance problems in Operations Manager
 
-This article helps you identify and troubleshoot performance problems that affect Operations Manager (OpsMgr) database and data warehouse data insertion time. It applies to all supported versions of System Center Operations Manager
+This article helps you identify and troubleshoot performance problems that affect the Operations Manager (OperationsManager) database and Data Warehouse (OperationsManagerDW) data insertion time. The following applies to all supported versions of System Center Operations Manager.
 
 _Original product version:_ &nbsp; System Center Operations Manager  
 _Original KB number:_ &nbsp; 2681388
@@ -334,7 +334,7 @@ This issue can occur if the management server does not have accounts that are sp
    - Assign the Data Warehouse Report Deployment Account to the Data Warehouse Report Deployment Account profile.
    - Assign the Data Warehouse SQL Server Authentication Account to the Data Warehouse SQL Server Authentication Account profile.
 
-1. On the management server that generated the alert, restart **OpsMgr Health Service**.
+1. On the management server that generated the alert, restart the **Microsoft Monitoring Agent (HealthService)**.
 1. In the Operations Manager event log on the management server, verify that event ID 31554 events are logged. Event ID 31554 indicates that the monitor state has changed to **Healthy**. This change resolves the alert.
 
 ### Scenario 6
