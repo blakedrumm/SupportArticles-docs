@@ -2,10 +2,9 @@
 title: DQSInstaller may fail accessing temp folder
 description: This article provides a resolution for the problem where the temp folder path contains an accented or special ANSI character.
 ms.date: 01/14/2021
-ms.prod-support-area-path: Data Quality Services
+ms.custom: sap:Data Quality Services
 ms.reviewer: JasonH
-ms.topic: troubleshooting
-ms.prod: sql 
+ms.topic: troubleshooting 
 ---
 # SQL Server 2012 DQSInstaller.exe may fail accessing TMP folder
 

@@ -3,11 +3,11 @@ title: OS start-up – Computer restarted unexpectedly or encountered an unexpec
 description: This article provides steps to resolve issues where the VM experiences an unexpected restart or error while installing Windows.
 services: virtual-machines, azure-resource-manager
 documentationcenter: ''
-author: v-miegge
+author: genlin
 manager: dcscontentpm
-editor: ''
 tags: azure-resource-manager
 ms.service: virtual-machines
+ms.subservice: vm-cannot-start-stop
 ms.collection: windows
 ms.workload: na
 ms.tgt_pltfrm: vm-windows
@@ -25,13 +25,13 @@ When you use [Boot diagnostics](./boot-diagnostics.md) to view the screenshot of
 
 **The computer restarted unexpectedly or encountered an unexpected error. Windows installation cannot proceed. To install Windows, click "OK" to restart the computer, and then restart the installation.**
 
-![Error while Windows Installation is in progress: The computer restarted unexpectedly or encountered an unexpected error. Windows installation cannot proceed. To install Windows, click "OK" to restart the computer, and then restart the installation.](./media/unexpected-restart-error-during-vm-boot/1.png)
- 
-![Error when Windows Installation setup is starting services: The computer restarted unexpectedly or encountered an unexpected error. Windows installation cannot proceed. To install Windows, click "OK" to restart the computer, and then restart the installation.](./media/unexpected-restart-error-during-vm-boot/2.png)
+:::image type="content" source="media/unexpected-restart-error-during-vm-boot/error-installation-in-progress.png" alt-text="Screenshot of the error while Windows Installation is in progress.":::
+
+:::image type="content" source="media/unexpected-restart-error-during-vm-boot/error-installation-setup.png" alt-text="Screenshot of the error when Windows Installation setup is starting services.":::
 
 ## Cause
 
-The machine is attempting to do an initial boot of a [generalized image](/windows-hardware/manufacture/desktop/sysprep--generalize--a-windows-installation), but encounters trouble due to a custom answer file (Unattend.xml) being processed. **Custom answer files are not supported in Azure**. 
+The machine is attempting to do an initial boot of a [generalized image](/windows-hardware/manufacture/desktop/sysprep--generalize--a-windows-installation), but encounters trouble due to a custom answer file (Unattend.xml) being processed. **Custom answer files are not supported in Azure**.
 
 The answer file is a special XML file that contains setting definitions and values for the configuration settings you want to automate during the installation of a Windows Server operating system installation. The configuration options include instructions on how to partition disks, where to find the Windows image to be installed, product keys to apply, and other commands you would like to run.
 
@@ -61,5 +61,7 @@ You may also use the **System Preparation tool GUI** to accomplish the same task
 - Enter Out-of-Box-Experience
 - Generalize
 - Shutdown
- 
-![System Preparation tool window with OOBE, Generalize, and Shutdown options selected.](./media/unexpected-restart-error-during-vm-boot/3.png)
+
+:::image type="content" source="media/unexpected-restart-error-during-vm-boot/system-preparation-tool.png" alt-text="Screenshot of the System Preparation Tool window with O O B E, Generalize, and Shutdown options selected.":::
+
+[!INCLUDE [Azure Help Support](../../includes/azure-help-support.md)]

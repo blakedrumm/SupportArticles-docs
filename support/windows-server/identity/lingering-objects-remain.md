@@ -1,7 +1,7 @@
 ---
 title: Lingering objects still remain
 description: Describes procedures for cleaning up objects that are reintroduced to AD after you bring an offline DC back online.
-ms.date: 09/08/2020
+ms.date: 04/28/2023
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -117,7 +117,7 @@ The best way to identify the domain in which an object is located (and from that
 
 8. Select the **Attributes** box and then select the end of the attribute string. Type *;objectGUID* at the end of the string.
 
-    ![LDP Search dialog box](./media/lingering-objects-remain/type-value-in-attributes-box.png)
+    :::image type="content" source="media/lingering-objects-remain/type-value-in-attributes-box.png" alt-text="Screenshot of the Search window with ;objectGUID typed at the end of the string in the Attribute box.":::
 
     In some versions of Ldp, you have to select **Options** to see the **Attributes** box.
 
@@ -170,7 +170,7 @@ If you have only a few objects and global catalogs, follow these steps to delete
 
 4. Select **Browse** > **Modify**.
 
-    ![Modify Object using LDP](./media/lingering-objects-remain/modify-dialog.png)
+    :::image type="content" source="media/lingering-objects-remain/modify-dialog-configure-entries.png" alt-text="Screenshot of the Modify window with some entries can be configured.":::
 
 5. Configure the following entries in the **Modify** dialog box:
 
@@ -364,3 +364,7 @@ In this case the DC created the object after replication with the DCs in its own
 To resolve this issue, let these objects become real lingering objects (aged beyond TSL) and then remove them using the script in this article. To make sure that the data continues to replicate, set **Allow Replication With Divergent and Corrupt Partner**  on all DCs in the forest.
 
 If you cannot resolve the errors in the log files by using these methods, you may be experiencing a different problem. Contact Microsoft Product Support Services for additional assistance.
+
+## Data collection
+
+If you need assistance from Microsoft support, we recommend you collect the information by following the steps mentioned in [Gather information by using TSS for Active Directory replication issues](../../windows-client/windows-troubleshooters/gather-information-using-tss-ad-replication.md).

@@ -1,7 +1,7 @@
 ---
 title: Incorrect time displayed after in-place upgrade
 description: Fixes an issue where the displayed time on affected computers doesn't match the current local time after you do an in-place upgrade to a 64-bit version of Windows 7 or Windows Server 2008 R2.
-ms.date: 09/08/2020
+ms.date: 12/21/2021
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -71,7 +71,7 @@ On Windows 7 clients, verify your time zone selection during the OOBE phase of S
 
 ### Dynamic DST
 
-In some countries, the DST dates differ from year to year and cannot be defined by a single rule. Therefore, Windows includes the Dynamic DST feature that stores per-year rules in the registry. When the year changes, the current time zone information is refreshed by using the correct DST information for that year.
+In some countries/regions, the DST dates differ from year to year and cannot be defined by a single rule. Therefore, Windows includes the Dynamic DST feature that stores per-year rules in the registry. When the year changes, the current time zone information is refreshed by using the correct DST information for that year.
 
 Dynamic DST depends on the following registry value being set to the name of the time zone key where the Dynamic DST data resides (for example, "Israel Standard Time"):
 

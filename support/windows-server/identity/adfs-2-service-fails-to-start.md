@@ -1,7 +1,7 @@
 ---
 title: ADFS 2.0 service fails to start
 description: Provides troubleshooting steps for ADFS service configuration and startup problems.
-ms.date: 10/21/2020
+ms.date: 12/9/2021
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -27,8 +27,8 @@ Most of ADFS 2.0 problems belong to one of the following main categories. This a
 - [Connectivity problems](https://support.microsoft.com/help/3044971)
 - ADFS service problems (KB 3044973)
 - [Certificate problems](https://support.microsoft.com/help/3044974)
-- [Authentication problems](/troubleshoot/windows-server/identity/adfs-error-401-requested-resource-requires-authentication)
-- [Claim rules problems](/troubleshoot/windows-server/identity/adfs-2-error-access-is-denied)
+- [Authentication problems](adfs-error-401-requested-resource-requires-authentication.md)
+- [Claim rules problems](adfs-2-error-access-is-denied.md)
 
 ## Symptoms
 
@@ -135,7 +135,7 @@ For an AD FS server that uses SQL Server as configuration database, you must als
 
     In this command, \<Federation service name> represents the fully qualified domain name (FQDN) service name of the AD FS service endpoint. You can find the service name in the **Federation Service Properties** dialog box:
 
-    ![The screenshot for ADFS service name](./media/adfs-2-service-fails-to-start/federation-service-name.png)
+    :::image type="content" source="media/adfs-2-service-fails-to-start/federation-service-name.png" alt-text="Screenshot of the Federation Service Properties window showing the Federation Service name.":::
 
     To add or remove the SPN from the account, follow these steps:
 

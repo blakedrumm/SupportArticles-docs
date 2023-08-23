@@ -1,7 +1,7 @@
 ---
 title: WSUS SelfUpdate doesn't send automatic updates
 description: Provides a resolution to a problem that occurs when a WSUS SelfUpdate service does not send automatic updates and client computers do not report to the server.
-ms.date: 10/20/2020
+ms.date: 04/28/2023
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -54,8 +54,7 @@ To resolve this problem, you must have the following minimum permissions on the 
 |System|Full Control|
 |Domain/Users or Local/Users|Read&Execute, Read, List Folders|
 |IUSR_ **ComputerName**|Read&Execute, Read, List Folders|
-|||
-
+  
 > [!NOTE]
 > IUSR_ **ComputerName** represents the host name of the server that is running IIS where WSUS is installed. If this account is a member of the Users group, you do not have to explicitly define these permissions.
 
@@ -113,7 +112,7 @@ Microsoft has confirmed that this is a problem.
 
 When you use IIS, you can move the SelfUpdate directory to a different Web site. To do this, follow these steps:
 
-1. Click **Start**, click **Run**, type *Control admintools*, and then double-click **Internet Information Services (IIS) Manager**.
+1. Click **Start**, click **Run**, type _Control admintools_, and then double-click **Internet Information Services (IIS) Manager**.
 2. Expand the **Web Sites** folder, and then click the **WSUS Administration** node.
 3. Right-click the **SelfUpdate** node, point to **All Tasks**, and then click **Save Configuration to File**.
 4. Type a name for the file and then save the file to another folder. You will use this file in steps 9 through 12.
@@ -133,3 +132,7 @@ When you use IIS, you can move the SelfUpdate directory to a different Web site.
 ## References
 
 For more information about automatic updates in Windows, see [Description of the Automatic Updates feature in Windows](https://support.microsoft.com/help/294871).
+
+## Data collection
+
+If you need assistance from Microsoft support, we recommend you collect the information by following the steps mentioned in [Gather information by using TSS for deployment-related issues](../../windows-client/windows-troubleshooters/gather-information-using-tss-deployment.md).

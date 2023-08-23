@@ -1,7 +1,7 @@
 ---
 title: Service overview and network port requirements
 description: A roadmap of ports, protocols, and services that are required by Microsoft client and server operating systems, server-based applications, and their subcomponents to function in a segmented network.
-ms.date: 09/08/2020
+ms.date: 2/8/2023
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -61,14 +61,14 @@ The following list provides an overview of the information that this article con
 
 This article uses certain terms in specific ways. To help avoid confusion, make sure that you understand how the article uses these terms:
 
-- System services: System services are programs that load automatically as part of an application's startup process or as part of the operating system startup process. System services support the different tasks that the operating system must perform. For example, some system services that are available on computers that run Windows Server 2003 Enterprise Edition include the Server service, the Print Spooler service, and the World Wide Web Publishing service. Each system service has a *friendly service name* and a *service name*. The friendly service name is the name that appears in graphical management tools such as the Services Microsoft Management Console (MMC) snap-in. The service name is the name that is used with command-line tools and with many scripting languages. Each system service may provide one or more network services.
-- Application protocol: In this article, *application protocol* refers to a high-level network protocol that uses one or more TCP/IP protocols and ports. Examples of application protocols include HTTP, server message blocks (SMBs), and Simple Mail Transfer Protocol (SMTP).
+- System services: System services are programs that load automatically as part of an application's startup process or as part of the operating system startup process. System services support the different tasks that the operating system must perform. For example, some system services that are available on computers that run Windows Server 2003 Enterprise Edition include the Server service, the Print Spooler service, and the World Wide Web Publishing service. Each system service has a _friendly service name_ and a _service name_. The friendly service name is the name that appears in graphical management tools such as the Services Microsoft Management Console (MMC) snap-in. The service name is the name that is used with command-line tools and with many scripting languages. Each system service may provide one or more network services.
+- Application protocol: In this article, _application protocol_ refers to a high-level network protocol that uses one or more TCP/IP protocols and ports. Examples of application protocols include HTTP, server message blocks (SMBs), and Simple Mail Transfer Protocol (SMTP).
 - Protocol: TCP/IP protocols are standard formats for communicating between devices on a network. TCP/IP protocols operate at a lower level than the application protocols. The TCP/IP suite of protocols includes TCP, User Datagram Protocol (UDP), and Internet Control Message Protocol (ICMP).
 - Port: It's the network port that the system service listens on for incoming network traffic.
 
 This article doesn't specify which services rely on other services for network communication. For example, many services rely on the Remote Procedure Call (RPC) or DCOM features in Microsoft Windows to assign them dynamic TCP ports. The Remote Procedure Call service coordinates requests by other system services that use RPC or DCOM to communicate with client computers. Many other services rely on network basic input/output system (NetBIOS) or SMBs, protocols that are provided by the Server service. Other services rely on HTTP or on Hypertext Transfer Protocol Secure (HTTPS). These protocols are provided by Internet Information Services (IIS). A full discussion of the architecture of the Windows operating systems is beyond the scope of this article. However, detailed documentation on this subject is available on Microsoft TechNet and on the Microsoft Developer Network (MSDN) websites. Although many services may rely on a particular TCP or UDP port, only one service or process at a time can listen on that port.
 
-When you use RPC with TCP/IP or with UDP/IP as the transport, incoming ports are frequently dynamically assigned to system services as required. TCP/IP and UDP/IP ports that are higher than port 1024 are used. These ports are also informally known as *random RPC ports*. In these cases, RPC clients rely on the RPC endpoint mapper to tell them which dynamic port or ports were assigned to the server. For some RPC-based services, you can configure a specific port instead of letting RPC dynamically assign a port. You can also restrict the range of ports that RPC dynamically assigns to a small range, regardless of the service. For more information about this topic, see the [References](#references) section.
+When you use RPC with TCP/IP or with UDP/IP as the transport, incoming ports are frequently dynamically assigned to system services as required. TCP/IP and UDP/IP ports that are higher than port 1024 are used. These ports are also informally known as _random RPC ports_. In these cases, RPC clients rely on the RPC endpoint mapper to tell them which dynamic port or ports were assigned to the server. For some RPC-based services, you can configure a specific port instead of letting RPC dynamically assign a port. You can also restrict the range of ports that RPC dynamically assigns to a small range, regardless of the service. For more information about this topic, see the [References](#references) section.
 
 This article includes information about the system services roles and the server roles for the Microsoft products that are listed in the Applies to section. Although this information may also apply to Windows XP and to Microsoft Windows 2000 Professional, this article is focused on server-class operating systems. Therefore, this article describes the ports that a service listens on instead of the ports that client programs use to connect to a remote system.
 
@@ -82,9 +82,9 @@ Active Directory runs under the Lsass.exe process and includes the authenticatio
 
 > [!NOTE]
 >
-> - If your computer network environment uses only Windows Server 2008 R2, Windows Server 2008, Windows 7, or Windows Vista, you must enable connectivity over the high port range of 49152 through 65535.
+> - If your computer network environment uses only Windows Server 2008 R2, Windows Server 2008, Windows 7, Windows Vista or later versions, you must enable connectivity over the high port range of 49152 through 65535.
 >
-> - If your computer network environment uses Windows Server 2008 R2, Windows Server 2008, Windows 7, or Windows Vista together with versions of Windows earlier than Windows Server 2008 and Windows Vista, you must enable connectivity over both port ranges:  
+> - If your computer network environment uses Windows Server 2008 R2, Windows Server 2008, Windows 7, Windows Vista or later versions together with versions of Windows earlier than Windows Server 2008 and Windows Vista, you must enable connectivity over both port ranges:  
 > High port range of 49152 through 65535  
 > Low port range of 1025 through 5000
 > - If your computer network environment uses only versions of Windows earlier than Windows Server 2008 and Windows Vista, you must enable connectivity over the low port range of 1025 through 5000.
@@ -113,13 +113,10 @@ Finally, you can hard-code the port that is used for Active Directory replicatio
 |IPsec ISAKMP|UDP|500|
 |NAT-T|UDP|4500|
 |RPC|TCP|135|
-|RPC randomly allocated high TCP ports¹|TCP|1024 - 5000<br/>49152 - 65535²|
+|RPC randomly allocated high TCP ports¹|TCP|49152 - 65535|
 |SMB|TCP|445|
-||||
-
+  
 ¹ For more information about how to customize this port, see Domain controllers and Active Directory in the [References](#references) section. This section also includes remote WMI and DCOM communications first used in Windows Server 2012 domain controller promotion during prerequisite validation and with the Server Manager tool.
-
-² It's the range in Windows Server 2012, Windows 8, Windows Server 2008 R2, Windows 7, Windows Server 2008, and Windows Vista.
 
 In addition, the Microsoft LDAP client uses ICMP pings to verify that an LDAP server it has a pending request with is still present on the network. The following settings are LDAP session options:
 
@@ -142,8 +139,7 @@ System service name: **ALG**
 |Application protocol|Protocol|Ports|
 |---|---|---|
 |FTP control|TCP|21|
-||||
-
+  
 ### ASP.NET State Service
 
 ASP.NET State Service provides support for ASP.NET out-of-process session states. ASP.NET State Service stores session data out-of-process. The service uses sockets to communicate with ASP.NET that is running on a web server.
@@ -153,8 +149,7 @@ System service name: **aspnet_state**
 |Application protocol|Protocol|Ports|
 |---|---|---|
 |ASP.NET Session State|TCP|42424|
-||||
-
+  
 ### Certificate Services
 
 Certificate Services is part of the core operating system. By using Certificate Services, a business can act as its own certification authority (CA). It lets the business issue and manage digital certificates for programs and protocols such as:
@@ -173,12 +168,9 @@ System service name: **CertSvc**
 |---|---|---|
 |RPC|TCP|135|
 |SMB|TCP|445, 139|
-|Randomly allocated high TCP ports¹|TCP|**random port number between 1024 - 65535**<br/>**random port number between 49152 - 65535**²|
-||||
-
+|Randomly allocated high TCP ports¹|TCP|**random port number between 49152 - 65535**|
+  
 ¹ For more information about how to customize this port, see Remote Procedure Calls and DCOM in the [References](#references) section.
-
-² It's the range in Windows Server 2012, Windows 8, Windows Server 2008 R2, Windows 7, Windows Server 2008, and Windows Vista.
 
 For more information, see [3.2.2.6.2.1.4.5.9 msPKI-Certificate-Name-Flag](/openspecs/windows_protocols/ms-wcce/a1f27ffb-7f74-4fa1-8841-7cde4ba0bcfe).
 
@@ -194,17 +186,14 @@ System service name: **ClusSvc**
 |Cluster Service|TCP|3343 (This port is required during a node join operation.)|
 |RPC|TCP|135|
 |Cluster Administrator|UDP|137|
-|Randomly allocated high UDP ports²|UDP|Random port number between 1024 and 65535<br/>Random port number between 49152 and 65535³|
-||||
-
+|Randomly allocated high ports²|TCP|Random port number between 49152 and 65535|
+  
 > [!NOTE]
 > Additionally, for successful validation on Windows Failover Clusters on 2008 and above, allow inbound and outbound traffic for ICMP4, ICMP6, and port 445/TCP for SMB.
 >
 > ¹ Cluster Service UDP traffic over port 3343 requires the Datagram Transport Layer Security (DTLS) protocol, version 1.0 or version 1.2. By default, DTLS is enabled. For more information, see [Protocols in TLS/SSL (Schannel SSP)](/windows/win32/secauthn/protocols-in-tls-ssl--schannel-ssp-).
 >
 > ² For more information about how to customize these ports, see Remote Procedure Calls and DCOM in the [References](#references) section.
->
-> ³ It's the range in Windows Server 2012, Windows 8, Windows Server 2008 R2, Windows 7, Windows Server 2008, and Windows Vista.
 
 ### Computer Browser
 
@@ -219,8 +208,7 @@ System service name: **Browser**
 |NetBIOS Datagram Service|UDP|138|
 |NetBIOS Name Resolution|UDP|137|
 |NetBIOS Session Service|TCP|139|
-||||
-
+  
 The Browser service uses RPC over Named Pipes to compile.
 
 ### Dynamic Host Configuration Protocol (DHCP) Server
@@ -234,8 +222,7 @@ System service name: **DHCPServer**
 |DHCP Server|UDP|67|
 |MADCAP|UDP|2535|
 |DHCP Failover|TCP|647|
-||||
-
+  
 ### Distributed File System Namespaces
 
 The Distributed File System Namespaces (DFSN) integrates different file shares that are located on a local area network (LAN) or wide area network (WAN) into a single logical namespace. The DFSN service is required for Active Directory domain controllers to advertise the SYSVOL shared folder.
@@ -244,20 +231,17 @@ System service name: `Dfs`
 
 |Application protocol|Protocol|Ports|
 |---|---|---|
-|NetBIOS Datagram Service|UDP|138³|
-|NetBIOS Session Service|TCP|139³|
+|NetBIOS Datagram Service|UDP|138<sup>2</sup>|
+|NetBIOS Session Service|TCP|139<sup>2</sup>|
 |LDAP Server|TCP|389|
 |LDAP Server|UDP|389|
 |SMB|TCP|445|
 |RPC|TCP|135|
-|Randomly allocated high TCP ports¹|TCP|**random port number between 1024 - 65535**<br/>**random port number between 49152 - 65535**²|
-||||
-
+|Randomly allocated high TCP ports¹|TCP|**random port number between 49152 - 65535**|
+  
 ¹ For more information about how to customize this port, see Remote Procedure Calls and DCOM in the [References](#references) section.
 
-² It's the range in Windows Server 2012, Windows 8, Windows Server 2008 R2, Windows 7, Windows Server 2008, and Windows Vista.
-
-³ The NETBIOS ports are optional and are not required when DFSN is using FQDN Server names.
+<sup>2</sup> The NETBIOS ports are optional and are not required when DFSN is using FQDN Server names.
 
 ### Distributed File System Replication
 
@@ -268,14 +252,12 @@ System service name: **DFSR**
 |Application protocol|Protocol|Ports|
 |---|---|---|
 |RPC|TCP|135|
-|RPC|TCP|5722³|
-|Randomly allocated high TCP ports¹|TCP|**random port number between 1024 - 65535**<br/>**random port number between 49152 - 65535**²|
-||||
-
+|RPC|TCP|5722<sup>2</sup>|
+|Randomly allocated high TCP ports¹|TCP|**random port number between 49152 - 65535**|
+  
 ¹ For more information about how to customize this port, see Distributed File Replication Service in the [References](#references) section.
 
-² It's the range in Windows Server 2012, Windows 8, Windows Server 2008 R2, Windows 7, Windows Server 2008, and Windows Vista.
-³ Port 5722 is only used on a Windows Server 2008 domain controller or on a Windows Server 2008 R2 domain controller. It is not used on a Windows Server 2012 domain controller.
+<sup>2</sup> Port 5722 is only used on a Windows Server 2008 domain controller or on a Windows Server 2008 R2 domain controller. It is not used on a Windows Server 2012 domain controller.
 
 ### Distributed Link Tracking Server
 
@@ -286,12 +268,9 @@ System service name: **TrkSvr**
 |Application protocol|Protocol|Ports|
 |---|---|---|
 |RPC|TCP|135|
-|Randomly allocated high TCP ports¹|TCP|**random port number between 1024 - 65535**<br/>**random port number between 49152 - 65535**²|
-||||
-
+|Randomly allocated high TCP ports¹|TCP|**random port number between 49152 - 65535**|
+  
 ¹ For more information about how to customize this port, see Remote Procedure Calls and DCOM in the [References](#references) section.
-
-² It's the range in Windows Server 2012, Windows 8, Windows Server 2008 R2, Windows 7, Windows Server 2008, and Windows Vista.
 
 ### Distributed Transaction Coordinator
 
@@ -302,12 +281,9 @@ System service name: **MSDTC**
 |Application protocol|Protocol|Ports|
 |---|---|---|
 |RPC|TCP|135|
-|Randomly allocated high TCP ports¹|TCP|**random port number between 1024 - 5000**<br/>**random port number between 49152 - 65535**²|
-||||
-
+|Randomly allocated high TCP ports¹|TCP|**random port number between 49152 - 65535**|
+  
 ¹ For more information about how to customize this port, see Distributed Transaction Coordinator in the [References](#references) section.
-
-² It's the range in Windows Server 2012, Windows 8, Windows Server 2008 R2, Windows 7, Windows Server 2008, and Windows Vista.
 
 ### DNS Server
 
@@ -319,8 +295,7 @@ System service name: **DNS**
 |---|---|---|
 |DNS|UDP|53|
 |DNS|TCP|53|
-||||
-
+  
 ### Event Log
 
 The Event Log system service logs event messages that are generated by programs and by the Windows operating system. Event log reports contain information that you can use to diagnose problems. You view reports in Event Viewer. The Event Log service writes events that are sent to log files by programs, by services, and by the operating system. The events contain diagnostic information in addition to errors that are specific to the source program, the service, or the component. The logs can be viewed programmatically through the event log APIs or through the Event Viewer in an MMC snap-in.
@@ -333,8 +308,7 @@ System service name: **Eventlog**
 |RPC/NP|TCP|445|
 |RPC/NP|UDP|137|
 |RPC/NP|UDP|138|
-||||
-
+  
 > [!NOTE]
 > The Event Log service uses RPC over named pipes. This service has the same firewall requirements as the File and Printer Sharing feature.
 
@@ -349,12 +323,9 @@ System service name: **Fax**
 |NetBIOS Session Service|TCP|139|
 |SMB|TCP|445|
 |RPC|TCP|135|
-|Randomly allocated high TCP ports¹|TCP|**random port number between 1024 - 65535**<br/>**random port number between 49152 - 65535**²|
-||||
-
+|Randomly allocated high TCP ports¹|TCP|**random port number between 49152 - 65535**|
+  
 ¹ For more information about how to customize this port, see Remote Procedure Calls and DCOM in the [References](#references) section.
-
-² It's the range in Windows Server 2012, Windows 8, Windows Server 2008 R2, Windows 7, Windows Server 2008, and Windows Vista.
 
 ### File Replication
 
@@ -365,12 +336,9 @@ System service name: **NtFrs**
 |Application protocol|Protocol|Ports|
 |---|---|---|
 |RPC|TCP|135|
-|Randomly allocated high TCP ports¹|TCP|**random port number between 1024 - 65535**<br/>**random port number between 49152 - 65535**²|
-||||
-
+|Randomly allocated high TCP ports¹|TCP|**random port number between 49152 - 65535**|
+  
 ¹ For more information about how to customize this port, see File Replication Service in the [References](#references) section.
-
-² It's the range in Windows Server 2012, Windows 8, Windows Server 2008 R2, Windows 7, Windows Server 2008, and Windows Vista.
 
 ### FTP Publishing Service
 
@@ -382,10 +350,8 @@ System service name: **MSFTPSVC**
 |---|---|---|
 |FTP control|TCP|21|
 |FTP default data|TCP|20|
-|Randomly allocated high TCP ports|TCP| **random port number between 1024 - 65535**<br/>**random port number between 49152 - 65535¹** |
-||||
-
-¹ It's the range in Windows Server 2012, Windows 8, Windows Server 2008 R2, Windows 7, Windows Server 2008, and Windows Vista.
+|Randomly allocated high TCP ports|TCP|**random port number between 49152 - 65535** |
+  
 
 ### Group Policy
 
@@ -397,18 +363,15 @@ System service name: **Group Policy**
 
 |Application protocol|Protocol|Ports|
 |---|---|---|
-|DCOM¹|TCP + UDP|**random port number between 1024 - 65535**<br/>**random port number between 49152 - 65535**²|
-|ICMP (ping)³|ICMP|
+|DCOM¹|TCP + UDP|**random port number between 49152 - 65535**|
+|ICMP (ping)<sup>2</sup>|ICMP|
 |LDAP|TCP|389|
 |SMB|TCP|445|
-|RPC¹|TCP|135<br/>**random port number between 1024 - 65535**<br/>**random port number between 49152 - 65535**²|
-||||
-
+|RPC¹|TCP|135<br/>**random port number between 49152 - 65535**|
+  
 ¹ For more information about how to customize this port, see Domain controllers and Active Directory in the [References](#references) section.
 
-² It's the range in Windows Server 2012, Windows 8, Windows Server 2008 R2, Windows 7, Windows Server 2008, and Windows Vista.
-
-³ This protocol is required only by Windows XP and Windows Server 2003 acting as clients.
+<sup>2</sup> This protocol is required only by Windows XP and Windows Server 2003 acting as clients.
 
 > [!NOTE]
 > When the Group Policy Microsoft Management Console (MMC) snap-in creates Group Policy Results reports and Group Policy Modeling reports, it uses DCOM and RPC to send and to receive information from the Resultant Set of Policy (RSoP) provider on the client or on the domain controller. The various binary files that make up the Group Policy Microsoft Management Console (MMC) snap-in features primarily use COM calls to send or to receive information. When you initiate remote group policy results reporting from a Windows Server 2012 computer, access to the destination computer's event log is required. (See the [Event Log](#event-log) section in this article for port requirements.)
@@ -424,8 +387,7 @@ System service name: **HTTPFilter**
 |Application protocol|Protocol|Ports|
 |---|---|---|
 |HTTPS|TCP|443|
-||||
-
+  
 ### Hyper-V service
 
 Hyper-V replica
@@ -436,8 +398,7 @@ Hyper-V replica
 |Randomly allocated high TCP ports|TCP|Random port number between 49152 and 65535|
 |Kerberos authentication (HTTP)|TCP|80|
 |Certificate-based authentication (HTTPS)|TCP|443|
-||||
-
+  
 Hyper-V live migration
 
 |Application protocol|Protocol| Port|
@@ -445,8 +406,7 @@ Hyper-V live migration
 |Live migration|TCP|6600|
 |SMB|TCP|445|
 |Cluster Service traffic|UDP|3343|
-||||
-
+  
 ### Internet Authentication Service
 
 Internet Authentication Service (IAS) performs centralized authentication, authorization, auditing, and accounting of users who are connecting to a network. These users can be on a LAN connection or on a remote connection. IAS implements the Internet Engineering Task Force (IETF) standard Remote Authentication Dial-In User Service (RADIUS) protocol.
@@ -459,8 +419,7 @@ System service name: **IAS**
 |Legacy RADIUS|UDP|1646|
 |RADIUS Accounting|UDP|1813|
 |RADIUS Authentication|UDP|1812|
-||||
-
+  
 ### Internet Connection Firewall (ICF)/Internet Connection Sharing
 
 This system service provides NAT, addressing, and name resolution services for all computers on your home network or your small-office network. When the Internet Connection Sharing feature is enabled, your computer becomes an Internet gateway on the network. Other client computers can then share one connection to the Internet, such as a dial-up connection or a broadband connection. This service provides basic DHCP and DNS services but will work with the full-featured Windows DHCP or DNS services. When ICF and Internet Connection Sharing act as a gateway for the rest of the computers on your network, they provide DHCP and DNS services to the private network on the internal network interface. They do not provide these services on the external network interface.
@@ -472,8 +431,7 @@ System service name: **SharedAccess**
 |DHCP Server|UDP|67|
 |DNS|UDP|53|
 |DNS|TCP|53|
-||||
-
+  
 ### IP Address Management (IPAM)
 
 The IPAM client UI communicates with the IPAM server to perform remote management. It's done by using the Windows Communications Framework (WCF), which uses TCP as the transport protocol. By default, the TCP binding is performed on port 48885 on the IPAM server.
@@ -498,8 +456,7 @@ The IPAM client UI communicates with the IPAM server to perform remote managemen
 |Randomly allocated high TCP ports (note 6)|TCP|random port number between 1024 - 65535<br/>random port number between 10000 - 65535 (note 7)|
 |Web Management|TCP|2175 (note 1, 4)|
 |Web Proxy Client|TCP|8080 (note 5)|
-||||
-
+  
 > [!NOTE]
 >
 > 1. This port is not used with ISA 2000.
@@ -523,8 +480,7 @@ System service name: **kdc**
 |Kerberos Password V5|UDP|464|
 |Kerberos Password V5|TCP|464|
 |DC Locator|UDP|389|
-||||
-
+  
 ### License Logging
 
 The License Logging system service is a tool that was originally designed to help customers manage licenses for Microsoft server products that are licensed in the server client access license (CAL) model. License Logging was introduced with Microsoft Windows NT Server 3.51. By default, the License Logging service is disabled in Windows Server 2003. Because of legacy design constraints and evolving license terms and conditions, License Logging may not provide an accurate view of the total number of CALs that are purchased compared to the total number of CALs that are used on a particular server or across the enterprise. The CALs that are reported by License Logging may conflict with the interpretation of the Microsoft Software License Terms and with Product Use Rights (PUR). License Logging is not included in Windows Server 2008 and later operating systems. We recommend that only users of the Microsoft Small Business Server family of operating systems enable this service on their servers.
@@ -536,8 +492,7 @@ System service name: **LicenseService**
 |NetBIOS Datagram Service|UDP|138|
 |NetBIOS Session Service|TCP|139|
 |SMB|TCP|445|
-||||
-
+  
 > [!NOTE]
 > The License Logging service uses RPC over named pipes. This service has the same firewall requirements as the File and Printer Sharing feature.
 
@@ -557,8 +512,7 @@ System service name: **MSMQ**
 |MSMQ-RPC|TCP|2105|
 |MSMQ-RPC|TCP|2103|
 |RPC|TCP|135|
-||||
-
+  
 ### Microsoft Exchange Message Transfer Agent (MTA) stacks
 
 In Microsoft Exchange 2000 Server and Exchange Server 2003, the MTA is frequently used to provide backward-compatible message transfer services between Exchange 2000 Server-based servers and Exchange Server 5.5-based servers in a mixed-mode environment.
@@ -568,8 +522,7 @@ System service name: **MSExchangeMTA**
 |Application protocol|Protocol|Ports|
 |---|---|---|
 |X.400|TCP|102|
-||||
-
+  
 ### Microsoft POP3 service
 
 The Microsoft POP3 service provides email transfer and retrieval services. Administrators can use this service to store and manage email accounts on the mail server. When you install POP3 service on the mail server, users can connect to the mail server and can retrieve email messages by using an email client that supports the POP3 protocol, such as Microsoft Outlook.
@@ -579,8 +532,7 @@ System service name: **POP3SVC**
 |Application protocol|Protocol|Ports|
 |---|---|---|
 |POP3|TCP|110|
-||||
-
+  
 ### Net Logon
 
 The Net Logon system service maintains a security channel between your computer and the domain controller to authenticate users and services. It passes the user's credentials to a domain controller and returns the domain security identifiers and the user rights for the user. This is typically known as pass-through authentication. Net Logon is configured to start automatically only when a member computer or domain controller is joined to a domain. In the Windows 2000 Server and Windows Server 2003 families, Net Logon publishes service resource locator records in the DNS. When this service runs, it relies on the WORKSTATION service and on the Local Security Authority service to listen for incoming requests. On domain member computers, Net Logon uses RPC over named pipes. On domain controllers, it uses RPC over named pipes, RPC over TCP/IP, mail slots, and Lightweight Directory Access Protocol (LDAP).
@@ -589,34 +541,20 @@ System service name: `Netlogon`
 
 |Application protocol|Protocol|Ports|
 |---|---|---|
-|NetBIOS Datagram Service|UDP|138³|
-|NetBIOS Name Resolution|UDP|137³|
-|NetBIOS Session Service|TCP|139³|
+|NetBIOS Datagram Service|UDP|138<sup>2</sup>|
+|NetBIOS Name Resolution|UDP|137<sup>2</sup>|
+|NetBIOS Session Service|TCP|139<sup>2</sup>|
 |SMB|TCP|445|
 |LDAP|UDP|389|
-|RPC¹|TCP|135, **random port number between 1024 - 65535**<br/>135, **random port number between 49152 - 65535**²|
-||||
-
+|RPC¹|TCP|135<br/>**random port number between 49152 - 65535**|
+  
 ¹ For more information about how to customize this port, see Domain controllers and Active Directory in the [References](#references) section.
 
-² It's the range in Windows Server 2012, Windows 8, Windows Server 2008 R2, Windows 7, Windows Server 2008, and Windows Vista.
-
-³ The NETBIOS ports are optional. `Netlogon` uses these only for trusts that don't support DNS or when DNS fails during an attempted fallback. If there is no WINS infrastructure and broadcasts can't work, you should either disable NetBt or set the computers and servers to NodeType=2.
+<sup>2</sup> The NETBIOS ports are optional. `Netlogon` uses these only for trusts that don't support DNS or when DNS fails during an attempted fallback. If there is no WINS infrastructure and broadcasts can't work, you should either disable NetBt or set the computers and servers to NodeType=2.
 
 > [!NOTE]
 > The Net Logon service uses RPC over named pipes for earlier versions of Windows clients. This service has the same firewall requirements as the File and Printer Sharing feature.
-
-### NetMeeting Remote Desktop Sharing
-
-The NetMeeting Remote Desktop Sharing system service allows authorized users to use Windows NetMeeting to remotely access your Windows desktop from another personal computer over a corporate intranet. You must explicitly enable this service in NetMeeting. You can disable or shut down this feature by using an icon that is displayed in the Windows notification area.
-
-System service name: **mnmsrvc**
-
-|Application protocol|Protocol|Ports|
-|---|---|---|
-|Terminal Services|TCP|3389|
-||||
-
+  
 ### Network News Transfer Protocol (NNTP)
 
 The Network News Transfer Protocol (NNTP) system service lets computers that are running Windows Server 2003 act as news servers. Clients can use a news client, such as Microsoft Outlook Express, to retrieve newsgroups from the server and to read the headers or the bodies of the articles in each newsgroup.
@@ -627,8 +565,7 @@ System service name: **NNTPSVC**
 |---|---|---|
 |NNTP|TCP|119|
 |NNTP over SSL|TCP|563|
-||||
-
+  
 ### Offline Files, User Profile Service, Folder Redirection, and Primary Computer
 
 Offline Files and Roaming User Profiles cache user data to computers for offline use. These capabilities exist in all supported Microsoft operating systems. Windows XP implemented roaming user profile caching as part of the `Winlogon` process while Windows Vista, Windows Server 2008, and later operating systems use the User Profile Service. All of these systems use SMB.
@@ -647,8 +584,7 @@ System service names: **ProfSvc**, **CscService**
 |LDAP Server|TCP|389|
 |LDAP Server|UDP|389|
 |LDAP SSL|TCP|636|
-||||
-
+  
 ### Performance Logs and Alerts
 
 The Performance Logs and Alerts system service collects performance data from local or remote computers based on preconfigured schedule parameters and then writes that data to a log or triggers a message. Based on the information that is contained in the named log collection setting, the **Performance Logs and Alerts** service starts and stops each named performance data collection. This service runs only if at least one performance data collection is scheduled.
@@ -658,8 +594,7 @@ System service name: **SysmonLog**
 |Application protocol|Protocol|Ports|
 |---|---|---|
 |NetBIOS Session Service|TCP|139|
-||||
-
+  
 ### Print Spooler
 
 The Print Spooler system service manages all local and network print queues and controls all print jobs. Print Spooler is the center of the Windows printing subsystem. It manages the print queues on the system and communicates with printer drivers and input/output (I/O) components, such as the USB port and the TCP/IP protocol suite.
@@ -668,12 +603,15 @@ System service name: **Spooler**
 
 |Application protocol|Protocol|Ports|
 |---|---|---|
+|RPC|TCP|135|
+|Randomly allocated high TCP ports¹|TCP|**random port number between 49152 - 65535**|
 |NetBIOS Datagram Service|UDP|138|
 |NetBIOS Name Resolution|UDP|137|
 |NetBIOS Session Service|TCP|139|
 |SMB|TCP|445|
-||||
-
+  
+¹ For more information about how to customize this port, see Remote Procedure Calls and DCOM in the [References](#references) section.
+  
 > [!NOTE]
 > The Print Spooler service uses RPC over named pipes. This service has the same firewall requirements as the File and Printer Sharing feature.
 
@@ -686,8 +624,7 @@ System service name: **BINLSVC**
 |Application protocol|Protocol|Ports|
 |---|---|---|
 |BINL|UDP|4011|
-||||
-
+  
 ### Remote Procedure Call (RPC)
 
 The Remote Procedure Call (RPC) system service is an interprocess communication (IPC) mechanism that enables data exchange and invocation of functionality that is located in a different process. The different process can be on the same computer, on the LAN, or in a remote location, and it can be accessed over a WAN connection or over a VPN connection. The RPC service serves as the RPC Endpoint Mapper and Component Object Model (COM) Service Control Manager. Many services depend on the RPC service to start successfully.
@@ -702,8 +639,7 @@ System service name: **RpcSs**
 |NetBIOS Name Resolution|UDP|137|
 |NetBIOS Session Service|TCP|139|
 |SMB|TCP|445|
-||||
-
+  
 > [!NOTE]
 >
 > - RPC does not use only the hard-coded ports that are listed in the table. Ephemeral range ports that are used by Active Directory and other components occur over RPC in the ephemeral port range. The ephemeral port range depends on the server operating system that the client operating system is connected to.  
@@ -721,8 +657,7 @@ System service name: **RpcLocator**
 |NetBIOS Name Resolution|UDP|137|
 |NetBIOS Session Service|TCP|139|
 |SMB|TCP|445|
-||||
-
+  
 > [!NOTE]
 > The RPC Locator service offers its services by using RPC over named pipes. This service has the same firewall requirements as the File and Printer Sharing feature.
 
@@ -735,12 +670,9 @@ System service name: **Remote_Storage_User_Link**
 |Application protocol|Protocol|Ports|
 |---|---|---|
 |RPC|TCP|135|
-|Randomly allocated high TCP ports¹|TCP|**random port number between 1024 - 65535**<br/>**random port number between 49152 - 65535**²|
-||||
-
+|Randomly allocated high TCP ports¹|TCP|**random port number between 49152 - 65535**|
+  
 ¹ For more information about how to customize this port, see Remote Procedure Calls and DCOM in the [References](#references) section.
-
-² It's the range in Windows Server 2012, Windows 8, Windows Server 2008 R2, Windows 7, Windows Server 2008, and Windows Vista.
 
 ### Remote Storage
 
@@ -751,12 +683,9 @@ System service name: **Remote_Storage_Server**
 |Application protocol|Protocol|Ports|
 |---|---|---|
 |RPC|TCP|135|
-|Randomly allocated high TCP ports¹|TCP|**random port number between 1024 - 65535**<br/>**random port number between 49152 - 65535**²|
-||||
-
+|Randomly allocated high TCP ports¹|TCP|**random port number between 49152 - 65535**|
+  
 ¹ For more information about how to customize this port, see Remote Procedure Calls and DCOM in the [References](#references) section.
-
-² It's the range in Windows Server 2012, Windows 8, Windows Server 2008 R2, Windows 7, Windows Server 2008, and Windows Vista.
 
 ### Routing and Remote Access
 
@@ -774,8 +703,7 @@ System service name: **RemoteAccess**
 |IPsec ESP (IP protocol 50)|ESP|n/a|
 |L2TP|UDP|1701|
 |PPTP|TCP|1723|
-||||
-
+  
 ### Server
 
 The Server system service provides RPC support and file sharing, print sharing, and named pipe sharing over the network. The Server service lets users share local resources, such as disks and printers, so that other users on the network can access them. It also enables named pipe communication between programs that are running on the local computer and on other computers. Named pipe communication is memory that is reserved for the output of one process to be used as input for another process. The input-accepting process does not have to be local to the computer.
@@ -793,8 +721,7 @@ System service name: **lanmanserver**
 |NetBIOS Name Resolution|UDP|137|
 |NetBIOS Session Service|TCP|139|
 |SMB|TCP|445|
-||||
-
+  
 ### SharePoint Portal Server
 
 The SharePoint Portal Server system service lets you develop an intelligent portal that seamlessly connects users, teams, and knowledge. It helps people take advantage of relevant information across business processes. Microsoft SharePoint Portal Server 2003 provides an enterprise business solution that integrates information from various systems into one solution through single sign-on and enterprise application integration capabilities.
@@ -803,8 +730,7 @@ The SharePoint Portal Server system service lets you develop an intelligent port
 |---|---|---|
 |HTTP|TCP|80|
 |HTTPS|TCP|443|
-||||
-
+  
 ### Simple Mail Transfer Protocol (SMTP)
 
 The Simple Mail Transfer Protocol (SMTP) system service is an email submission and relay agent. It accepts and queues email messages for remote destinations, and it retries at set intervals. Windows domain controllers use the SMTP service for intersite e-mail-based replication. The Collaboration Data Objects (CDO) for the Windows Server 2003 COM component can use the SMTP service to submit and to queue outgoing email messages.
@@ -814,8 +740,7 @@ System service name: **SMTPSVC**
 |Application protocol|Protocol|Ports|
 |---|---|---|
 |SMTP|TCP|25|
-||||
-
+  
 ### Simple TCP/IP Services
 
 Simple TCP/IP Services implements support for the following protocols:
@@ -840,8 +765,7 @@ System service name: **SimpTcp**
 |Echo|UDP|7|
 |`Quotd`|TCP|17|
 |Quoted|UDP|17|
-||||
-
+  
 ### Simple Network Management Protocol (SNMP) Service
 
 SNMP Service lets the local computer service incoming SNMP requests. SNMP Service includes agents that monitor activity in network devices and report to the network console workstation. SNMP Service provides a method of managing network hosts (such as workstation or server computers, routers, bridges, and hubs) from a centrally located computer that is running network management software. SNMP performs management services by using a distributed architecture of management systems and agents.
@@ -851,8 +775,7 @@ System service name: **SNMP**
 |Application protocol|Protocol|Ports|
 |---|---|---|
 |SNMP|UDP|161|
-||||
-
+  
 ### SNMP Trap Service
 
 SNMP Trap Service receives trap messages that are generated by local or by remote SNMP agents. Then the SNMP Trap Service forwards those messages to SNMP management programs that are running on your computer. When SNMP Trap Service is configured for an agent, the service generates trap messages if any specific events occur. These messages are sent to a trap destination. For example, an agent can be configured to start an authentication trap if an unrecognized management system sends a request for information. Trap destinations include the computer name, the IP address, or the Internetwork Packet Exchange (IPX) address of the management system. The trap destination must be a network-enabled host that is running SNMP management software.
@@ -862,8 +785,7 @@ System service name: **SNMPTRAP**
 |Application protocol|Protocol|Ports|
 |---|---|---|
 |SNMP Traps Outgoing|UDP|162|
-||||
-
+  
 ### Simple Service Discovery Protocol (SSDP) Discovery Service
 
 SSDP Discovery Service implements SSDP as a Windows service. SSDP Discovery Service manages receipt of device presence announcements, updates its cache, and sends these notifications to clients that have outstanding search requests. SSDP Discovery Service also accepts the registration of event callbacks from clients. The registered event callbacks are then turned into subscription requests. SSDP Discovery Service then monitors for event notifications and sends these requests to the registered callbacks. This system service also provides periodic announcements to hosted devices. Currently, the SSDP event notification service uses TCP port 5000.
@@ -878,8 +800,7 @@ System service name: **SSDPRSR**
 |SSDP|UDP|1900|
 |SSDP event notification|TCP|2869|
 |SSDP legacy event notification|TCP|5000|
-||||
-
+  
 ### TCP/IP Print Server
 
 The TCP/IP Print Server system service enables TCP/IP-based printing by using the Line Printer Daemon (LPD) protocol. The LPD service on the server receives documents from Line Printer Remote (LPR) utilities that are running on UNIX computers.
@@ -889,8 +810,7 @@ System service name: **LPDSVC**
 |Application protocol|Protocol|Ports|
 |---|---|---|
 |LPD|TCP|515|
-||||
-
+  
 ### Telnet
 
 The Telnet system service for Windows provides ASCII terminal sessions to Telnet clients. A Telnet server supports two kinds of authentication and supports the following kinds of terminals:
@@ -905,57 +825,50 @@ System service name: **TlntSvr**
 | Application protocol| Protocol| Ports |
 |---|---|---|
 |Telnet|TCP|23|
-||||
+  
+### Remote Desktop Services (RDS)
 
-### Terminal Services
-
-Terminal Services provides a multi-session environment that enables client devices to access a virtual Windows desktop session and Windows-based programs that are running on the server. Terminal Services enables multiple users to be connected interactively to a computer.
+RDS provides a multi-session environment that enables client devices to access a virtual Windows desktop session and Windows-based programs that are running on the server. RDS enables multiple users to be connected interactively to a computer.
 
 System service name: **TermService**
 
 |Application protocol|Protocol|Ports|
 |---|---|---|
-|Terminal Services|TCP|3389|
-||||
+|RDS|TCP|3389|
+|RDS|UDP|3389|
+  
+### RDS Licensing (RDSL)
 
-### Terminal Services Licensing
-
-The Terminal Services Licensing system service installs a license server and provides licenses to registered clients when the clients connect to a terminal server (a server that has Terminal Server enabled). Terminal Services Licensing is a low-impact service that stores the client licenses that are issued for a terminal server and tracks the licenses that are issued to client computers or terminals.
+The RDSL system service installs a license server and provides licenses to registered clients when the clients connect to a RDS server (a server that has RDS enabled). RDSL is a low-impact service that stores the client licenses that are issued for a RDS server and tracks the licenses that are issued to client computers or servers.
 
 System service name: **TermServLicensing**
 
 |Application protocol|Protocol|Ports|
 |---|---|---|
 |RPC|TCP|135|
-|Randomly allocated high TCP ports¹|TCP|**random port number between 1024 - 65535**<br/>**random port number between 49152 - 65535**²|
+|Randomly allocated high TCP ports¹|TCP|**random port number between 49152 - 65535**|
 |NetBIOS Datagram Service|UDP|138|
 |NetBIOS Name Resolution|UDP|137|
 |NetBIOS Session Service|TCP|139|
 |SMB|TCP|445|
-||||
-
+  
 ¹ For more information about how to customize this port, see Remote Procedure Calls and DCOM in the [References](#references) section.
 
-² It's the range in Windows Server 2012, Windows 8, Windows Server 2008 R2, Windows 7, Windows Server 2008, and Windows Vista.
-
 > [!NOTE]
-> Terminal Services Licensing offers its services by using RPC over named pipes. This service has the same firewall requirements as the File and Printer Sharing feature.
+> RDSL offers its services by using RPC over named pipes. This service has the same firewall requirements as the File and Printer Sharing feature.
 
-### Terminal Services Session Directory
+### Remote Desktop Connection Broker
 
-The Terminal Services Session Directory system service enables clusters of load-balanced terminal servers to correctly route a user's connection request to the server where the user already has a session running. Users are routed to the first-available terminal server regardless of whether they are running another session in the server cluster. The load-balancing functionality pools the processing resources of several servers by using the TCP/IP networking protocol. You can use this service together with a cluster of terminal servers to increase the performance of a single terminal server by distributing sessions across multiple servers. Terminal Services Session Directory keeps track of disconnected sessions on the cluster and makes sure that users are reconnected to those sessions.
+The Remote Desktop Connection Broker system service enables clusters of load-balanced RDS servers to correctly route a user's connection request to the server where the user already has a session running. Users are routed to the first-available RDS server regardless of whether they are running another session in the server cluster. The load-balancing functionality pools the processing resources of several servers by using the TCP/IP networking protocol. You can use this service together with a cluster of RDS servers to increase the performance of a single RDS server by distributing sessions across multiple servers. Remote Desktop Connection Broker keeps track of disconnected sessions on the cluster and makes sure that users are reconnected to those sessions.
 
 System service name: **Tssdis**
 
 |Application protocol|Protocol|Ports|
 |---|---|---|
 |RPC|TCP|135|
-|Randomly allocated high TCP ports¹|TCP|**random port number between 1024 - 65535**<br/>**random port number between 49152 - 65535**²|
-||||
-
+|Randomly allocated high TCP ports¹|TCP|**random port number between 49152 - 65535**|
+  
 ¹ For more information about how to customize this port, see Remote Procedure Calls and DCOM in the [References](#references) section.
-
-² It's the range in Windows Server 2012, Windows 8, Windows Server 2008 R2, Windows 7, Windows Server 2008, and Windows Vista.
 
 ### Trivial FTP Daemon
 
@@ -973,8 +886,7 @@ System service name: **tftpd**
 |Application protocol|Protocol| Ports|
 |---|---|---|
 |TFTP|UDP|69|
-||||
-
+  
 ### UPnP Device Host
 
 The UPnP Device Host discovery system service implements all the components that are required for device registration, control, and the response to events for hosted devices. The information that is registered that relates to a device, such as the description, the lifetimes, and the containers, are optionally stored to disk and are announced on the network after registration or when the operating system restarts. The service also includes the web server that serves the device in addition to service descriptions and a presentation page.
@@ -984,8 +896,7 @@ System service name: **UPNPHost**
 |Application protocol|Protocol|Ports|
 |---|---|---|
 |UPNP|TCP|2869|
-||||
-
+  
 ### Windows Internet Name Service (WINS)
 
 Windows Internet Name Service (WINS) enables NetBIOS name resolution. This service helps you locate network resources by using NetBIOS names. WINS servers are required unless all domains have been upgraded to the Active Directory directory service and unless all computers on the network are running Windows 2000 or later versions. WINS servers communicate with network clients by using NetBIOS name resolution. WINS replication is only required between WINS servers.
@@ -997,8 +908,7 @@ System service name: **WINS**
 |NetBIOS Name Resolution|UDP|137|
 |WINS Replication|TCP|42|
 |WINS Replication|UDP|42|
-||||
-
+  
 ### Windows Media Services
 
 Windows Media Services in Windows Server 2003 and later versions replaces the following services that are included in Windows Media Services versions 4.0 and 4.1:
@@ -1021,8 +931,7 @@ System service name: `WMServer`
 |RTCP|UDP|5005|
 |RTP|UDP|5004|
 |RTSP|TCP|554|
-||||
-
+  
 ### Windows Remote Management (WinRM)
 
 System service name: **WinRM**
@@ -1031,8 +940,7 @@ System service name: **WinRM**
 |---|---|---|
 |WinRM 1.1 and earlier|TP|The default HTTP port is TCP 80, and the default HTTPS port is TCP 443.|
 |WinRM 2.0|TP|The default HTTP port is TCP 5985, and the default HTTPS port is TCP 5986.|
-||||
-
+  
 For more information, see [Installation and Configuration for Windows Remote Management](/windows/win32/winrm/installation-and-configuration-for-windows-remote-management).
 
 ### Windows Time
@@ -1047,8 +955,7 @@ System service name: **W32Time**
 |---|---|---|
 |NTP|UDP|123|
 |SNTP|UDP|123|
-||||
-
+  
 ### World Wide Web Publishing Service
 
 World Wide Web Publishing Service provides the infrastructure that you must have to register, manage, monitor, and serve websites and programs that are registered with IIS. This system service contains a process manager and a configuration manager. The process manager controls the processes where custom applications and websites reside. The configuration manager reads the stored system configuration for World Wide Web Publishing Service and makes sure that Http.sys is configured to route HTTP requests to the appropriate application pools or operating system processes. You can use the Internet Information Services (IIS) Manager snap-in to configure the ports that are used by this service. If the administrative website is enabled, a virtual website is created that uses HTTP traffic on TCP port 8098.
@@ -1059,8 +966,7 @@ System service name: **W3SVC**
 |---|---|---|
 |HTTP|TCP|80|
 |HTTPS|TCP|443|
-||||
-
+  
 ## Ports and protocols
 
 The following table summarizes the information from the [System services ports](#system-services-ports) section. This table is sorted by port number instead of by service name.
@@ -1124,8 +1030,8 @@ The following table summarizes the information from the [System services ports](
 |135|TCP|RPC|Remote Storage Notification|
 |135|TCP|RPC|Remote Storage|
 |135|TCP|RPC|Systems Management Server 2.0|
-|135|TCP|RPC|Terminal Services Licensing|
-|135|TCP|RPC|Terminal Services Session Directory|
+|135|TCP|RPC|RDSL|
+|135|TCP|RPC|Remote Desktop Connection Broker|
 |137|UDP|NetBIOS Name Resolution|Computer Browser|
 |137|UDP|NetBIOS Name Resolution|Server|
 |137|UDP|NetBIOS Name Resolution|Windows Internet Name Service|
@@ -1226,8 +1132,8 @@ The following table summarizes the information from the [System services ports](
 |3268|TCP|Global Catalog|Local Security Authority|
 |3269|TCP|Global Catalog|Local Security Authority|
 |3343|UDP|Cluster Services|Cluster Service|
-|3389|TCP|Terminal Services|NetMeeting Remote Desktop Sharing|
-|3389|TCP|Terminal Services|Terminal Services|
+|3389|TCP|RDS|RDS|
+|3389|UDP|RDS|RDS|
 |3527|UDP|MSMQ-Ping|Message Queuing|
 |4011|UDP|BINL|Remote Installation|
 |4500|UDP|NAT-T|Local Security Authority|
@@ -1250,7 +1156,6 @@ The following table summarizes the information from the [System services ports](
 |6600|TCP|Live Migration|Hyper-V Live Migration|
 |445|TCP|SMB|Hyper-V Live Migration|
 |3343|UDP|Cluster Service Traffic|Hyper-V Live Migration|
-|||||
 
 > [!NOTE]
 > Port 5722 is only used on a Windows Server 2008 domain controller or a Windows Server 2008 R2 domain controller; it is not used on a Windows Server 2012 domain controller. Port 445 is used by DFSR only when creating a new empty replicated folder.
@@ -1301,9 +1206,9 @@ The list of services that require Active Directory services:
 - Routing and Remote Access
 - Server
 - Simple Mail Transfer Protocol (SMTP)
-- Terminal Services
-- Terminal Services Licensing
-- Terminal Services Session Directory
+- RDS
+- RDSL
+- Remote Desktop Connection Broker
 
 ## References
 
@@ -1393,9 +1298,9 @@ For more information about the ports that are used by Microsoft Message Queuing,
 
 For information about how to plan for and to deploy MOM, see [System Center Developer Documentation Library](/previous-versions/system-center/developer/cc817313(v=msdn.10)).
 
-### Terminal Services
+### RDS
 
-For more information about how to configure the port that is used by Terminal Services, see [Change the listening port for Remote Desktop on your computer](/windows-server/remote/remote-desktop-services/clients/change-listening-port).
+For more information about how to configure the port that is used by RDS, see [Change the listening port for Remote Desktop on your computer](/windows-server/remote/remote-desktop-services/clients/change-listening-port).
 
 ### Controlling communications over the Internet in Windows
 

@@ -1,7 +1,7 @@
 ---
 title: Database garbage collection process
 description: Describes the Active Directory database garbage collection process and calculation of allowed intervals.
-ms.date: 09/08/2020
+ms.date: 12/16/2021
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -9,7 +9,7 @@ audience: itpro
 ms.topic: troubleshooting
 ms.prod: windows-server
 localization_priority: medium
-ms.reviewer: kaushika, v-miegge
+ms.reviewer: kaushika
 ms.custom: sap:active-directory-database-issues-and-domain-controller-boot-failures, csstroubleshoot
 ms.technology: windows-server-active-directory
 ---

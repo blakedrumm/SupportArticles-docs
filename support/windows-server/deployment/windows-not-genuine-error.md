@@ -1,7 +1,7 @@
 ---
 title: Error 0x80070005 when you log on to computer
 description: Describes a problem in which you receive an error (Windows is not genuine. Your computer might not be running a counterfeit copy of Windows. 0x80070005) in Windows. Provides resolutions.
-ms.date: 09/08/2020
+ms.date: 04/28/2023
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -24,11 +24,16 @@ _Original KB number:_ &nbsp; 2704233
 
 When you log on to a computer that is running Windows, you receive the following Windows Activation message:
 
-![Screenshot of the error 1](./media/windows-not-genuine-error/windows-not-genuine.png)
+> Windows is not genuine  
+> Your computer might be running a counterfeit copy of Windows.
+
+:::image type="content" source="media/windows-not-genuine-error/windows-not-genuine.png" alt-text="Details of the Windows is not genuine error." border="false":::
 
 Additionally, the desktop background is black, and you receive the following error message in the lower-right corner of the screen:
 
-![Screenshot of the error 2](./media/windows-not-genuine-error/copy-windows-not-genuine-error.png)
+> The copy of Windows in not genuine
+
+:::image type="content" source="media/windows-not-genuine-error/copy-windows-not-genuine-error.png" alt-text="Copy of Windows is not genuine error shown in the lower-right corner of the screen.":::
 
 When you view the System properties in Control Panel, the following information is displayed:
 
@@ -68,11 +73,12 @@ To resolve the problem in this scenario, use method A or method B.
 
     2. In the navigation pane, expand the following containers: See image
 
-        ![Security Settings container](./media/windows-not-genuine-error/system-services.png)
+        :::image type="content" source="media/windows-not-genuine-error/system-services.png" alt-text="Screenshot shows how to find the System Services in the Resultant Set of Policy wizard." border="false":::
 
         - Computer Configuration
         - Windows Settings
         - Security Settings
+
     3. In the navigation pane, click **System Services**.
     4. If the Plug and Play service is configured through a Group Policy setting, you see the GPO listed here with settings other than Not Defined. Additionally, you can see which GPO is applying this setting.
 
@@ -125,15 +131,15 @@ If there are no GPOs in place, the default registry permissions have been change
 
 2. Right-click the registry key `HKEY_USERS\S-1-5-20`, and then click **Permissions**.
 
-    :::image type="content" source="./media/windows-not-genuine-error/permissions.png" alt-text="Select Permissions.":::
+    :::image type="content" source="media/windows-not-genuine-error/registry-permissions.png" alt-text="Select the Permissions option by right-clicking the registry key.":::
 
 3. If the NETWORK SERVICE isn't present, click **Add**.
 
-    ![NETWORK SERVICE not present](./media/windows-not-genuine-error/select-add.png)
+    :::image type="content" source="media/windows-not-genuine-error/select-add.png" alt-text="Adding NETWORK SERVICE under the Security tab of the permissions settings dialog box." border="false":::
 
 4. In **Enter the object names to select** area, type *network service*, click **Check Names**, and then click **OK**.
 
-    ![Enter the object names to select area](./media/windows-not-genuine-error/type-network-service.png)
+    :::image type="content" source="media/windows-not-genuine-error/type-network-service.png" alt-text="Enter network service in the Enter the object names to select area." border="false":::
 
 5. Click **NETWORK SERVICE**, and then select the **Full Control** and **Read** permissions.
 
@@ -217,3 +223,7 @@ Check whether the problem is fixed. If the problem is fixed, you're finished wit
 #### Advanced information
 
 Because the Licensing service uses Plug and Play to obtain hardware ID information and binds the license to the computer, this setting can result in an activated system appearing to be out of tolerance. The default permissions of the Plug and Play policy don't grant the Licensing service the appropriate rights to access the Plug and Play service. The Licensing service runs under the Network Service account.
+
+## Data collection
+
+If you need assistance from Microsoft support, we recommend you collect the information by following the steps mentioned in [Gather information by using TSS for deployment-related issues](../../windows-client/windows-troubleshooters/gather-information-using-tss-deployment.md).

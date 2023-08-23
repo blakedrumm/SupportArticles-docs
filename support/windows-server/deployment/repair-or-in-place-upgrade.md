@@ -1,7 +1,7 @@
 ---
 title: How to do an in-place upgrade
-description: This article introduces how to do a repair/in-place upgrade of the existing installation for Windows 7 Service Pack 1.
-ms.date: 09/08/2020
+description: This article introduces how to do a repair/in-place upgrade of the existing installation for Windows.
+ms.date: 04/28/2023
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -13,11 +13,11 @@ ms.reviewer: kaushika
 ms.custom: sap:setup, csstroubleshoot
 ms.technology: windows-server-deployment
 ---
-# How to do an in-place upgrade on Windows 7
+# How to do an in-place upgrade on Windows
 
-After you've done the emergency repair process, the computer still doesn't operate normally. In this situation, you may want to do a repair or in-place upgrade of the existing installation.
+After you've done the emergency repair process, the computer still doesn't operate normally. In this situation, you may want to do a repair in-place upgrade or an in-place upgrade to a newer operating system version. A repair in-place upgrade means performing an in-place upgrade to the same OS version as the existing one.
 
-_Applies to:_ &nbsp; Windows 7 Service Pack 1  
+_Applies to:_ &nbsp; All Windows versions  
 _Original KB number:_ &nbsp; 2255099
 
 ## More information
@@ -27,17 +27,17 @@ An in-place upgrade is the final alternative before you have to reinstall the op
 > [!NOTE]
 > It takes the same amount of time to do the upgrade as to reinstall the operating system. Also, some of your customized Windows settings may be lost through this process.
 
-## How to do a repair installation of Windows 7
+## How to do a repair installation of Windows
 
 A repair installation will restore the current Windows installation to the version of the installation DVD. It also requires the installation of all updates that aren't included on the installation DVD.
 
 > [!NOTE]
 > A repair installation won't damage files and applications that are currently installed on your computer.
 
-To do a repair installation of Windows 7, follow these steps:
+To do a repair installation of Windows, follow these steps:
 
 1. Close all the running applications.
-2. Insert the Windows 7 DVD in the computer's DVD drive.
+2. Insert the Windows DVD in the computer's DVD drive.
 3. In the **Setup** window, select **Install Now**.
 
     > [!NOTE]
@@ -57,3 +57,7 @@ To do a repair installation of Windows 7, follow these steps:
 7. select **Yes** to accept the Microsoft Software License Terms.
 8. On the **Which type of installation do you want?** screen, select **Upgrade**.
 9. When the installation is complete, restart your computer.
+
+## Data collection
+
+If you need assistance from Microsoft support, we recommend you collect the information by following the steps mentioned in [Gather information by using TSS for deployment-related issues](../../windows-client/windows-troubleshooters/gather-information-using-tss-deployment.md).

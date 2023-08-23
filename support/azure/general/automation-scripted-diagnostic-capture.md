@@ -2,7 +2,6 @@
 title: How to capture Azure Automation-scripted diagnostics
 description: Provides guidance for capturing diagnostic information for Microsoft Support engineers. 
 ms.date: 08/14/2020
-ms.prod-support-area-path: 
 ms.service: automation
 ms.author: genli
 author: genlin
@@ -17,7 +16,7 @@ _Original KB number:_ &nbsp; 4034605
 
 ## Diagnostic script
 
-The Azure Automation support team has created a script to capture troubleshooting information. The script is stored on the [PowerShell Gallery](http://www.powershellgallery.com/) website. The script uses the Package Management capabilities that were introduced in Windows PowerShell 5.0.
+The Azure Automation support team has created a script to capture troubleshooting information. The script is stored on the [PowerShell Gallery](https://www.powershellgallery.com/) website. The script uses the Package Management capabilities that were introduced in Windows PowerShell 5.0.
 
 ## Requirement: Package Management
 
@@ -26,7 +25,7 @@ If you're using a computer that's running Windows 10 or Windows Server 2016, yo
 If you're running an earlier version of Windows PowerShell, you must either upgrade to the latest version of Windows Management Framework (WMF), which includes PowerShell, or install the package management components for PowerShell 3.0 or 4.0.
 
 - To get the latest version of WMF, go to [Windows Management Framework 5.1](https://www.microsoft.com/download/details.aspx?id=54616).
-- For more information about how to use and manage PowerShell, go to the [PowerShell Gallery website](http://www.powershellgallery.com/).
+- For more information about how to use and manage PowerShell, go to the [PowerShell Gallery website](https://www.powershellgallery.com/).
 
 To determine the version of Windows PowerShell that you're currently running, open a PowerShell session, type `$PSVersionTable`, and then press Enter.
   
@@ -79,3 +78,5 @@ The script then runs on its own to collect relevant data.
 ## After script runs
 
 After the script runs, it opens a Windows File Explorer window that points to the folder in which it stored the captured information.  To have the information analyzed, compress the storage folder, and then send the compressed file to Microsoft Support.
+
+[!INCLUDE [Azure Help Support](../../includes/azure-help-support.md)]

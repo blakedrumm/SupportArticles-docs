@@ -1,7 +1,7 @@
 ---
 title: Conditional access and multi-factor authentication in Flow
 description: Using conditional access has an unexpected effect on users who use Flow to connect to Microsoft services that are relevant to conditional access policies.
-ms.reviewer: dblyth
+ms.reviewer: sranjan, hamenon
 ms.date: 3/31/2021
 ms.subservice: power-automate-flows
 ---
@@ -22,17 +22,17 @@ Conditional access policies are managed through the Azure portal and may have se
 
 The following screenshot shows an MFA policy example that requires MFA for specific users when they access the Azure management portal.
 
-:::image type="content" source="media/conditional-access-and-multi-factor-authentication-in-flow/require-mfa-for-azure-portal.png" alt-text="Require multi-factor authorization for a user when accessing the Azure Management portal":::
+:::image type="content" source="media/conditional-access-and-multi-factor-authentication-in-flow/require-mfa-for-azure-portal.png" alt-text="Screenshot shows an example that requires M F A for the specific users when accessing the Azure Management portal.":::
 
 You can also open the MFA configuration from the Azure portal. To do this, select **Azure Active Directory** > **Users and groups** > **All users** > **Multi-Factor Authentication**, and then configure policies by using the **service settings** tab.
 
-:::image type="content" source="media/conditional-access-and-multi-factor-authentication-in-flow/select-mfa-from-azure-portal.png" alt-text="Select Multi-Factor Authentication from Azure portal":::
+:::image type="content" source="media/conditional-access-and-multi-factor-authentication-in-flow/mfa-azure-portal.png" alt-text="Screenshot shows steps to open the M F A configuration from the Azure portal.":::
 
 MFA can also be configured from **Microsoft 365 admin center**. A subset of Azure MFA capabilities is available to Office 365 subscribers. For more information about how to enable MFA, see [Set up multi-factor authentication for Office 365 users](/microsoft-365/admin/security-and-compliance/set-up-multi-factor-authentication).
 
-:::image type="content" source="media/conditional-access-and-multi-factor-authentication-in-flow/select-mfa-from-microsoft-365-admin-center.png" alt-text="Select Azure multi-factor authentication from Microsoft 365 admin center":::
+:::image type="content" source="media/conditional-access-and-multi-factor-authentication-in-flow/mfa-admin-center.png" alt-text="Screenshot shows that M F A can be configured from Microsoft 365 admin center.":::
 
-:::image type="content" source="media/conditional-access-and-multi-factor-authentication-in-flow/remember-multi-factor-authentication-option.png" alt-text="The remember multi-factor authentication option details":::
+:::image type="content" source="media/conditional-access-and-multi-factor-authentication-in-flow/remember-multi-factor-authentication-option.png" alt-text="Screenshot of the remember multi-factor authentication option details.":::
 
 The **remember multi-factor authentication** setting can help you to reduce the number of user logons by using a persistent cookie. This policy controls the Azure AD settings that are documented in [Remember Multi-Factor Authentication for trusted devices](/azure/active-directory/authentication/howto-mfa-mfasettings#remember-multi-factor-authentication-for-trusted-devices).
 
@@ -46,13 +46,12 @@ The primary adverse effect of conditional access on Flow is caused by the settin
 |---|---|---|
 |MaxInactiveTime|90 days|If any Flow connection is idle (unused by Flow runs) for longer than this timespan, any new Flow run after the expiry time fails and returns the following error:</br></br>**AADSTS70008: The refresh token has expired due to inactivity. The token was issued on Time and was inactive for 90.00:00:00**|
 |MaxAgeMultiFactor|Until-Revoked|This setting controls how long multi-factor refresh tokens (the kind of tokens that are used in Flow connections) are valid.</br></br>The default setting means that there is effectively no limit on how long a Flow connection can be used - unless a tenant admin specifically revokes the user's access.</br></br>Setting this value to any fixed timespan means that after that duration (regardless of use or inactivity), a Flow connection becomes invalid and the Flow runs then fail. When this occurs, the following error message is generated. This error requires users to repair or re-create the connection:</br></br>**AADSTS50076: Due to a configuration change made by your administrator, or because you moved to a new location, you must use multi-factor authentication to access...**|
-|MaxAgeSingleFactor|Until-Revoked|This setting is same as the *MaxAgeMultiFactor* setting, but for single-factor refresh tokens.|
+|MaxAgeSingleFactor|Until-Revoked|This setting is same as the _MaxAgeMultiFactor_ setting, but for single-factor refresh tokens.|
 |MaxAgeSessionMultiFactor|Until-Revoked|There is no direct effect on Flow connections. This setting defines the expiration of a user session for web apps. This setting can be changed by the admins depending on how frequently they want the users to sign in to web apps before the user session expires.|
-||||
+  
+  Some settings that are configured as part of enabling multi-factor may affect the Flow connection. When MFA is enabled from **Microsoft 365 admin center** and the **remember multi-factor authentication** setting is selected, the configured value overrides the default token policy settings, _MaxAgeMultiFactor_, and _MaxAgeSessionMultiFactor_. Flow connections start failing when _MaxAgeMultiFactor_ expires, and it requires the user to use an explicit logon to fix the connections.
 
-Some settings that are configured as part of enabling multi-factor may affect the Flow connection. When MFA is enabled from **Microsoft 365 admin center** and the **remember multi-factor authentication** setting is selected, the configured value overrides the default token policy settings, *MaxAgeMultiFactor*, and *MaxAgeSessionMultiFactor*. Flow connections start failing when *MaxAgeMultiFactor* expires, and it requires the user to use an explicit logon to fix the connections.
-
-We recommend that you use the token policy instead of the **remember multi-factor authentication** setting to configure different values for *theMaxAgeMultiFactor* and *MaxAgeSessionMultiFactor* settings. The token policy lets Flow connections keep working while also controlling a user logon session for the Office 365 web apps.*MaxAgeMultiFactor* has to have a reasonably longer period - ideally, the Until-Revoked value. This is to make Flow connections keep working until the refresh token is revoked by the admin. *MaxAgeSessionMultiFactor* affects a user logon session. Tenant administrators can select the value that they want, depending on how frequently they want the users to sign in to the Office 365 web apps before the session expires.
+We recommend that you use the token policy instead of the **remember multi-factor authentication** setting to configure different values for _theMaxAgeMultiFactor_ and _MaxAgeSessionMultiFactor_ settings. The token policy lets Flow connections keep working while also controlling a user logon session for the Office 365 web apps._MaxAgeMultiFactor_ has to have a reasonably longer period - ideally, the Until-Revoked value. This is to make Flow connections keep working until the refresh token is revoked by the admin. _MaxAgeSessionMultiFactor_ affects a user logon session. Tenant administrators can select the value that they want, depending on how frequently they want the users to sign in to the Office 365 web apps before the session expires.
 
 To view Active Directory policies in your organization, you can use the following commands. The [Configurable token lifetimes in Azure Active Directory (Preview)](/azure/active-directory/develop/active-directory-configurable-token-lifetimes) document provides specific instructions to query and update the settings in your organization.
 
@@ -98,7 +97,7 @@ If a default organization policy already exists, update and override the setting
 
 After you configure the policy, tenant admins can clear the **remember multi-factor authentication** checkbox because the expiration of a user session is configured by using the token lifetime policy. The token lifetime policy settings make sure that Flow connections continue to work in the following conditions:
 
-- Office 365 web apps are configured to expire the user session after *X* days (14 days in example in step 2).
+- Office 365 web apps are configured to expire the user session after _X_ days (14 days in example in step 2).
 - The apps ask users to log on again by using MFA.
 
 ## More information
@@ -113,11 +112,11 @@ If you enable a conditional access policy after flows and connections are create
 
 > AADSTS50076: Due to a configuration change made by your administrator, or because you moved to a new location, you must use multi-factor authentication to access \<service>.
 
-:::image type="content" source="media/conditional-access-and-multi-factor-authentication-in-flow/error-details.png" alt-text="Details of the error message including Time, Status, Error, Error Details, and how to fix":::
+:::image type="content" source="media/conditional-access-and-multi-factor-authentication-in-flow/error-details.png" alt-text="Screenshot of the error details including Time, Status, Error, Error Details, and how to fix.":::
 
 When users view connections on the Flow portal, they see an error message that resembles the following:
 
-:::image type="content" source="media/conditional-access-and-multi-factor-authentication-in-flow/status-error.png" alt-text="Status error that users see in Flow saying failed to refresh access token for service":::
+:::image type="content" source="media/conditional-access-and-multi-factor-authentication-in-flow/status-error.png" alt-text="Screenshot of the error Failed to refresh access token for service users see in the Flow portal." border="false":::
 
 To resolve this issue, users must sign in to the Flow portal under conditions that match the access policy of the service that they are trying to access (such as multi-factor, corporate network, and so on), and then repair or re-create the connection.
 
@@ -125,7 +124,7 @@ To resolve this issue, users must sign in to the Flow portal under conditions th
 
 If users don't sign in to Flow by using criteria that matches the policies, the automatic connection creation to first-party Microsoft services that are controlled by the conditional access policies fail. Users must manually create and authenticate the connections by using criteria that matches the conditional access policy of the service that they try to access. This behavior also applies to 1-click templates that are created from the Flow portal.
 
-:::image type="content" source="media/conditional-access-and-multi-factor-authentication-in-flow/automatic-connection-creation-error.png" alt-text="Automatic connection creation error with AADSTS50076":::
+:::image type="content" source="media/conditional-access-and-multi-factor-authentication-in-flow/automatic-connection-creation-error.png" alt-text="Screenshot of the automatic connection creation error with AADSTS50076.":::
 
 To resolve this issue, users must sign in to the Flow portal under conditions that match the access policy of the service they try to access (such as multi-factor, corporate network, and so on) before they create a template.
 
@@ -135,7 +134,7 @@ If users don't sign in to Flow by using criteria that matches the policies, they
 
 > AADSTS50076: Due to a configuration change made by your administrator, or because you moved to a new location, you must use multi-factor authentication to access \<service>.
 
-:::image type="content" source="media/conditional-access-and-multi-factor-authentication-in-flow/aadsts50076-error.png" alt-text="AADSTS50076 error when attempting to create a connection":::
+:::image type="content" source="media/conditional-access-and-multi-factor-authentication-in-flow/aadsts50076-error.png" alt-text="Screenshot of the AADSTS50076 error when attempting to create a connection.":::
 
 To resolve this issue, users must sign in under conditions that match the access policy of the service that they are trying to access, and then re-create the connection.
 
@@ -157,13 +156,13 @@ When you try to share ownership or run-only permissions by using SharePoint list
 
 More importantly, users may also be unable to discover or run their flows from SharePoint. This is because, currently, the conditional access policy information is not passed between Power Automate and SharePoint to enable SharePoint to make an access decision.
 
-:::image type="content" source="media/conditional-access-and-multi-factor-authentication-in-flow/add-a-sharepoint-list-or-library-as-owner.png" alt-text="Share Flows with SharePoint lists and libraries":::
+:::image type="content" source="media/conditional-access-and-multi-factor-authentication-in-flow/add-a-sharepoint-list-or-library-as-owner.png" alt-text="Screenshot to share Flows with SharePoint lists and libraries.":::
 
-:::image type="content" source="media/conditional-access-and-multi-factor-authentication-in-flow/owner-see-site-url-and-list-id.png" alt-text="Owners can see the site url and list ID":::
+:::image type="content" source="media/conditional-access-and-multi-factor-authentication-in-flow/owner-see-site-url-and-list-id.png" alt-text="Screenshot shows the site U R L and the list ID owners can see.":::
 
 #### Effect 7 - Creation of SharePoint out-of-box flows
 
-Related to Effect 6, the creation and execution of SharePoint out-of-box flows, such as the *Request Signoff* and *Page Approval* flows, can be blocked by conditional access policies. [Control access to SharePoint and OneDrive data based on network location](/sharepoint/control-access-based-on-network-location) indicates that these policies can cause access issues that affect both first-party and third-party apps.
+Related to Effect 6, the creation and execution of SharePoint out-of-box flows, such as the _Request Signoff_ and _Page Approval_ flows, can be blocked by conditional access policies. [Control access to SharePoint and OneDrive data based on network location](/sharepoint/control-access-based-on-network-location) indicates that these policies can cause access issues that affect both first-party and third-party apps.
 
 This scenario applies both to the network location and to conditional access policies (such as Disallow Unmanaged Devices). Support for the creation of SharePoint out-of-box flows is currently in development. We will post more information in this article when this support becomes available.
 

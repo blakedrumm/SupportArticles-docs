@@ -2,9 +2,8 @@
 title: The execution of a SSIS package stops responding
 description: Describes a problem in which the execution of a Microsoft SSIS package stops responding if you enable DTC transactions for the package and enable the ValidateExternalMetadata property for a component in a data flow task.
 ms.date: 09/02/2020
-ms.prod-support-area-path: Integration Services
+ms.custom: sap:Integration Services
 ms.reviewer: kayokon, hisashik, ksaito
-ms.prod: sql
 ---
 # The execution of an SSIS package stops responding when you enable DTC transactions for a package in Microsoft SQL Server
 

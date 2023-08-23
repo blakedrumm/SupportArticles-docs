@@ -1,7 +1,7 @@
 ---
 title: Update Windows Update Agent to latest version
 description: Provides information about updating Windows Update Agent to the latest version.
-ms.date: 09/21/2020
+ms.date: 04/28/2023
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -40,11 +40,11 @@ To download the Windows Update Agent automatically, follow these steps:
 
     - Windows 7, Windows Vista, or Windows XP
 
-        To turn on automatic updating automatically, select the **Fix it** button or link, and then select **Run** in the **View Download** dialog box. Then, follow the steps in the **Fix it** wizard. 
+        To turn on automatic updating automatically, select the **Fix it** button or link, and then select **Run** in the **View Download** dialog box. Then, follow the steps in the **Fix it** wizard.
 
 2. Restart the Windows Update service. To do this, follow these steps:
     1. Press the Windows logo Key+R to open the **Run** box.
-    2. Type *services.msc* in the **Run** box, and then press Enter.
+    2. Type _services.msc_ in the **Run** box, and then press Enter.
     3. Right-click **Windows Update** in the Services management console, and then select **Stop**. If you are running Windows XP, right-click **Automatic Updates**, and then select **Stop**.
     4. After Windows Update stops, right-click **Windows Update**, and then select **Start**. If you are running Windows XP, right-click **Automatic Updates**, and then select **Start**.
 3. Wait for Windows Update to start, and then verify that the Windows Update Agent is updated.
@@ -62,7 +62,6 @@ The following files are available for download from the Microsoft Download Cente
 |All supported x86-based versions of Windows 8 (KB2937636)|[Download the package now.](https://www.microsoft.com/download/details.aspx?familyid=909de38f-ab20-46fc-a96a-662335b13a23) |
 |All supported x64-based versions of Windows 8 (KB2937636)|[Download the package now.](https://www.microsoft.com/download/details.aspx?familyid=d414eda7-9d82-4a15-bae6-f9b94975dafc) |
 |All supported x64-based versions of Windows Server 2012 (KB2937636)|[Download the package now.](https://www.microsoft.com/download/details.aspx?familyid=31ddb379-6268-4ad7-8083-d8fa42b6a3e9) |
-|||  
 
 ### Stand-alone packages for Windows 7 SP1 and Windows Server 2008 R2 SP1
 
@@ -75,8 +74,7 @@ The following files are available for download from Windows Update.
 |All supported x86-based versions of Windows Server 2008 R2 SP1|[Download the package now.](http://download.windowsupdate.com/windowsupdate/redist/standalone/7.6.7600.320/windowsupdateagent-7.6-x86.exe) |
 |All supported x64-based versions of Windows Server 2008 R2 SP1|[Download the package now.](http://download.windowsupdate.com/windowsupdate/redist/standalone/7.6.7600.320/windowsupdateagent-7.6-x64.exe) |
 |All supported Itanium-based versions of Windows Server 2008 R2 SP1|[Download the package now](http://download.windowsupdate.com/windowsupdate/redist/standalone/7.6.7600.320/windowsupdateagent-7.6-ia64.exe). |
-|||
-
+  
 > [!NOTE]
 > Windows 8.1, Windows RT 8.1, and Windows Server 2012 R2 with update [2919355](https://support.microsoft.com/help/2919355) already include the latest version of the Windows Update Agent.
 
@@ -145,3 +143,7 @@ After you turn on Windows Update, the required updates to components of Windows 
 The updates to Windows Update itself typically do the following: Address feedback from customers, improve compatibility, service performance and reliability, and enable new service capabilities. When the Windows Update server is updated, a corresponding client update is typically required. During an agent self-update operation, Windows Update Agent files may be added, modified, or replaced. For example, Windows Update Agent files that help display the user experience or that determine whether updates apply to a particular system may be added. This behavior occurs when a system is set to automatically check for available updates. This does not occur when automatic updates are turned off. For example, this behavior does not occur if you select **Never check for updates** in Windows Vista and Windows 7 or if you select **Turn off Automatic Updates** in Windows XP.
 
 Administrators will receive the latest version of the Windows Update Agent for deployment through Windows Server Update Services (WSUS).
+
+## Data collection
+
+If you need assistance from Microsoft support, we recommend you collect the information by following the steps mentioned in [Gather information by using TSS for deployment-related issues](../windows-troubleshooters/gather-information-using-tss-deployment.md).

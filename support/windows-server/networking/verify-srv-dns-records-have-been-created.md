@@ -1,7 +1,7 @@
 ---
 title: Verify that SRV Domain Name System (DNS) records have been created
 description: Describes how to verify Service Location (SRV) locator resource records for a domain controller after you install the Active Directory directory service.
-ms.date: 09/22/2020
+ms.date: 1/4/2022
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -63,7 +63,7 @@ To use `Nslookup` to verify the SRV records, follow these steps:
 ```console
 Server: localhost
 Address: 127.0.0.1
-_ldap._tcp.dc._msdcs. Domain_Name
+_ldap._tcp.dc._msdcs.Domain_Name
 SRV service location:
 priority= 0
 weight= 100

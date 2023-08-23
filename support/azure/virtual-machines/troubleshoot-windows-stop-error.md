@@ -3,17 +3,20 @@ title: Windows stop error - Status No Memory
 description: This article provides steps to resolve issues where Windows fails to start and displays the status "Status No Memory".
 services: virtual-machines, azure-resource-manager
 documentationcenter: ''
-author: v-miegge
+author: genlin
 manager: dcscontentpm
-editor: ''
 tags: azure-resource-manager
 ms.service: virtual-machines
+ms.subservice: vm-cannot-start-stop
 ms.collection: windows
 ms.workload: na
 ms.tgt_pltfrm: vm-windows
 ms.topic: troubleshooting
 ms.date: 06/26/2020
 ---
+
+<!---Internal note: The screenshots in the article are being or were already updated. Please contact "gsprad" and "christys" for triage before making the further changes to the screenshots.
+--->
 
 # Windows stop error - Status No Memory
 
@@ -25,11 +28,11 @@ When you use [Boot diagnostics](./boot-diagnostics.md) to view the screenshot of
 
    **Windows Boot Manager**
 
-   ![Windows Boot Manager stating that "Windows failed to start. A recent hardware or software change might be the cause". Scrolling down, you see the Status code "0xC0000017" as well as info stating that "The application or operating system couldn't be loaded because a required file is missing or contains errors".](./media/troubleshoot-windows-stop-error/windows-boot-manager.svg)
+   :::image type="content" source="media/troubleshoot-windows-stop-error/windows-boot-manager.svg" alt-text="Screenshot of the 0xC0000017 error code in the Windows Boot Manager.":::
 
    **Recovery Screen**
- 
-   ![The Recovery screen stating that "Your PC/Device needs to be repaired. There isn't enough memory available to create a ramdisk device". You should also see the error code "0xC0000017".](./media/troubleshoot-windows-stop-error/recovery-screen.svg)
+
+   :::image type="content" source="media/troubleshoot-windows-stop-error/recovery-screen.svg" alt-text="Screenshot of the 0xC0000017 error code in the Recovery screen." border="false":::
 
 ## Cause
 
@@ -37,7 +40,7 @@ The operating system's disk is either full, too fragmented, or the operating sys
 
 ## Solution
 
-### Process Overview:
+### Process Overview
 
 > [!TIP]
 > If you have a recent backup of the VM, you may try [restoring the VM from the backup](/azure/backup/backup-azure-arm-restore-vms) to fix the boot problem.
@@ -57,7 +60,7 @@ The operating system's disk is either full, too fragmented, or the operating sys
 1. Use [steps 1-3 of the VM Repair Commands](./repair-windows-vm-using-azure-virtual-machine-repair-commands.md) to prepare a Repair VM.
 1. Using Remote Desktop Connection connect to the Repair VM.
 
-### For Generation 2 VMs, assign a letter to the Extensible Firmware Interface (EFI) partition:
+### For Generation 2 VMs, assign a letter to the Extensible Firmware Interface (EFI) partition
 
 If you're using a Generation 2 VM, the EFI partition of the attached disk may not have a letter assigned to it. You'll need to follow the steps below to assign a letter to the partition before proceeding with this troubleshooting guide.
 
@@ -65,7 +68,7 @@ If you're using a Generation 2 VM, the EFI partition of the attached disk may no
 1. Identify the broken disk attached to the repair VM. Typically, this disk is listed last in the console, and has the highest numerical value.
 1. Note if in that disk there's a partition that holds the **EFI System Partition**, which also doesn't have a letter value assigned to it (such as drive *F:*). If all partitions are assigned, you may skip ahead to free up space on the disk. Otherwise, continue to assign a letter to this disk.
 
-   ![The Disk Management console, with the attached disk "Disk 2", as well as the unassigned partition that is 100 MB and is the "EFI System Partition".](./media/troubleshoot-windows-stop-error/3.png)
+   :::image type="content" source="media/troubleshoot-windows-stop-error/disk-management.svg" alt-text="Screenshot of the Disk Management window, showing a partition that holds the E F I System Partition.":::
 
 1. Open an elevated command prompt as an administrator and enter `diskpart` to launch the **DISKPART** tool.
 1. Enter the following commands:
@@ -77,7 +80,7 @@ If you're using a Generation 2 VM, the EFI partition of the attached disk may no
    sel partition <NUMBER OF THE SYSTEM (EFI) PARTION>
    assign
    ```
-   
+
    - In the command, replace `<NUMBER OF THE ATTACHED DISK>` with the disk number you identified in step 2.
    - In the command, replace `<NUMBER OF THE SYSTEM PARTION>` with the partition number of the EFI system partition. This partition has not been assigned a letter yet, but it should be of the type **System** and be about 100MB in size.
 
@@ -88,7 +91,7 @@ If you're using a Generation 2 VM, the EFI partition of the attached disk may no
 
 ### Free up space on the disk
 
-Now that the broken disk is attached to the repair VM, you should verify that the OS on that disk has enough space to function properly. 
+Now that the broken disk is attached to the repair VM, you should verify that the OS on that disk has enough space to function properly.
 
 1. Check if the disk is full by right-clicking on the drive of the attached disk and selecting **Properties**.
 1. If the disk has **less than 300 Mb of free space**, [expand it to a maximum of 1 Tb using PowerShell](/azure/virtual-machines/windows/expand-os-disk).
@@ -98,7 +101,7 @@ Now that the broken disk is attached to the repair VM, you should verify that th
    ``
    defrag <LETTER ASSIGNED TO THE OS DISK>: /u /x /g
    ``
-   
+
    - Depending upon the level of fragmentation, de-fragmentation could take hours.
    - In the command, replace `<LETTER ASSIGNED TO THE OS DISK>` with the OS disk's letter (such as drive *F:*).
 
@@ -110,7 +113,7 @@ Now that the broken disk is attached to the repair VM, you should verify that th
    ``
    bcdedit /store <LETTER ASSIGNED TO THE OS DISK>:\boot\bcd /enum {badmemory}
    ``
-   
+
    - In the command, replace `<LETTER ASSIGNED TO THE OS DISK>` with the OS disk's letter (such as drive *F:*).
 
 1. If the query shows no bad memory blocks, skip ahead to the next task. Otherwise, continue to step 4.
@@ -119,7 +122,7 @@ Now that the broken disk is attached to the repair VM, you should verify that th
    ``
    bcdedit /store <LETTER ASSIGNED TO THE OS DISK>:\boot\bcd /deletevalue {badmemory} badmemorylist
    ``
-   
+
    - In the command, replace `<LETTER ASSIGNED TO THE OS DISK>` with the OS disk's letter (such as drive *F:*).
 
 ### Restore the page file to its default location
@@ -131,7 +134,7 @@ Before taking any steps, you should create a copy of the **\windows\system32\con
 1. In Windows search, enter **regedit** and open the Registry Editor application.
 1. In the Registry Editor, highlight the key **HKEY_LOCAL_MACHINE** and select **File > Load Hive...** from the menu.
 
-   ![The load Hive menu of the registry editor.](./media/troubleshoot-windows-stop-error/4.png)
+   :::image type="content" source="media/troubleshoot-windows-stop-error/load-hive.svg" alt-text="Screenshot shows steps to load a hive in the Registry Editor.":::
 
 1. In the Load Hive dialog, select **\windows\system32\config\SYSTEM** and click Open.
    1. You'll be prompted for a name, which you should enter **BROKENSYSTEM**. This name will help differentiate the affected hives while you're troubleshooting.
@@ -155,21 +158,21 @@ To enable memory dump collection and Serial Console, run the following script:
 1. List the BCD store data and determine the boot loader identifier, which you'll use in the next step.
 
    1. For a Generation 1 VM, enter the following command and note the identifier listed:
-   
+
       ``
       bcdedit /store <BOOT PARTITON>:\boot\bcd /enum
       ``
-   
+
    - In the command, replace `<BOOT PARTITON>` with the letter of the partition in the attached disk that contains the boot folder.
 
-      ![The output of listing the BCD store in a Generation 1 VM, which lists under Windows Boot Loader the identifier number.](./media/troubleshoot-windows-stop-error/5.png)
+      :::image type="content" source="media/troubleshoot-windows-stop-error/command-output.svg" alt-text="Screenshot shows the output of the command, which lists the identifier number under the Windows Boot Loader section.":::
 
    1. For a Generation 2 VM, enter the following command and note the identifier listed:
-   
+
       ``
       bcdedit /store <LETTER OF THE EFI SYSTEM PARTITION>:EFI\Microsoft\boot\bcd /enum
       ``
-   
+
    - In the command, replace `<LETTER OF THE EFI SYSTEM PARTITION>` with the letter of the EFI System Partition.
    - It may be helpful to launch the Disk Management console to identify the appropriate system partition labeled as **EFI System Partition**.
    - The identifier may be a unique GUID or it could be the default **bootmgr**.
@@ -180,7 +183,7 @@ To enable memory dump collection and Serial Console, run the following script:
    bcdedit /store <VOLUME LETTER WHERE THE BCD FOLDER IS>:\boot\bcd /ems {<BOOT LOADER IDENTIFIER>} ON 
    bcdedit /store <VOLUME LETTER WHERE THE BCD FOLDER IS>:\boot\bcd /emssettings EMSPORT:1 EMSBAUDRATE:115200
    ```
-   
+
    - In the command, replace `<VOLUME LETTER WHERE THE BCD FOLDER IS>` with the letter of the BCD folder.
    - In the command, replace `<BOOT LOADER IDENTIFIER>` with the identifier you found in the previous step.
 
@@ -217,7 +220,9 @@ To enable memory dump collection and Serial Console, run the following script:
    ```
    REG UNLOAD HKLM\BROKENSYSTEM
    ```
-   
+
 ### Rebuild the VM
 
 Use [step 5 of the VM Repair Commands](./repair-windows-vm-using-azure-virtual-machine-repair-commands.md#repair-process-example) to rebuild the VM.
+
+[!INCLUDE [Azure Help Support](../../includes/azure-help-support.md)]

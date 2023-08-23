@@ -1,7 +1,7 @@
 ---
 title: Recommended updates for Windows Server 2008 R2-based server clusters
 description: Discusses the recommended hotfixes and updates for Windows Server 2008 R2-based server clusters, and describes these hotfixes and updates.
-ms.date: 10/23/2020
+ms.date: 3/24/2022
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -31,7 +31,7 @@ Use the information in the [More information](#more-information) section to help
 
 ## More information
 
-We recommend that you install Windows Server 2008 R2 Service Pack 1 (SP1), as it has many fixes for problems with Windows Clustering. We also recommend installing the hotfixes that are referenced in [Recommended hotfixes and updates for Windows Server 2008 R2 SP1 Failover Clusters](/troubleshoot/windows-server/high-availability/updates-for-windows-server-2008-r2-sp1-failover-cluster). If for any reason you cannot immediately apply SP1, we recommend that you install the following Windows Server 2008 R2 hotfixes, depending on your environment.
+We recommend that you install Windows Server 2008 R2 Service Pack 1 (SP1), as it has many fixes for problems with Windows Clustering. We also recommend installing the hotfixes that are referenced in [Recommended hotfixes and updates for Windows Server 2008 R2 SP1 Failover Clusters](updates-for-windows-server-2008-r2-sp1-failover-cluster.md). If for any reason you cannot immediately apply SP1, we recommend that you install the following Windows Server 2008 R2 hotfixes, depending on your environment.
 
 ### General hotfixes
 
@@ -47,7 +47,6 @@ We recommend that you install the following hotfixes if you plan to install the 
 |May 14, 2011| [2545850](https://support.microsoft.com/help/2545850)|Users cannot access an IIS-hosted website after the computer password for the server is changed in Windows 7 or in Windows Server 2008 R2|Multiple Authentication DLL's|Prevents CNO and VCO objects from failing to register in DNS due to Kerberos authentication not working after the computer password is changed.|
 |March 24, 2010| [978309](https://support.microsoft.com/help/978309)|IPv6 transition technologies, such as ISATAP, 6to4, and Teredo do not work on a computer that is running Windows Server 2008 R2 Server Core|Tunnel.sys|Fixes components leveraged by failover cluster on 2008 R2 Server Core installations. Available for individual download.|
 |September 4, 2010| [976571](https://support.microsoft.com/help/976571)|Stability update for Windows Server 2008 R2 Failover Print Clusters|Win32spl.dll|Fixes print cluster stability. Apply only if print cluster resources are configured. Available for individual download.|
-||||||
 
 To avoid problems that affect the cluster operation when the network is unreliable, install the following hotfix:
 

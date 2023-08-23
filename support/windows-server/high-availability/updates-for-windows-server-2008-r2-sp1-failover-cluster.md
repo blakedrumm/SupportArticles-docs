@@ -1,7 +1,7 @@
 ---
 title: Recommended updates for Windows Server 2008 R2 SP1 Failover Clusters
 description: Describes the hotfixes for Windows Server 2008 R2 SP1 Failover Clusters that we recommend you install, depending on your environment.
-ms.date: 10/23/2020
+ms.date: 3/24/2022
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -21,7 +21,7 @@ _Applies to:_ &nbsp; Windows Server 2008 R2 Service Pack 1
 _Original KB number:_ &nbsp; 2545685
 
 > [!NOTE]
-> We recommend that you evaluate each fix to determine whether it applies to your environment. If you determine that Failover Clusters in your environment may be affected by the problem(s) that a fix addresses, install the fix on each cluster node by using the procedures that are described in [How to update Windows Server failover clusters](/troubleshoot/windows-server/high-availability/windows-server-failover-clusters-service-packs-hotfixes).
+> We recommend that you evaluate each fix to determine whether it applies to your environment. If you determine that Failover Clusters in your environment may be affected by the problem(s) that a fix addresses, install the fix on each cluster node by using the procedures that are described in [How to update Windows Server failover clusters](windows-server-failover-clusters-service-packs-hotfixes.md).
 >
 > Use the information in the More information section to help you determine whether a particular fix applies to the cluster. Before you install a particular fix, we recommend that you review the original Microsoft Knowledge Base (KB) article that describes the fix.
 
@@ -35,6 +35,5 @@ _Original KB number:_ &nbsp; 2545685
 |November 17, 2012| [2524478](https://support.microsoft.com/help/2524478)|The network location profile changes from Domain to Public in Windows 7 or in Windows Server 2008 R2|Ncsi.dll<br/><br/>Nlaapi.dll<br/><br/>Nlasvc.dll|Prevents loss of Cluster communication.|
 |April 25, 2012| [2559392](https://support.microsoft.com/help/2559392)|The List Running Processes test fails when you run the Failover Cluster Validation Wizard on a Windows 7-based or Windows Server 2008 R2-based cluster node|Multiple Validation DLL's|Prevents Cluster Validation failure. Passing validation is required to have a Supported Cluster configuration.|
 |June 14, 2011| [2545850](https://support.microsoft.com/help/2545850)|Users cannot access an IIS-hosted website after the computer password for the server is changed in Windows 7 or in Windows Server 2008 R2|Multiple Authentication DLL's|Prevents CNO and VCO objects from failing to register in DNS because of Kerberos authentication failure after the computer password is changed.|
-||||||
 
 To see the latest list of hotfixes for Windows Server 2008 R2 Hyper-V configurations, see [Hyper-V Update List for Windows Server 2008 R2](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/ff394763(v=ws.10)).

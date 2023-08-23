@@ -1,7 +1,7 @@
 ---
 title: Return codes used by the Robocopy utility
 description: Discusses the return codes that are used by the Robocopy utility in Windows Server 2008 or Windows Server 2008 R2.
-ms.date: 10/21/2020
+ms.date: 6/30/2022
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -34,10 +34,9 @@ The following table lists and describes the return codes that are used by the Ro
 |6|Additional files and mismatched files exist. No files were copied and no failures were met. Which means that the files already exist in the destination directory.|
 |7|Files were copied, a file mismatch was present, and additional files were present.|
 |8|Several files didn't copy.|
-|||
-
+  
 > [!NOTE]
-> Any value greater than 8 indicates that there was at least one failure during the copy operation.
+> Any value greater than or equal to 8 indicates that there was at least one failure during the copy operation.
 
 ## More information
 

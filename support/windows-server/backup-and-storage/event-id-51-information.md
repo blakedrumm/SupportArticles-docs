@@ -1,7 +1,7 @@
 ---
 title: Information about Event ID 51
 description: This article describes the information about Event ID 51 that occurs when you write information to the physical disk.
-ms.date: 09/08/2020
+ms.date: 3/24/2022
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -95,8 +95,7 @@ The following tables describe what each offset represents:
 |0x35|3|Unused|
 |0x38|88|SCSI request block structure|
 |0x90|18|Sense data structure|
-||||
-
+  
 ## Key sections to decode
 
 Here are key sections to decode.

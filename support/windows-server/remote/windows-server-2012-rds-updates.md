@@ -1,7 +1,7 @@
 ---
 title: Available updates for Remote Desktop Services
 description: Lists the available updates for Remote Desktop Services in Windows Server 2012.
-ms.date: 09/08/2020
+ms.date: 12/21/2021
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -73,7 +73,7 @@ The hotfixes and updates are arranged by component areas within Remote Desktop S
 
 [2916846](https://support.microsoft.com/help/2916846) No RDS license when you connect to an RDS farm in Windows Server 2012
 
-[2855919](https://support.microsoft.com/help/2855919) New countries are added to the Activate Server wizard on a Windows Server-based license server
+[2855919](https://support.microsoft.com/help/2855919) New countries/regions are added to the Activate Server wizard on a Windows Server-based license server
 
 [2849342](https://support.microsoft.com/help/2849342)  Can't install RDS CALs by using a web browser or telephone on a Windows Server 2012-based license server
 

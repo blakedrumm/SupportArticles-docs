@@ -1,7 +1,7 @@
 ---
 title: Using domain join UI to join a workgroup computer to an AD domain by specifying the target DNS domain name fails
 description: Provides a solution to an error that occurs when you use the domain join User Interface (UI) to join a Windows 7 or Windows Server 2008 R2 workgroup computer to an Active Directory domain by specifying the target DNS domain name.
-ms.date: 12/04/2020
+ms.date: 3/24/2022
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -38,8 +38,7 @@ where 0x3a maps to:
 |UI Error|Symbolic Error String|Hex Error #|Decimal Error #|
 |---|---|---|---|
 |The specified server cannot perform the operation|ERROR_BAD_NET_RESP|0x3a|58|
-|||||
-
+  
 Cases where the "Changing the Primary Domain DNS name.." error appears in conjunction with extended errors other than "the specified server cannot perform the required operation", including those listed in the table below, are NOT related to the symptom, cause, or resolution text discussed in this article.
 
 The Extended errors that make the "Changing the Primary DNS name..." error unrelated to this KB include:
@@ -71,7 +70,7 @@ To eliminate the error, use one of the following methods:
 
 - Verify that NetBIOS over TCP/IP is enabled.
 
-    1. Click **Start**, click **Run**, type *ncpa.cpl*, and then click **OK**.
+    1. Click **Start**, click **Run**, type _ncpa.cpl_, and then click **OK**.
     2. In **Network Connections**, right-click **Local Area Connection**, and then click **Properties**.
     3. Click **Internet Protocol Version 4 (TCP/IPv4)**, and then click **Properties**.
     4. In the **Internet Protocol Version 4 (TCP/IPv4) Properties** dialog box, click **Advanced**.
@@ -83,7 +82,7 @@ To eliminate the error, use one of the following methods:
 
 - Add Domain DNS Suffix in the TCP/IP Properties.
 
-    1. Click **Start**, click **Run**, type *ncpa.cpl*, and then click **OK**.
+    1. Click **Start**, click **Run**, type _ncpa.cpl_, and then click **OK**.
     2. In **Network Connections**, right-click **Local Area Connection**, and then click **Properties**.
     3. Click **Internet Protocol Version 4 (TCP/IPv4)**, and then click **Properties**.
     4. In the **Internet Protocol Version 4 (TCP/IPv4) Properties** dialog box, click **Advanced**.

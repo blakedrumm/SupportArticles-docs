@@ -1,7 +1,7 @@
 ---
 title: Azure Virtual Desktop sign-in screen is blank
 description: Troubleshoot when Azure Virtual Desktop sign-in screen is blank
-author: v-miegge
+author: genlin
 ms.author: jerrycif
 ms.service: virtual-desktop
 manager: dcscontentpm
@@ -15,6 +15,9 @@ ms.date: 02/09/2021
 # Azure Virtual Desktop sign-in screen is blank
 
 Azure Virtual Desktop users might encounter sign-in issues that result in a black screen. There are multiple possible causes for black screens, but users can be impacted from issues synchronizing with **AppReadiness**, and multiple sessions signing in or out.
+
+> [!NOTE]
+> These sign-in issues may also occur in the RDS environment, where user profiles are created every sign-in and deleted every sign-out.
 
 ## Causes
 
@@ -51,3 +54,5 @@ If the black screen is tied with **AppReadiness** issues, set the following regi
 If you continue to see black screens after you confirm that you have the latest updates, perform a **full memory dump** and include it in a support case.
 
 Find the steps to enable and collect a **dump file** at [Collect an OS memory dump](/azure/virtual-machines/troubleshooting/boot-error-troubleshoot-windows#collect-an-os-memory-dump)
+
+[!INCLUDE [Azure Help Support](../../includes/azure-help-support.md)]

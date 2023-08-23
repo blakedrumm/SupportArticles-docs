@@ -1,7 +1,7 @@
 ---
 title: SSL/TLS communication problems after you install KB 931125
 description: Provides a solution to SSL/TLS communication problems that occur after you install KB 931125.
-ms.date: 12/03/2020
+ms.date: 3/24/2022
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -17,7 +17,7 @@ ms.technology: windows-server-security
 
 This article provides a solution to SSL/TLS communication problems that occur after you install KB 931125.
 
-_Applies to:_ &nbsp; Windows Server 2008 R2 Service Pack 1,  Windows Server 2012 R2  
+_Applies to:_ &nbsp; Windows Server 2008 R2 Service Pack 1,  Windows Server 2012 R2
 
 _Original KB number:_ &nbsp; 2801679
 
@@ -43,7 +43,6 @@ Events that are logged in Windows or in application-specific event logs, and tha
 |System|NapAgent|39|The Network Access Protection Agent was unable to determine which HRAs to request a health certificate from. A network change or if GP is configured, a configuration change will prompt further attempts to acquire a health certificate. Otherwise no further attempts will be made. Contact the HRA administrator for more information.|
 |System|RemoteAccess|20225|The following error occurred in the Point to Point Protocol module on port: </br>VPN2-509, UserName: \<username>. The connection was prevented because of a policy configured on your RAS/VPN server. Specifically, the authentication method used by the server to verify your username and password may not match the authentication method configured in your connection profile. Please contact the Administrator of the RAS server and notify them of this error.|
 |System|RemoteAccess|20271|The user \<username> connected from \<IP address> but failed an authentication attempt due to the following reason: </br>The connection was prevented because of a policy configured on your RAS/VPN server. Specifically, the authentication method used by the server to verify your username and password may not match the authentication method configured in your connection profile. Please contact the Administrator of the RAS server and notify them of this error.|
-|||||
 
 ## Cause
 

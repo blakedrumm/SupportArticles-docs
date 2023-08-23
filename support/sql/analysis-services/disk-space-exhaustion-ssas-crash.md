@@ -2,9 +2,8 @@
 title: Disk space exhaustion causes SSAS crash
 description: This article describes a Microsoft SQL Server Analysis Services (SSAS) crash error that occurs when disk space is exhausted.
 ms.date: 08/03/2020
-ms.prod-support-area-path: Analysis Services
+ms.custom: sap:Analysis Services
 ms.reviewer: jburchel, daleche
-ms.prod: sql
 ---
 # Disk space exhaustion during the rollback of a failed processing job causes SSAS to crash
 

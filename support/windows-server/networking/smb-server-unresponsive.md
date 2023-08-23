@@ -1,7 +1,7 @@
 ---
 title: Windows SMB server is unresponsive
 description: Provides recommendations from Escalation Engineering about what to do when a Windows SMB server is unresponsive
-ms.date: 09/21/2020
+ms.date: 12/10/2021
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -30,7 +30,7 @@ Incoming SMB traffic is handled in the kernel through the Srv2.sys driver (smb2)
 
 Because obtaining a memory dump of the box is an extreme troubleshooting step, you must make sure that you've completed all other appropriate troubleshooting steps first. The following flow chart explains what you must do before dumping the box.
 
-![Troubleshoot flow chart](./media/smb-server-unresponsive/flow-chart.jpg)
+:::image type="content" source="media/smb-server-unresponsive/troubleshooting-before-dumping-flow-chart.png" alt-text="Screenshot of a flow chart which explains what you must do before dumping the box.":::
 
 ## Resolution
 

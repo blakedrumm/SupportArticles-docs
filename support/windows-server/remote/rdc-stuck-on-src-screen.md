@@ -1,7 +1,7 @@
 ---
 title: Remote desktop connection is stuck
 description: Fixes an issue when remote desktop may stick on the Securing remote connection screen.
-ms.date: 09/08/2020
+ms.date: 12/9/2021
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -28,7 +28,7 @@ Assume a scenario in which you use a remote desktop connection for operating sys
 Connecting to:  
 Securing remote connection...
 
-:::image type="content" source="media/rdc-stuck-on-src-screen/remote-desktop-connection.jpg" alt-text="Remote Desktop Connection" border="false":::
+:::image type="content" source="media/rdc-stuck-on-src-screen/remote-desktop-connection.png" alt-text="The connection process of a remote desktop." border="false":::
 
 ## Cause
 

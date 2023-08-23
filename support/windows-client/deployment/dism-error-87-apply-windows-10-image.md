@@ -1,7 +1,7 @@
 ---
 title: DISM command fails with error code 87
 description: Resolves an issue in which you can't apply a Windows 10 image.
-ms.date: 09/08/2020
+ms.date: 04/28/2023
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -44,8 +44,12 @@ To apply a Windows 10 image, you must use the Windows 10 version of DISM. This v
 
 ## Resolution
 
-Use the Windows 10 version of DISM with Wofadk.sys filter driver. For more information, see [DISM Supported Platforms](https://msdn.microsoft.com/library/windows/hardware/dn898553%28v=vs.85%29.aspx ) and [Copy DISM to Another Computer](https://msdn.microsoft.com/library/windows/hardware/dn898515%28v=vs.85%29.aspx).
+Use the Windows 10 version of DISM with Wofadk.sys filter driver. For more information, see [DISM Supported Platforms](/windows-hardware/manufacture/desktop/dism-supported-platforms) and [Copy DISM to Another Computer](https://msdn.microsoft.com/library/windows/hardware/dn898515%28v=vs.85%29.aspx).
 
 ## More information
 
 For more information about Compact OS compression, see [Compact OS, single-instancing, and image optimization](https://msdn.microsoft.com/library/windows/hardware/dn940129%28v=vs.85%29.aspx). In that article, see the "To deploy Windows using a WIM file section for more information about how to deploy Windows by using a WIM file.
+
+## Data collection
+
+If you need assistance from Microsoft support, we recommend you collect the information by following the steps mentioned in [Gather information by using TSS for deployment-related issues](../windows-troubleshooters/gather-information-using-tss-deployment.md).

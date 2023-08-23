@@ -5,9 +5,9 @@ services: virtual-machines, azure-resource-manager
 documentationcenter: ''
 author: genlin
 manager: dcscontentpm
-editor: ''
 tags: azure-resource-manager
 ms.service: virtual-machines
+ms.subservice: vm-cannot-start-stop
 ms.collection: windows
 ms.workload: na
 ms.tgt_pltfrm: vm-windows
@@ -24,7 +24,7 @@ This article provides steps to resolve issues where an Active Directory domain c
 
 When you use [Boot diagnostics](./boot-diagnostics.md) to view the screenshot of the VM, the screenshot shows that the VM needs to restart because of an error, displaying the stop code **0xC00002E1** in Windows Server 2008 R2, or **0xC00002E2** in Windows Server 2012 or later.
 
-:::image type="content" source="media/troubleshoot-directory-service-initialization-failure/error-0xc00002e2.png" alt-text="Screenshot of an example of the error screen displaying the stop code 0xC00002E2: Your PC ran into a problem and needs to restart.":::
+:::image type="content" source="media/troubleshoot-directory-service-initialization-failure/error-0xc00002e2.png" alt-text="Screenshot of an example of the error screen displaying the stop code 0xC00002E2: Your PC ran into a problem and needs to restart." border="false":::
 
 ## Cause
 
@@ -42,7 +42,7 @@ This error can be caused by any of the following conditions:
 
 ## Solution
 
-### Process overview:
+### Process overview
 
 1. Create and Access a Repair VM.
 1. Free space on disk.
@@ -74,9 +74,9 @@ As the disk is now attached to a repair VM, verify that the disk holding the Act
 
 1. **Optional** - If more space is needed, open a CMD instance and enter the `defrag <LETTER ASSIGNED TO THE OS DISK>: /u /x /g` command to perform a de-fragmentation on the drive:
 
-  * In the command, replace `<LETTER ASSIGNED TO THE OS DISK>` with the OS Disk's letter. For example, if the disk letter is `F:`, then the command would be `defrag F: /u /x /g`.
+- In the command, replace `<LETTER ASSIGNED TO THE OS DISK>` with the OS Disk's letter. For example, if the disk letter is `F:`, then the command would be `defrag F: /u /x /g`.
 
-  * Depending upon the level of fragmentation, the de-fragmentation could take hours.
+- Depending upon the level of fragmentation, the de-fragmentation could take hours.
 
 If there's enough space on the disk, continue to the next task.
 
@@ -92,7 +92,7 @@ If there's enough space on the disk, continue to the next task.
 
    1. Determine the drive letter and folder of **NTDS.DIT**:
 
-      ```
+      ```reg
       REG QUERY "HKLM\BROKENSYSTEM\ControlSet001\Services\NTDS\parameters" /v "DSA Working Directory"
       REG QUERY "HKLM\BROKENSYSTEM\ControlSet001\Services\NTDS\parameters" /v "DSA Database file"
       REG QUERY "HKLM\BROKENSYSTEM\ControlSet001\Services\NTDS\parameters" /v "Database backup path"
@@ -139,18 +139,18 @@ To enable memory dump collection and Serial Console, run the following script by
 
 1. Enable the Serial Console:
 
-  ```
+  ```console
   bcdedit /store <VOLUME LETTER WHERE THE BCD FOLDER IS>:\boot\bcd /ems {<BOOT LOADER IDENTIFIER>} ON
   bcdedit /store <VOLUME LETTER WHERE THE BCD FOLDER IS>:\boot\bcd /emssettings EMSPORT:1 EMSBAUDRATE:115200
   ```
 
 1. Verify that the free space on the OS disk is at least equal to the memory size (RAM) on the VM.
 
-  1. If there's not enough space on the OS disk, change the location where the memory dump file will be created, and refer that to any data disk attached to the VM that has enough free space.
+1. If there's not enough space on the OS disk, change the location where the memory dump file will be created, and refer that to any data disk attached to the VM that has enough free space.
 
      To change the location, replace `%SystemRoot%` with the drive letter (such as, `F:`) of the data disk in the following commands.
 
-  #### The following configuration is suggested to enable OS dump:
+#### The following configuration is suggested to enable OS dump
 
   **Load Broken OS Disk**:
 
@@ -158,7 +158,7 @@ To enable memory dump collection and Serial Console, run the following script by
 
   **Enable on ControlSet001**:
 
-  ```
+  ```reg
   REG ADD "HKLM\BROKENSYSTEM\ControlSet001\Control\CrashControl" /v CrashDumpEnabled /t REG_DWORD /d 1 /f
   REG ADD "HKLM\BROKENSYSTEM\ControlSet001\Control\CrashControl" /v DumpFile /t REG_EXPAND_SZ /d "%SystemRoot%\MEMORY.DMP" /f
   REG ADD "HKLM\BROKENSYSTEM\ControlSet001\Control\CrashControl" /v NMICrashDump /t REG_DWORD /d 1 /f
@@ -166,7 +166,7 @@ To enable memory dump collection and Serial Console, run the following script by
 
   **Enable on ControlSet002**:
 
-  ```
+  ```reg
   REG ADD "HKLM\BROKENSYSTEM\ControlSet002\Control\CrashControl" /v CrashDumpEnabled /t REG_DWORD /d 1 /f
   REG ADD "HKLM\BROKENSYSTEM\ControlSet002\Control\CrashControl" /v DumpFile /t REG_EXPAND_SZ /d "%SystemRoot%\MEMORY.DMP" /f
   REG ADD "HKLM\BROKENSYSTEM\ControlSet002\Control\CrashControl" /v NMICrashDump /t REG_DWORD /d 1 /f
@@ -195,7 +195,7 @@ To enable memory dump collection and Serial Console, run the following script by
 
    1. Enter the following commands to select the disk that needs to be brought online and change the SAN policy:
 
-      ```
+      ```console
       DISKPART> select disk 1
       Disk 1 is now the selected disk.
 
@@ -228,3 +228,5 @@ To enable memory dump collection and Serial Console, run the following script by
    > If your VM was just migrated from on-premise and you want to migrate more domain controllers from on-premise to Azure, you should consider following the steps in the article below to prevent this issue from happening in future migrations:
    >
    > [How to upload existing on-premises Hyper-V domain controllers to Azure by using Azure PowerShell](https://support.microsoft.com/help/2904015)
+
+[!INCLUDE [Azure Help Support](../../includes/azure-help-support.md)]

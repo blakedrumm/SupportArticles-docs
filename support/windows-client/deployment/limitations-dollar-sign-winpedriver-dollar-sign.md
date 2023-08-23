@@ -1,7 +1,7 @@
 ---
 title: Limitations of $WinPeDriver$
 description: Describes limitations of $WinPeDriver$.
-ms.date: 09/15/2020
+ms.date: 04/28/2023
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -34,7 +34,7 @@ The $WinPEDriver$ feature is intended as a method to provide drivers at installa
 
 WinPE doesn't have a built-in mechanism to unload drivers that have been loaded into memory, so any drivers for devices that have already been loaded won't be reloaded once setup.exe starts, as there are already drivers for the device loaded. This error will cause Setup to mark the driver in the $WinPEDriver$ folder as a bad driver, even if it's newer than the driver version injected into WinPE and would otherwise outrank it. Setup has no explicit knowledge of drivers that have been loaded into the boot.wim.
 
-*This behavior is by design*; however this article will identify a method of accommodating this scenario so these drivers can still be included in the deployable operating system.
+_This behavior is by design_; however this article will identify a method of accommodating this scenario so these drivers can still be included in the deployable operating system.
 
 ## More information
 
@@ -47,8 +47,7 @@ In this document, we're going to be highlighting methods for injecting drivers a
 |If WinPE contains driver version X1 injected via Dism.exe|contains X2 version of driver with same driver name|X1 will be carried in post OS installation and X2 will be ignored|
 |If WinPE installs driver X2 using Drvload.exe from \$WinPEDriver$|contains X2 version of driver with same driver name|X2 will be carried in post OS installation|
 |if WinPE contains driver X1 that isn't boot-critical (in-box native)|contains no driver|Will use in-box native driver X1. No out of box driver will be available for that device post OS installation|
-||||
-
+  
 ## Driver Limitations
 
 Keep in mind that there are some drivers that can be included and/or loaded that may not be functional during WinPE portion of installation. This would include, but isn't limited too; video drivers, wireless adapter drivers, and audio drivers. The behavior described in this document isn't specific to BootCritical drivers (drivers need during boot-up such as controller drivers for access to hard drive) and is in effect for all drivers loaded during installation/deployment.
@@ -206,7 +205,7 @@ Folder structure can look something like this on the root of the USB device:
 
 > [!NOTE]
 > If you look in the \\Windows\\Panther\\Setupact.log you can see reference to this folder:
-    *PnPIBS: Checking for pre-configured driver paths ...*  
+    _PnPIBS: Checking for pre-configured driver paths ..._  
     *PnPIBS: Checking for pre-configured driver directory C:\$WinPEDriver$.*  
     *PnPIBS: Checking for pre-configured driver directory D:\$WinPEDriver$.*  
     *PnPIBS: Checking for pre-configured driver directory E:\$WinPEDriver$.*  
@@ -317,6 +316,10 @@ WinRE is typically going to be static on the hard drive, either auto-installed d
 ## Conclusion
 
 If your requirement is to create a WinPE environment that loads out of box drivers prior to running setup.exe, follow the guidelines described in this document in order to end up with the driver you want in the resulting installed operating system. Writing scripts which leverage Drvload.exe launched by startnet.cmd to load specific drivers located in the \$WinPeDriver$ folder on a USB flash drive is the most flexible method available. This method allows you to load a driver during the WinPE phase that carries over into the installed operating system. In addition, it allows for maintaining of a central repository for drivers that will allow for flexibility to update these drivers (so as to maintain the latest drivers in your driver store).
+
+## Data collection
+
+If you need assistance from Microsoft support, we recommend you collect the information by following the steps mentioned in [Gather information by using TSS for deployment-related issues](../windows-troubleshooters/gather-information-using-tss-deployment.md).
 
 ## References and Links
 

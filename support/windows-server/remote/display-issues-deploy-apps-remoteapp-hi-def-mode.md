@@ -1,7 +1,7 @@
 ---
 title: Display issues occur when you deploy applications through RemoteApp Hi-Def mode
 description: Discusses that you experience display issues when you deploy applications through RemoteApp Hi-Def mode. Provides a workaround.
-ms.date: 09/07/2020
+ms.date: 12/1/2021
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -36,7 +36,7 @@ Also, when you hover over or try to click the visible child window, the movement
 
 The following screenshot shows this issue. In this example, the Microsoft Dynamics NAV application is deployed as a remote app.
 
-![Here, Dynamics NAV application is deployed as a RemoteApp.](./media/display-issues-deploy-apps-remoteapp-hi-def-mode/dynamics-nav-remote-app.png)
+:::image type="content" source="media/display-issues-deploy-apps-remoteapp-hi-def-mode/dynamics-nav-remote-app.png" alt-text="Screenshot shows the issue when Microsoft Dynamics NAV application is deployed as a remote app." border="false":::
 
 ## Workaround
 

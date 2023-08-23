@@ -2,13 +2,9 @@
 title: Capture a TCP dump from a Windows node in an AKS cluster
 description: Understand how to capture a TCP dump from a Windows node within an Azure Kubernetes Service (AKS) cluster.
 ms.date: 11/15/2021
-author: DennisLee-DennisLee
-ms.author: v-dele
-ms.reviewer: erbookbi
-manager: gwallace
-audience: itpro
-ms.topic: troubleshooting
-ms.service: container-service
+ms.reviewer: erbookbi, v-leedennis
+ms.service: azure-kubernetes-service
+ms.subservice: data-collection-guide
 ---
 # Capture a TCP dump from a Windows node in an AKS cluster
 
@@ -45,7 +41,7 @@ If you have an SSH key, [create an SSH connection to the Windows node](/azure/ak
 
 ### [RDP](#tab/rdp)
 
-If you don't have an SSH key, connect using RDP and the Windows admin password. What if you don't have this password for your cluster? Then reset the password in Azure CLI by running the [az aks update](/cli/azure/aks#az_aks_update) command. Specify the resource group, cluster name, and the new password. The command displays the cluster details after it completes.
+If you don't have an SSH key, connect using RDP and the Windows admin password. What if you don't have this password for your cluster? Then reset the password in Azure CLI by running the [az aks update](/cli/azure/aks#az-aks-update) command. Specify the resource group, cluster name, and the new password. The command displays the cluster details after it completes.
 
 ```azurecli-interactive
 az aks update \
@@ -160,6 +156,7 @@ First, follow these steps to transfer the TCP dump files from the AKS Windows no
     C:\Users\bookbinder>net use z: \\tsclient\c
     The command completed successfully.
     ```
+
 1. Then run the following copy command to copy the TCP dump files to your jump VM:
 
     ```output
@@ -182,3 +179,5 @@ Next, follow these steps to copy the dump files from the jump VM to your machine
 The dump files are now in the root directory of your machine's c: drive.
 
 ---
+
+[!INCLUDE [Azure Help Support](../../includes/azure-help-support.md)]

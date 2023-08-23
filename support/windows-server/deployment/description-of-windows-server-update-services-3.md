@@ -1,7 +1,7 @@
 ---
 title: Description of the Windows Server Update Services 3.0 Service Pack 1 package
 description: Describes the Windows Server Update Services 3.0 Service Pack 1 package.
-ms.date: 09/21/2020
+ms.date: 04/28/2023
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -30,7 +30,7 @@ Microsoft has released a service pack for Microsoft Windows Server Update Servic
 
 The following file is available for download from the Microsoft Download Center:  
 
-![Download ](./media/description-of-windows-server-update-services-3/download.gif)
+:::image type="icon" source="media/description-of-windows-server-update-services-3/download-icon.png":::
  [Download the WSUS 3.0 Service Pack 1 package now.](https://www.catalog.update.microsoft.com/Search.aspx?q=Windows%20Server%20Update%20Services%203.0%20sp2)  
 
 For more information about how to download Microsoft support files, click the following article number to view the article in the Microsoft Knowledge Base:  
@@ -127,3 +127,7 @@ To work around this issue, temporarily change the locally saved password, run th
   5. Exit the WSUS Administration tool.
   6. Run the WSUS 3.0 SP1 upgrade.
   7. After you successfully upgrade to WSUS 3.0 SP1, change the password back to the original password.
+
+## Data collection
+
+If you need assistance from Microsoft support, we recommend you collect the information by following the steps mentioned in [Gather information by using TSS for deployment-related issues](../../windows-client/windows-troubleshooters/gather-information-using-tss-deployment.md).

@@ -1,7 +1,7 @@
 ---
 title: Troubleshoot Remote desktop disconnected errors
 description: Provides troubleshooting information for Remote desktop disconnected errors.
-ms.date: 09/08/2020
+ms.date: 05/16/2023
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -14,6 +14,10 @@ ms.custom: sap:connecting-to-a-session-or-desktop, csstroubleshoot
 ms.technology: windows-server-rds
 adobe-target: true
 ---
+
+<!---Internal note: The screenshots in the article are being or were already updated. Please contact "gsprad" and "christys" for triage before making the further changes to the screenshots.
+--->
+
 # Troubleshoot Remote desktop disconnected errors
 
 This article helps you understand the most common settings that are used to establish a Remote Desktop session in an enterprise environment, and provides troubleshooting information for Remote desktop disconnected errors.
@@ -368,7 +372,7 @@ To configure authentication and encryption for a connection, follow these steps:
 
 To help troubleshoot this problem, enable CAPI2 event logs on both the client and server computers. This command is shown in the following screenshot.
 
-:::image type="content" source="./media/troubleshoot-remote-desktop-disconnected-errors/enable-log-option.png" alt-text="Screenshot of the Enable Log option.":::
+:::image type="content" source="./media/troubleshoot-remote-desktop-disconnected-errors/enable-log-option.svg" alt-text="Expand CAPI2, right-click Operational, and then select the Enable Log option." border="false":::
 
 ### Workaround for the issue (You cannot completely disconnect a Remote Desktop server connection) described in Symptom 3
 
@@ -427,3 +431,7 @@ For more information about Remote Desktop Gateway, see the following articles:
 - [Troubleshooting General Remote Desktop Error Messages](/previous-versions/windows/it-pro/windows-server-2003/cc780927(v=ws.10))
 
 If this article does not help you resolve the problem, or if you experience symptoms that differ from those that are described in this article, visit the [Microsoft Support](https://support.microsoft.com/) for more information. To search your issue, in the **Search support for help** box, type the text of the error message that you received, or type a description of the problem.
+
+## Data collection
+
+If you need assistance from Microsoft support, we recommend you collect the information by following the steps mentioned in [Gather information by using TSS for User Experience issues](../../windows-client/windows-troubleshooters/gather-information-using-tss-user-experience.md#remote-desktop-disconnection).

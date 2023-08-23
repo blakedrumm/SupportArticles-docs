@@ -1,28 +1,28 @@
 ---
-title: Support for 32-bit operating systems in Azure virtual machines| Microsoft Docs
+title: Support for 32-bit operating systems in Azure virtual machines
 description: Information about operating systems that are supported on Azure virtual machines
 services: virtual-machines, azure-resource-manager
 documentationcenter: ''
 author: genlin
 manager: dcscontentpm
-editor: ''
 tags: top-support-issue, azure-resource-manager
 ms.service: virtual-machines
+ms.subservice: vm-support-statements
 ms.collection: windows
 ms.workload: na
 ms.tgt_pltfrm: vm-windows
 ms.topic: troubleshooting
-ms.date: 09/18/2019
+ms.date: 04/25/2023
 ms.author: genli
 ---
 
 # Support for 32-bit operating systems in Azure virtual machines
 
-Microsoft Azure now allows users to bring in their 32-bit Windows Operating systems over to Azure. Only Specialized VHDs are supported and Generalized images won't work in Azure. As some of these operating systems have already reached their end of life supportability agreement, Microsoft might not offer additional support for them. Support is also not offered for Linux-based, or Berkeley Software Distribution (BSD)-based operating systems that run on a Microsoft Azure virtual machine (VM).
+Microsoft Azure now allows users to bring in their 32-bit Windows operating systems over to Azure. Only Specialized VHDs are supported and Generalized images won't work in Azure. As some of these operating systems have already reached their end of life supportability agreement, Microsoft might not offer additional support for them. Support is also not offered for Linux-based, or Berkeley Software Distribution (BSD)-based operating systems that run on a Microsoft Azure virtual machine (VM).
 
 > [!NOTE]
-> Azure platform has a memory address space limitation imposed on VMs running 32-bit operating systems where only 1GB of memory might be made available to the VM (*especially on client SKUs like Win7 or Win10*), and the rest of the memory for the VM will show as reserved within the guest VM. This is a known issue and we currently do not have an ETA for a fix. We recommend moving to 64bit OS versions.
-> 
+> - Azure platform has a memory address space limitation imposed on VMs running 32-bit operating systems where only 1GB of memory might be made available to the VM (*especially on client SKUs like Windows 7 or Windows 10*), and the rest of the memory for the VM will show as reserved within the guest VM. This is a known issue and we currently do not have an ETA for a fix. We recommend moving to 64-bit operating system versions.
+> - Linux and Windows VM Guest Agent doesn't support 32-bit operating systems. VM extensions such as Azure Backup and Azure Monitor Agent don't work on 32-bit operating systems because they require VM Guest Agent.
 
 ## More information
 
@@ -39,8 +39,4 @@ For more information about operating systems that are supported on Azure virtu
 * [Learn more about Azure Extension supported operating systems](https://support.microsoft.com/help/4078134/azure-extension-supported-operating-systems)
 * [Learn more about running Windows Server 2003 on Microsoft Azure](https://support.microsoft.com/help/3206074/running-windows-server-2003-on-microsoft-azure)
 
-## Next steps
-
-If you need more help at any point in this article, contact the Azure experts on [the MSDN Azure and Stack Overflow forums](https://azure.microsoft.com/support/forums/).
-
-Alternatively, file an Azure support incident. Go to the [Azure support site](https://azure.microsoft.com/support/options/) and select **Get Support**.
+[!INCLUDE [Azure Help Support](../../includes/azure-help-support.md)]

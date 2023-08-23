@@ -1,7 +1,7 @@
 ---
 title: Dynamic link library (DLL)
 description: Describes what a DLL is and the various issues that occur when you use a DLL.
-ms.date: 09/22/2020
+ms.date: 04/28/2023
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -349,9 +349,13 @@ The following list describes some of the features of assemblies compared to the 
 
     An assembly can be developed by using any one of the supported .NET languages. For example, you can develop an assembly in Microsoft Visual C#, and then use the assembly in a Visual Basic .NET project.
 
+## Data collection
+
+If you need assistance from Microsoft support, we recommend you collect the information by following the steps mentioned in [Gather information by using TSS for deployment-related issues](../windows-troubleshooters/gather-information-using-tss-deployment.md).
+
 ## References
 
-- [Deploying and Configuring Applications](https://msdn2.microsoft.com/netframework/aa497268.aspx)
+- [Deploying and Configuring Applications](/previous-versions/aa497268(v=msdn.10))
 
 - [Assemblies](/previous-versions/dotnet/netframework-1.1/hk5f40ct(v=vs.71))
 

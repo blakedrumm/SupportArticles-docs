@@ -1,281 +1,84 @@
 ---
-title: Recover Linux VMs using chroot where LVM (Logical Volume Manager) is used - Azure VMs
-description: Recovery of Linux VMs with LVMs. 
+title: Troubleshoot Azure Linux VM when there's no access to Azure Serial Console and the disk layout uses LVM
+description: Provides a troubleshooting guide for an Azure Linux VM when there's no access to Azure Serial Console and the disk layout uses Logical Volume Manager.
 services: virtual-machines
 documentationcenter: ''
-author: vilibert
-manager: dcscontentpm
-editor: ''
+author: divargas-msft
 tags: Linux chroot LVM
 ms.service: virtual-machines
+ms.subservice: vm-cannot-start-stop
 ms.collection: linux
 ms.devlang: na
 ms.topic: troubleshooting
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
-ms.date: 11/24/2019
-ms.author: vilibert
+ms.date: 03/10/2023
+ms.author: divargas
 ---
+# Troubleshoot Azure Linux VM when there's no access to Azure Serial Console and the disk layout uses Logical Volume Manager
 
-# Troubleshooting a Linux VM when there is no access to the Azure serial console and the disk layout is using LVM (Logical Volume Manager)
+This article provides a troubleshooting guide for an Azure Linux virtual machine (VM) where all the following conditions are presented:
 
-This troubleshooting guide is of benefit for scenarios where a Linux VM is not booting,ssh is not possible and the underlying file system layout is configured with LVM (Logical Volume Manager).
+- The VM isn't booting up.
+- Connection to the VM by using SSH isn't possible.
+- The Azure Serial Console access is unavailable.
+- The VM is using Logical Volume Manager (LVM) in the operating system (OS) disk.
 
-## Take snapshot of the failing VM
+## Prerequisites
 
-Take a snapshot of the affected VM. 
+- To use the [Azure VM repair commands](repair-linux-vm-using-azure-virtual-machine-repair-commands.md), the following access is required:
 
-The snapshot will then be attached to a **rescue** VM. 
-Follow instructions [here](/azure/virtual-machines/linux/snapshot-copy-managed-disk#use-azure-portal) on how to take a **snapshot**.
+  - Access to the [Azure Cloud Shell](https://ms.portal.azure.com/#cloudshell/)
+  - Access to a new or existing custom storage account
 
-## Create a rescue VM
-Usually a rescue VM of the same or similar Operating system version is recommended. Use the same **region** and **resource group** of the affected VM
+- To perform the recovery operation, a temporary VM is required. To create such a VM, you need the corresponding permissions at the Azure subscription level.
 
-## Connect to the rescue VM
-Connect using ssh into the **rescue** VM. Elevate privileges and become super user using
+## Prepare the rescue VM
 
-`sudo su -`
+1. Use [VM repair commands](repair-linux-vm-using-azure-virtual-machine-repair-commands.md) to create a rescue VM that has a copy of the affected VM's OS disk attached.
 
-## Attach the disk
-Attach a disk to the **rescue** VM made from the snapshot taken previously.
+    > [!NOTE]
+    > Alternatively, you can create a rescue VM manually by using the Azure portal. For more information, see [Troubleshoot a Linux VM by attaching the OS disk to a recovery VM using the Azure portal](troubleshoot-recovery-disks-portal-linux.md).
 
-Azure portal -> select the **rescue** VM -> **Disks** 
+    - If you create the rescue VM manually instead of using the VM repair commands, to avoid issues due to duplicated LVM structures, you must select an image without LVM in the OS disk. If using Red Hat-based VMs, you need to search the image by using "Red Hat RAW." Ubuntu and SUSE images don't use LVM in the OS disk.
 
-![Create disk](./media/chroot-logical-volume-manager/create-disk-from-snap.png)
+    - If the LVM utilities are missing in the Red Hat RAW image, [install the LVM utilities](/azure/virtual-machines/linux/configure-lvm?toc=%2Fazure%2Fvirtual-machines%2Flinux%2Ftoc.json#install-the-lvm-utilities).
 
-Populate the fields. 
-Assign a name to your new disk, select the same Resource Group as the snapshot, affected VM, and Rescue VM.
+2. Connect to the rescue VM and mount the copy of the OS file systems in the rescue VM by using [chroot](chroot-environment-linux.md).
 
-The **Source type** is **Snapshot** .
-The **Source snapshot** is the name of the **snapshot** previously created.
+    When you execute commands in a chroot environment, they're executed against the attached OS Disk instead of the local rescue VM.
 
-![create disk 2](./media/chroot-logical-volume-manager/create-disk-from-snap-2.png)
+3. <a id="exit-chroot-and-swap-the-os-disk"></a>Once the troubleshooting is complete, perform the following actions:
 
-Create a mount point for the attached disk.
+    1. Exit chroot.
+    2. Unmount the copy of the file systems from the rescue VM.
+    3. Run the `az vm repair restore` command to swap the repaired OS disk with the original OS disk of the VM. For more information, see Step 5 in [Repair a Linux VM by using the Azure Virtual Machine repair commands](repair-linux-vm-using-azure-virtual-machine-repair-commands.md).
+    4. Validate if the VM is able to boot up by taking a look at the Azure Serial Console or by trying to connect to the VM.
 
-`mkdir /rescue`
+## Enable Serial Console
 
-Run the **fdisk -l** command to verify the snapshot disk has been attached and list all devices and partitions available
+If access to the Serial Console is still not possible, verify the GRUB configuration parameters for your Linux VM and correct them. For more information, see [Serial Console GRUB proactive configuration](serial-console-grub-proactive-configuration.md).
 
-`fdisk -l`
+## <a id="perform-fixes"></a>Common troubleshooting scenarios
 
-Most scenarios, the attached snapshot disk will be seen as **/dev/sdc** displaying two partitions **/dev/sdc1** and **/dev/sdc2**
+### Scenario 1: Configure the VM to boot from a different kernel
 
-![Fdisk](./media/chroot-logical-volume-manager/fdisk-output-sdc.png)
+A common scenario is to force a VM to boot from a previous kernel, as the currently installed kernel may have become corrupt or an upgrade didn't complete correctly.
 
-The **\*** indicates a boot partition, both partitions are to be mounted.
+To do this, follow the steps in [Boot system on older kernel version](kernel-related-boot-issues.md#bootingup-differentkernel). You can also check [Recent kernel downgrade](kernel-related-boot-issues.md#other-kernel-boot-issues-kerneldowngrade).
 
-Run the command **lsblk** to see the LVMs of the affected VM
+### Scenario 2: Kernel update issues
 
-`lsblk`
+A failed kernel upgrade can cause the VM to be non-bootable. For more information about the actions to perform the Kernel update, see [Kernel update process](kernel-related-boot-issues.md#other-kernel-boot-issues-kernelupdate).
 
-![Screenshot that shows the output from the lsblk command.](./media/chroot-logical-volume-manager/lsblk-output-mounted.png)
+### Scenario 3: LVM swap volume misconfiguration in GRUB
 
+In this scenario, a VM fails to complete the boot process and enters the dracut emergency shell due to an invalid swap device path in the GRUB configuration.
 
-Verify if LVMs from the affected VM are displayed.
-If not, use the below commands to enable them and rerun **lsblk**.
-Ensure to have the LVMs from the attached disk visible before proceeding.
-
-```
-vgscan --mknodes
-vgchange -ay
-lvscan
-mount –a
-lsblk
-```
-
-Locate the path to mount the Logical Volume that contains the / (root)  partition. It has the configuration files such as /etc/default/grub
-
-In this example, taking the output from the previous **lsblk** command  **rootvg-rootlv** is the correct **root** LV to mount and can be used in the next command.
-
-The output of the next command will show the path to mount for the **root** LV
-
-`pvdisplay -m | grep -i rootlv`
-
-![Rootlv](./media/chroot-logical-volume-manager/locate-rootlv.png)
-
-Proceed to mount this device on the directory /rescue
-
-`mount /dev/rootvg/rootlv /rescue`
-
-Mount the partition that has the **Boot flag** set on /rescue/boot
-
-`
-mount /dev/sdc1 /rescue/boot
-`
-
-Verify the file systems of the attached disk are now correctly mounted using the **lsblk** command
-
-![Run lsblk](./media/chroot-logical-volume-manager/lsblk-output-1.png)
-
-or the **df -Th** command
-
-![Df](./media/chroot-logical-volume-manager/df-output.png)
-
-## Gaining chroot access
-
-Gain **chroot** access, which will enable you to perform various fixes, slight variations exist for each Linux distribution.
-
-```
- cd /rescue​
- mount -t proc proc proc
- mount -t sysfs sys sys/​
- mount -o bind /dev dev/​
- mount -o bind /dev/pts dev/pts/​
- chroot /rescue​
-```
-
-If an error is experienced such as:
-
-**chroot: failed to run command ‘/bin/bash’: No such file or directory**
-
-attempt to mount the **usr** Logical Volume
-
-`
-mount  /dev/mapper/rootvg-usrlv /rescue/usr
-`
-
-> [!TIP]
-> When executing commands in a **chroot** environment, note they are run against the attached OS Disk and not the local **rescue** VM. 
-
-Commands can be used to install, remove and update software. Troubleshoot VMs in order to fix errors.
-
-
-Execute the lsblk command and the /rescue is now / and /rescue/boot is /boot
-![Screenshot shows a console window with the l s blk command and its output tree.](./media/chroot-logical-volume-manager/chrooted.png)
-
-## Perform Fixes
-
-### Example 1 - configure the VM to boot from a different kernel
-
-A common scenario is to force a VM to boot from a previous kernel as the current installed kernel may have become corrupt or an upgrade did not complete correctly.
-
-
-```
-cd /boot/grub2
-
-grep -i linux grub.cfg
-
-grub2-editenv list
-
-grub2-set-default "CentOS Linux (3.10.0-1062.1.1.el7.x86_64) 7 (Core)"
-
-grub2-editenv list
-
-grub2-mkconfig -o /boot/grub2/grub.cfg
-```
-
-*walkthrough*
-
-The **grep** command lists the kernels that **grub.cfg** is aware of.
-![Screenshot shows a console window displaying the result of a grep search for kernels.](./media/chroot-logical-volume-manager/kernels.png)
-
-**grub2-editenv list** displays which kernel will be loaded at next boot
-![Kernel default](./media/chroot-logical-volume-manager/kernel-default.png)
-
-**grub2-set-default** is used to change to another kernel
-![Grub2 set](./media/chroot-logical-volume-manager/grub2-set-default.png)
-
-**grub2-editenv** list displays which kernel will be loaded at next boot
-![New kernel](./media/chroot-logical-volume-manager/kernel-new.png)
-
-**grub2-mkconfig** rebuilds grub.cfg using the versions required
-![Grub2 mkconfig](./media/chroot-logical-volume-manager/grub2-mkconfig.png)
-
-
-
-### Example 2 - upgrade packages
-
-A failed kernel upgrade can render the VM non-bootable.
-Mount all the Logical Volumes to allow packages to be removed or reinstalled
-
-Run the **lvs** command to verify which **LVs** are available for mounting, every VM, which has been migrated or comes from another Cloud Provider will vary in configuration.
-
-Exit the **chroot** environment mount the required **LV**
-
-![Screenshot shows a console window with an l v s command, then mounting an L V.](./media/chroot-logical-volume-manager/advanced.png)
-
-Now access the **chroot** environment again by running
-
-`chroot /rescue`
-
-All LVs should be visible as mounted partitions
-
-![Screenshot that shows the LVs visible as mounted partitions.](./media/chroot-logical-volume-manager/chroot-all-mounts.png)
-
-Query the installed **kernel**
-
-![Screenshot thats shows how to query the installed kernel.](./media/chroot-logical-volume-manager/rpm-kernel.png)
-
-If needed remove or upgrade the **kernel**
-![Advanced](./media/chroot-logical-volume-manager/rpm-remove-kernel.png)
-
-
-### Example 3 - enable Serial Console
-If access has not been possible to the Azure serial console, verify GRUB configuration parameters for your Linux VM and correct them. Detailed information can be found [in this doc](./serial-console-grub-proactive-configuration.md)
-
-### Example 4 - kernel loading with problematic LVM swap volume
-
-A  VM may fail to fully boot and drops into the **dracut** prompt.
-More details of the failure can be located from either Azure serial console or navigate to Azure portal -> boot diagnostics -> Serial log
-
-
-An error similar to this may be present:
-
-```
-[  188.000765] dracut-initqueue[324]: Warning: /dev/VG/SwapVol does not exist
-         Starting Dracut Emergency Shell...
-Warning: /dev/VG/SwapVol does not exist
-```
-
-The grub.cfg is configured in this example to load an LV with the name of **rd.lvm.lv=VG/SwapVol** and the VM is unable to locate this. This line shows how the kernel is being loaded referencing the LV SwapVol
-
-```
-[    0.000000] Command line: BOOT_IMAGE=/vmlinuz-3.10.0-1062.4.1.el7.x86_64 root=/dev/mapper/VG-OSVol ro console=tty0 console=ttyS0 earlyprintk=ttyS0 net.ifnames=0 biosdevname=0 crashkernel=256M rd.lvm.lv=VG/OSVol rd.lvm.lv=VG/SwapVol nodmraid rhgb quiet
-[    0.000000] e820: BIOS-provided physical RAM map:
-```
-
- Remove the offending LV from the /etc/default/grub configuration and rebuild grub2.cfg
-
-
-## Exit chroot and swap the OS disk
-
-After repairing the issue, proceed to unmount and detach the disk from the rescue VM allowing it to be swapped with the affected VM OS disk.
-
-```
-exit
-cd /
-umount /rescue/proc/
-umount /rescue/sys/
-umount /rescue/dev/pts
-umount /rescue/dev/
-umount /rescue/boot
-umount /rescue
-```
-
-Detach the disk from the rescue VM and perform a Disk Swap.
-
-Select the VM from the portal **Disks** and select **detach**
-![Detach disk](./media/chroot-logical-volume-manager/detach-disk.png) 
-
-Save the changes
-![Save detach](./media/chroot-logical-volume-manager/save-detach.png) 
-
-The disk will now become available allowing it to be swapped with the original OS disk of the affected VM.
-
-Navigate in the Azure portal to the failing VM and select **Disks** -> **Swap OS Disk**
-![Swap disk](./media/chroot-logical-volume-manager/swap-disk.png) 
-
-Complete the fields the **Choose disk** is the snapshot disk just detached in the previous step. The VM name of the affected VM is also required then select **OK**
-
-![New os disk](./media/chroot-logical-volume-manager/new-osdisk.png) 
-
-If the VM is running the Disk Swap will shut it down, reboot the VM once the disk swap operation has completed.
-
+To resolve the issues, perform the steps in [Wrong swap device path in GRUB configuration file](linux-no-boot-dracut.md#dracut-grub-misconf-wrong-swap).
 
 ## Next steps
-Learn more about
 
- [Azure Serial Console]( ./serial-console-linux.md)
+For further no boot troubleshooting options, see [Troubleshoot Azure Linux Virtual Machines boot errors](./boot-error-troubleshoot-linux.md).
 
-[Single user mode](./serial-console-grub-single-user-mode.md)
+[!INCLUDE [Azure Help Support](../../includes/azure-help-support.md)]

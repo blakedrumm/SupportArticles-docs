@@ -2,9 +2,8 @@
 title: Evaluate PDW statistics accuracy
 description: This article provides a method to test the accuracy of the PDW statistics of a PDW table or all tables in a PDW database based off the total row count.
 ms.date: 07/22/2020
-ms.prod-support-area-path: Parallel Data Warehouse (APS)
+ms.custom: sap:Parallel Data Warehouse (APS)
 ms.topic: how-to
-ms.prod: sql
 ---
 # Evaluate PDW statistics accuracy
 

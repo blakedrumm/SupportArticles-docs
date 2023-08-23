@@ -1,7 +1,7 @@
 ---
 title: Error when creating a single partition
 description: Provides a solution to an error that occurs when you install Windows to a drive greater than 2.2 TB.
-ms.date: 10/22/2020
+ms.date: 04/28/2023
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -25,7 +25,7 @@ _Original KB number:_ &nbsp; 2604034
 When installing Windows to a drive greater than 2.2TB, you receive Error 0x80042468.
 This will occur if you install Windows 7 and manually try to create one partition using "Advanced Drive Options" during setup.
 
-:::image type="content" source="./media/error-when-creating-single-partition/error-when-installing-windows.png" alt-text="Error 0x80042468 when you install Windows.":::
+:::image type="content" source="media/error-when-creating-single-partition/error-when-installing-windows.png" alt-text="Screenshot of error 0x80042468: Failed to create a new partition on the selected unused space." border="false":::
 
 ## Cause
 
@@ -51,11 +51,11 @@ To Boot a UEFI enabled system, the disk type should be changed to GPT using conv
 3. Type **Select disk 0** (It selects the disk that you want to convert to GPT.)
 4. Type **Convert GPT** (This command will convert drive to GPT.)
 
-    :::image type="content" source="./media/error-when-creating-single-partition/type-convert-gpt-command.png" alt-text="Type convert gpt command.":::
+    :::image type="content" source="media/error-when-creating-single-partition/type-convert-gpt-command.png" alt-text="Screenshot of the output of convert gpt command." border="false":::
 
 5. Just to make sure everything went fine type **list disk**. The converted disk should now have an asterix in the GPT column. (See example image below)
 
-    :::image type="content" source="./media/error-when-creating-single-partition/type-list-disk.png" alt-text="Type list disk command.":::
+    :::image type="content" source="media/error-when-creating-single-partition/type-list-disk.png" alt-text="Screenshot of the output of list disk command." border="false":::
 
 6. Type exit and exit again. It should close the command window.
 
@@ -69,8 +69,12 @@ Windows doesn't support booting of GPT initialized volumes with UEFI systems on 
 
 For details on Windows support for large drives, see the following articles:
 
-- [Windows support for hard disks that are larger than 2 TB](/troubleshoot/windows-server/backup-and-storage/support-for-hard-disks-exceeding-2-tb)
+- [Windows support for hard disks that are larger than 2 TB](../../windows-server/backup-and-storage/support-for-hard-disks-exceeding-2-tb.md)
 - [How to establish and boot to GPT mirrors on 64-bit Windows](https://support.microsoft.com/help/814070)
 - [Configure UEFI/GPT-Based Hard Drive Partitions](/previous-versions/windows/it-pro/windows-8.1-and-8/hh824839(v=win.10))
 
 - [Using GPT Drives](/previous-versions/windows/hardware/design/dn653580(v=vs.85))
+
+## Data collection
+
+If you need assistance from Microsoft support, we recommend you collect the information by following the steps mentioned in [Gather information by using TSS for deployment-related issues](../windows-troubleshooters/gather-information-using-tss-deployment.md).

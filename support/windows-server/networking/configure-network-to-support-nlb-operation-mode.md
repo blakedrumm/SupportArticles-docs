@@ -1,7 +1,7 @@
 ---
 title: Configure network infrastructure to support the NLB operation mode
 description: Describes how the different NLB operation modes affect network infrastructure, and the best ways in which the network can support each mode.
-ms.date: 12/07/2020
+ms.date: 2/2/2023
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -36,7 +36,6 @@ The following table summarizes the requirements, advantages, and disadvantages o
 |Unicast|NLB must be able to change the MAC adapter address.|<ul><li>Easy to configure</li> <li>Appropriate for simple environments</li> </ul>|<ul><li>May flood other systems with network traffic, causing performance issues (you may have to use additional hardware to resolve those issues)</li> <li>Not appropriate for more complex environments</li> </ul>|
 |Multicast|The network infrastructure must use a static ARP entry and a static MAC address table entry.|<ul><li>More efficient use of bandwidth and lower risk of performance impacts than unicast mode</li> <li>Each adapter uses its built-in MAC address</li> </ul>|More complex to configure than unicast|
 |Multicast with IGMP|The network switches must be capable of IGMP snooping.|<ul><li>Same advantages as multicast</li> <li>Additional advantage of automatic configuration.</li> </ul>|Requires that the network hardware have specific capabilities that the other modes do not need|
-|||||
 
 You can configure an NLB cluster in one of three operation modes: Unicast, multicast, or IMGP multicast. All three modes work very well if your infrastructure is correctly configured. However, serious problems can develop if you haven't prepared your network infrastructure to support the mode that you are using. Each mode has different implications for the network infrastructure.
 
@@ -66,7 +65,7 @@ netsh interface ipv4 show int
 
 The output of this command lists the interfaces on the computer, as follows.
 
-:::image type="content" source="./media/configure-network-to-support-nlb-operation-mode/output-of-the-netsh-interface-ipv4-show-int-command.png" alt-text="The output of the netsh interface ipv4 show int command lists the indexes and names of all of the network interfaces." border="false":::
+:::image type="content" source="./media/configure-network-to-support-nlb-operation-mode/output-of-the-netsh-interface-ipv4-show-int-command.png" alt-text="The output of the netsh interface ipv4 show int command lists the indexes and names of all of the network interfaces.":::
 
 In the Command Prompt window, run the following command:
 
@@ -86,7 +85,7 @@ In this command, \<Cluster Idx> represents the index of the cluster interface.
 
 The output shows that forwarding is now enabled.
 
-:::image type="content" source="./media/configure-network-to-support-nlb-operation-mode/show-enabled-forwarding.png" alt-text="The Forwarding parameter is now set to Enabled." border="false":::
+:::image type="content" source="./media/configure-network-to-support-nlb-operation-mode/show-enabled-forwarding.png" alt-text="The Forwarding parameter is now set to Enabled in the output of netsh interface ipv4 show interface command.":::
 
 ### Configure virtual environments in unicast mode
 
@@ -112,13 +111,11 @@ The articles that are listed in the following table explain clearly what you hav
 |Cisco| [<ul><li>Catalyst Switches for Microsoft Network Load Balancing Configuration Example](https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6500-series-switches/107995-configure-nlb-00.html) <br/>If you use VSS on Cisco Catalyst, you may experience traffic issues on one of the stack nodes. For more information, contact Cisco and mention [this bug](https://bst.cloudapps.cisco.com/bugsearch/bug/CSCvd69060) (you must have a Cisco account to access the bug).</li> <li> [Microsoft Network Load Balancing on Nexus 7000 Configuration Example](http://www.cisco.com/c/en/us/support/docs/ip/multicast/116150-configure-Nexus7000-00.html) </li> <li>[Configuring Microsoft Network Load Balancing (NLB) on Nexus 9000 Series](https://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus9000/sw/92x/multicast/b-cisco-nexus-9000-series-nx-os-multicast-routing-configuration-guide-92x.html)</li> </ul> |
 |Juniper| <ul><li>[EX Series Switches and Microsoft Network Load Balancing (NLB) in multicast mode](https://kb.juniper.net/InfoCenter/index?page=content&id=KB14854) </li> <li> [[EX/QFX] Example - Workaround for using Microsoft network load balancing on EX4300 and QFX5100 switches](https://kb.juniper.net/InfoCenter/index?page=content&id=KB30135) </li> </ul> |
 |HPE| [HP Switch 5500/5500G - How to implement Microsoft Network Load Balancing using multicasts on the Switch 5500 and 5500G](https://support.hpe.com/hpesc/public/docDisplay?docId=emr_na-c02656362) |
-|Dell| <ul><li>[Dell Configuration Guide for the S4048-ON System 9.9(0.0)](https://www.dell.com/support/manuals/en-sg/force10-s4048-on/S4048_ON_9.9.0.0_Config_Pub-v1/Microsoft-Network-Load-Balancing?guid=GUID-A7EAB672-025C-4498-A1A2-6C32CCB9552C&lang=en-us) </li> <li>[Dell Networking Force10 switches and Microsoft Network Load Balancing](https://www.dell.com/support/kbdoc/en-sg/000121394/dell-networking-force10-switches-and-microsoft-network-load-balancing) </li> </ul>|
+|Dell| [Dell Networking Force10 switches and Microsoft Network Load Balancing](https://www.dell.com/support/kbdoc/en-sg/000121394/dell-networking-force10-switches-and-microsoft-network-load-balancing)|
 |Huawei| [Example for Connecting a Device to an NLB Cluster (Using Multi-Interface ARP)](https://support.huawei.com/ehedex/pages/DOC1000135317AEG0221R/04/DOC1000135317AEG0221R/04/resources/dc/dc_s_ccase_arp_003.html) |
 |D-Link| [D-Link Layer 3 Switch Microsoft NLB in Multicast Mode Configuration Example](https://files.dlink.com.au/Products/DGS-3620-52P/REV_A/SetupGuides/Layer_3_Switch_Microsoft_NLB_in_Multicast_Mode_Configuration_Example.pdf) |
 |Avaya| [Technical Configuration Guide for Microsoft Network Load Balancing](https://downloads.avaya.com/css/P8/documents/100123894) (download)|
-|H3C| [05-Layer 3 - IP Services Configuration Guide](https://www.h3c.com/en/Support/Resource_Center/HK/Switches/H3C_S10500/H3C_S10500/Technical_Documents/Configure/Configuration_Guide/H3C_S10500_CG-Release7536P05-6W100/05/) |
-|||
-
+  
 ### Configure virtual environments in multicast mode
 
 In a virtual environment, the network switches connect to the hypervisor host servers. In a high-availability virtual environment, a group of hypervisor hosts supports a group of virtual machines. An individual virtual machine may reside on any of the hypervisor hosts, and it may migrate to a different hypervisor host under specific circumstances. The network traffic must be able to reach the correct virtual machine regardless of which hypervisor host that virtual machine runs on.
@@ -134,6 +131,9 @@ This mode is basically the same as multicast mode, except that the switches can 
 When you enable IGMP multicast, the NLB nodes send IGMP Join messages to the 239.255.x.y multicast address (in this address, x.y represents the last two octets of the NLB VIP). For example, if the NLB VIP is 10.0.0.1, the multicast address for IGMP Join messages is 239.244.0.1. These messages indicate the group membership of the NLB nodes. The switches use this information to configure the MAC address table.
 
 Some of the articles that are listed in the [Multicast](#multicast) section include the correct configuration parameters for their devices for multicast with IGMP. To verify that your equipment can support this mode, contact your hardware vendor.
+
+> [!NOTE]
+> Up until Windows Server 2022, NLB supports IGMP Version 1 on any Windows versions that include IGMP multicast mode.
 
 ## Configure the NLB operation mode
 
@@ -157,7 +157,7 @@ NLB IP2MAC <VIP of NLB>
 
 In this command, \<VIP of NLB> represents the NLB virtual IP address.
 
-:::image type="content" source="./media/configure-network-to-support-nlb-operation-mode/mac-addresses-for-a-given-cluster-ip.png" alt-text="The NLB IP2MAC tool produces a list of MAC addresses for a given cluster IP." border="false":::
+:::image type="content" source="./media/configure-network-to-support-nlb-operation-mode/mac-addresses-for-a-given-cluster-ip.png" alt-text="The NLB IP2MAC tool produces a list of MAC addresses for a given cluster IP.":::
 
 As the screenshot shows, you can get the MAC address for each mode easily by using this command. As an alternative, you can do your math, considering the following guidelines (the numbers correspond to the red numbers in the screenshot):
 

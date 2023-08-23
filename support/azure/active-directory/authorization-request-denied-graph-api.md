@@ -21,11 +21,11 @@ You try to change the password of a Microsoft Azure Active Directory (Azure AD) 
 
 When you give the **Read and write directory data** permission to your application or Application Service Principal, the application can change the password of a typical Azure AD user by using Graph API. This setting is shown in the following screenshot.
 
-:::image type="content" source="media/authorization-requestdenied-change-password-graph-api/3004143.png" alt-text="screenshot of permissions.":::
+:::image type="content" source="media/authorization-request-denied-graph-api/application-permission.png" alt-text="Screenshot of the application permissions filed where Read and write directory data permission is selected.":::
 
 You can delegate an Azure AD user as an administrator by changing the user's **Organizational Role** setting, as shown in the following screenshot.
 
-:::image type="content" source="media/authorization-requestdenied-change-password-graph-api/3004144.png" alt-text="screenshot of role.":::
+:::image type="content" source="media/authorization-request-denied-graph-api/organizational-role.png" alt-text="Screenshot shows the Organizational Role option is set to User.":::
 
 ## Cause
 
@@ -76,6 +76,4 @@ After you run both sets of cmdlets, your application will be enabled to change t
 > [!NOTE]
 > It can take up to 30 minutes for the permissions to be applied to the Application Service Principal after you add the permissions to the Office 365 administrative roles.
 
-## More information
-
-Still need help? Go to [Microsoft Community](https://answers.microsoft.com/) or the [Azure Active Directory Forums](https://social.msdn.microsoft.com/Forums) website.
+[!INCLUDE [Azure Help Support](../../includes/azure-help-support.md)]

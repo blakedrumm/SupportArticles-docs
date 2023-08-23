@@ -1,12 +1,12 @@
 ---
-title: 'Azure Virtual Machines shutdown is stuck on Restarting, Shutting Down, or Stopping services | Microsoft Docs'
+title: 'Azure Virtual Machines shutdown is stuck on Restarting, Shutting Down, or Stopping services'
 description: This article helps you troubleshoot service errors in Azure Windows Virtual Machines.
 services: virtual-machines
 documentationCenter: ''
-author: v-miegge
+author: genlin
 manager: dcscontentpm
-editor: ''
 ms.service: virtual-machines
+ms.subservice: vm-cannot-start-stop
 ms.collection: windows
 ms.topic: troubleshooting
 ms.tgt_pltfrm: vm-windows
@@ -23,8 +23,8 @@ This article provides steps to resolve the issues of "Restarting", "Shutting dow
 
 When you use [Boot diagnostics](./boot-diagnostics.md) to view the screenshot of the VM, you may see that the screenshot displays the message "Restarting", "Shutting down", or "Stopping services".
 
-![Restarting, Shutting Down, and Stopping Services Screens](./media/boot-error-troubleshooting-windows/restart-shut-down-stop-service.png)
- 
+:::image type="content" source="media/boot-error-troubleshooting-windows/restart-shut-down-stop-service.png" alt-text="Screenshot of Restarting, Shutting down, and Stopping services screens." border="false":::
+
 ## Cause
 
 Windows uses the shutdown process to perform system maintenance operations, and process changes such as updates, roles, and features. It's not recommended to interrupt this critical process until it completes. Depending on the number of updates/changes and the VM size, the process may take a long time. If the process is stopped, it's possible for the OS to become corrupt. Only interrupt the process if it's taking excessively long.
@@ -33,7 +33,7 @@ Windows uses the shutdown process to perform system maintenance operations, and 
 
 ### Collect a Process memory dump
 
-1. Download [Procdump tool](http://download.sysinternals.com/files/Procdump.zip) into a new or existing data disk, which is attached to a working VM from the same region.
+1. Download [Procdump tool](https://download.sysinternals.com/files/Procdump.zip) into a new or existing data disk, which is attached to a working VM from the same region.
 
 2. Detach the disk containing the files needed from the working VM and attach the disk to your broken VM. We are calling this disk the **Utility disk**.
 
@@ -142,12 +142,12 @@ To enable dump log and Serial Console, run the following script.
 
 6. Start the VM and access the Serial Console.
 
-7. Select Send Non-Maskable Interrupt (NMI) to trigger the memory dump.
+7. Select **Send Non-Maskable Interrupt (NMI)** to trigger the memory dump.
 
-   ![Send Non-Maskable Interrupt](./media/boot-error-troubleshooting-windows/send-nonmaskable-interrupt.png)
+   :::image type="content" source="media/boot-error-troubleshooting-windows/send-nonmaskable-interrupt.png" alt-text="Screenshot of the Send  Non-Maskable Interrupt (NMI) button on the button bar in the Serial Console window." border="false":::
 
 8. Attach the OS disk to a recovery VM again, collect dump file.
 
-## Contact Microsoft support
-
 After you collect the dump file, contact Microsoft support to determine the root cause.
+
+[!INCLUDE [Azure Help Support](../../includes/azure-help-support.md)]

@@ -2,8 +2,7 @@
 title: Error when you connect to a named instance
 description: This article provides a resolution for the connectivity problem that occurs when a server that hosts a named instance of SQL Server Analysis Services server is configured to use IPv6.
 ms.date: 11/09/2020
-ms.prod-support-area-path: Analysis Services
-ms.prod: sql
+ms.custom: sap:Analysis Services
 ---
 # Error when you connect to a named instance of SQL Server Analysis Services by using IPv6
 

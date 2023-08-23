@@ -1,19 +1,18 @@
 ---
-title: Troubleshoot a faulty Azure VM by using nested virtualization in Azure | Microsoft Docs
-description: How to troubleshoot a problem Azure VM by using nested virtualization in Azure
+title: Troubleshoot a faulty Azure VM by using nested virtualization in Azure
+description: How to troubleshoot a faulty Azure VM by using nested virtualization in Azure.
 services: virtual-machines
 documentationcenter: ''
 author: genlin
 manager: dcscontentpm
-editor: ''
 tags: azure-resource-manager
 ms.service: virtual-machines
+ms.subservice: vm-backup-restore
 ms.collection: windows
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
-
 ms.topic: article
-ms.date: 10/11/2020
+ms.date: 06/15/2023
 ms.author: glimoli
 ---
 # Troubleshoot a faulty Azure VM by using nested virtualization in Azure
@@ -26,31 +25,39 @@ In order to mount the faulty VM, the Rescue VM must use the same type of Storage
 
 ## Step 1: Create a Rescue VM and install Hyper-V role
 
-1.  Create a new Rescue VM:
+1. Create a new Rescue VM:
 
-    -  Operating system: Windows Server 2016 Datacenter
+    - Operating system: Windows Server 2016 Datacenter or newer versions of Windows Server Datacenter.
 
-    -  Size: Select a series that supports nested virtualization. For example: [Dv3](/azure/virtual-machines/dv3-dsv3-series) or [Dv4](/azure/virtual-machines/dv4-dsv4-series).
+    - Size: Select a series that supports nested virtualization. For example: [Dv3](/azure/virtual-machines/dv3-dsv3-series) or [Dv4](/azure/virtual-machines/dv4-dsv4-series).
 
-    -  Same location, Storage Account, and Resource Group as the faulty VM.
+    - Same location, Storage Account, and Resource Group as the faulty VM.
 
-    -  Select the same storage type as the faulty VM (Standard or Premium).
+    - Select the same storage type as the faulty VM (Standard or Premium).
 
-2.  After the Rescue VM is created, remote desktop to the Rescue VM.
+    - Image: Choose either a Generation 2 image or a Generation 1 image.
 
-3.  In Server Manager, select **Manage** > **Add Roles and Features**.
+    - Security type: Change the security type to **Standard**. The default security type is **Virtual machine Trust Launch** that does not support nested virtualization. If the security type is set to **Virtual machine Trust Launch**, when you add server roles on the Rescue VM, you'll receive the following error message:
 
-4.  In the **Installation Type** section, select **Role-based or feature-based installation**.
+        > Hyper-V cannot be installed because virtualization support is not enabled in the BIOS.
 
-5.  In the **Select destination server** section, make sure that the Rescue VM is selected.
+        :::image type="content" source="media/troubleshoot-vm-by-use-nested-virtualization/hyper-v-cannot-be-installed-error.png" alt-text="Screenshot that shows the 'Hyper-V cannot be installed' error message. "lightbox="media/troubleshoot-vm-by-use-nested-virtualization/hyper-v-cannot-be-installed-error.png":::
+      
+2. After the Rescue VM is created, remote desktop to the Rescue VM.
 
-6.  Select the **Hyper-V role** > **Add Features**.
+3. In Server Manager, select **Manage** > **Add Roles and Features**.
 
-7.  Select **Next** on the **Features** section.
+4. In the **Installation Type** section, select **Role-based or feature-based installation**.
 
-8.  If a virtual switch is available, select it. Otherwise select **Next**.
+5. In the **Select destination server** section, make sure that the Rescue VM is selected.
 
-9.  On the **Migration** section, select **Next**
+6. Select the **Hyper-V role** > **Add Features**.
+
+7. Select **Next** on the **Features** section.
+
+8. If a virtual switch is available, select it. Otherwise select **Next**.
+
+9. On the **Migration** section, select **Next**
 
 10. On the **Default Stores** section, select **Next**.
 
@@ -62,21 +69,21 @@ In order to mount the faulty VM, the Rescue VM must use the same type of Storage
 
 ## Step 2: Create the faulty VM on the Rescue VM's Hyper-V server
 
-1.  [Create a snapshot disk](troubleshoot-recovery-disks-portal-windows.md#take-a-snapshot-of-the-os-disk) for the OS disk of the VM that has problem, and then attach the snapshot disk to the Rescue VM.
+1. [Create a snapshot disk](troubleshoot-recovery-disks-portal-windows.md#take-a-snapshot-of-the-os-disk) for the OS disk of the VM that has problem, and then attach the snapshot disk to the Rescue VM.
 
-2.  Remote desktop to the Rescue VM.
+2. Remote desktop to the Rescue VM.
 
-3.  Open Disk Management (diskmgmt.msc). Make sure that the disk of the faulty VM is set to **Offline**.
+3. Open Disk Management (diskmgmt.msc). Make sure that the disk of the faulty VM is set to **Offline**.
 
-4.  Open Hyper-V Manager: In **Server Manager**, select the **Hyper-V role**. Right-click the server, and then select the **Hyper-V Manager**.
+4. Open Hyper-V Manager: In **Server Manager**, select the **Hyper-V role**. Right-click the server, and then select the **Hyper-V Manager**.
 
-5.  In the Hyper-V Manager, right-click the Rescue VM, and then select **New** > **Virtual Machine** > **Next**.
+5. In the Hyper-V Manager, right-click the Rescue VM, and then select **New** > **Virtual Machine** > **Next**.
 
-6.  Type a name for the VM, and then select **Next**.
+6. Type a name for the VM, and then select **Next**.
 
-7.  Select **Generation 1** or **Generation 2** according to the faulty VM generation.
+7. Select **Generation 1** or **Generation 2** according to the faulty VM generation.
 
-8.  Set the startup memory at 1024 MB or more.
+8. Set the startup memory at 1024 MB or more.
 
 9. If applicable select the Hyper-V Network Switch that was created. Else move to the next page.
 
@@ -112,3 +119,5 @@ In order to mount the faulty VM, the Rescue VM must use the same type of Storage
 ## Next steps
 
 If you are having issues connecting to your VM, see [Troubleshoot RDP connections to an Azure VM](troubleshoot-rdp-connection.md). For issues with accessing applications running on your VM, see [Troubleshoot application connectivity issues on a Windows VM](troubleshoot-app-connection.md).
+
+[!INCLUDE [Azure Help Support](../../includes/azure-help-support.md)]

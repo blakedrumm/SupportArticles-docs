@@ -1,7 +1,7 @@
 ---
 title: AD replication error 5
 description: This article describes various reasons of Active Directory replication error 5.
-ms.date: 09/08/2020
+ms.date: 04/28/2023
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -80,7 +80,6 @@ _Original KB number:_ &nbsp; 2002013
     |NTDS General|1655|Active Directory attempted to communicate with the following global catalog and the attempts were unsuccessful.|
     |NTDS KCC|1925|The attempt to establish a replication link for the following writable directory partition failed.|
     |NTDS KCC|1926|The attempt to establish a replication link to a read-only directory partition with the following parameters failed.|
-    ||||  
 
 5. The **replicate now** command in Active Directory Sites and Services returns **Access is denied**.
 
@@ -97,7 +96,7 @@ _Original KB number:_ &nbsp; 2002013
 
     Buttons in Dialog: **OK**
 
-    :::image type="content" source="media/replication-error-5/replicate-now.png" alt-text="Replicate Now" border="false":::
+    :::image type="content" source="media/replication-error-5/replicate-now.png" alt-text="Access is denied error shows in the Replicate Now dialog box." border="false":::
 
 ## Cause
 
@@ -183,7 +182,6 @@ The generic DCDIAG runs multiple tests.
     |Everyone|Everyone|
     |Enterprise Domain Controllers|Enterprise Domain Controllers|
     |[Pre-Windows 2000 compatible Access]|[Pre-Windows 2000 compatible Access]|
-    |||
 
     If Active Directory operations are failing with error 5: **access is denied**, verify that:
 
@@ -273,7 +271,6 @@ The generic DCDIAG runs multiple tests.
     | Microsoft network client: Digitally sign communications (always)|HKLM\SYSTEM\CCS\Services\Lanmanworkstation\Parameters\Requiresecuritysignature|
     | Microsoft network server: Digitally sign communications (if server agrees)|HKLM\SYSTEM\CCS\Services\Lanmanserver\Parameters\Enablesecuritysignature|
     | Microsoft network server: Digitally sign communications (always)|HKLM\SYSTEM\CCS\Services\Lanmanserver\Parameters\Requiresecuritysignature|
-    |||
 
     Focus on SMB signing mismatches between the destination and source domain controllers with the classic cases being the setting enabled or required on one side but disabled on the other.
 
@@ -395,3 +392,7 @@ The generic DCDIAG runs multiple tests.
     - Select **Advanced** tab.
     - Disable **IPv4 Large Send Offload**.
     - Reboot.
+
+## Data collection
+
+If you need assistance from Microsoft support, we recommend you collect the information by following the steps mentioned in [Gather information by using TSS for Active Directory replication issues](../../windows-client/windows-troubleshooters/gather-information-using-tss-ad-replication.md).

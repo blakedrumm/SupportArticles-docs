@@ -1,7 +1,7 @@
 ---
 title: The Dcgpofix tool doesn't restore security settings in the Default Domain Controller Policy to their original state
 description: Explains that the Dcgpofix tool doesn't restore security settings in the Default Domain Controller Policy to the same state that they were in after successfully completing Dcpromo and that it's best to use this tool only in disaster recovery scenario.
-ms.date: 04/14/2021
+ms.date: 3/24/2022
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -58,8 +58,7 @@ The following table lists differences in security settings in the Default Domain
 |Log on as a batch job|LOCAL SERVICE, SUPPORT_388945a0|(Empty)|
 |Log on as a service|NETWORK SERVICE|(Empty)|
 |Shut down the system|Administrators, Backup Operators, Server Operators, Print Operators|Account Operators, Administrators, Backup Operators, Server Operators, Print Operators|
-||||
-
+  
 The following settings will change after you run the Dcgpofix tool:
 
 - AuditAccountManage

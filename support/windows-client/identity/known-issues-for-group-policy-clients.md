@@ -77,8 +77,7 @@ To manage this situation, an administrator could delete the Group policy, if it'
 | WindowsDefender.admx| Removed Policy setting **Configure local setting override to turn off Intrusion Prevention System**| This setting was deprecated from the ADMX file. The setting remains configured under the following conditions: <ul><li>the setting had already been deployed into production</li><li>the ADMX file was upgraded</li></ul> But it can't be changed without using one of the following methods: <ul><li>using a custom ADMX</li><li>deleting the whole policy that stores the setting.</li></ul>|
 | WindowsExplorer.admx| Changed Policy setting **Configure Windows SmartScreen** (EnableSmartScreen), replaced drop-down item to enabled/disabled configuration item.| This setting has changed in this version from previous versions, in particular the option to enable smart screen but Require approval from an administrator before running downloaded unknown software has been deprecated. If this setting was configured previously, it will become unmanageable after the ADMX upgrade. If this setting is enabled, but the smart screen was disabled, then the whole setting becomes disabled after the upgrade. <br/> See [Appendix 2 Windows Explorer](#appendix-2-windows-explorer) |
 | WindowsUpdate.admx| Removed Policy setting **Defer Upgrades and Updates** (DeferUpgrade), replaced by more detailed Policy settings (`DeferFeatureUpdates`, `DeferQualityUpdates`, `ExcludeWUDriversInQualityUpdate`, `ActiveHours`)| The defer upgrade option was made available as per Windows 10 RTM and was changed on build 1607. Once the settings have been configured, and the `PolicyDefinitions` folder is upgraded to build 1607, the settings become unmanageable. The configured settings will remain configured. But it can't be changed without using one of the following methods: <ul><li>using a custom ADMX</li><li>deleting the whole policy that stores the setting.</li></ul> As the new DeferUpgrade settings are new to build 1607, it isn't expected to affect existing configurations. <br/>See [Appendix 3 Windows Update](#appendix-3-windows-update) |
-||||
-
+  
 ## Known ADMX file content change issues in Windows 10 build 1511
 
 | Filename| Change| Possible Effect |
@@ -90,8 +89,7 @@ To manage this situation, an administrator could delete the Group policy, if it'
 | MicrosoftEdge.admx| The following nine settings have had class changes from **Both** to **Machine**: <ul><li>Turn off Autofill (AllowAutofill)</li></li>Allow employees to send don't Track headers (AllowDoNotTrack)</li></li>Turn off Password Manager (AllowPasswordManager)</li></li>Turn off Pop-up Blocker (AllowPopups)</li></li>Turn off address bar search suggestions (AllowSearchSuggestionsinAddressBar)</li></li>Turn off the SmartScreen Filter (AllowSmartScreen)</li></li>Configure Cookies (Cookies)</li></li>Configure the Enterprise Mode Site List (EnterpriseModeSiteList)</li></li>Send all intranet sites to Internet Explorer 11 (SendIntranetTraffictoInternetExplorer) | Change from **Both** to **Machine** means: <br/>&nbsp;&nbsp;&nbsp;a setting is descoped from being applicable to both the User and Machine sides of a policy to only the Machine side. <br/><br/>If the policy has already been configured in the User side, you can't change the user side settings again after the ADMX upgrade. However, the setting remains configured. |
 | ParentalControls.admx| Was removed in this build of ADMX| When an ADMX is removed from the latest build of templates, all settings that may have been configured from previous versions of the file become stagnant. If the `PolicyDefinitions` folder is upgraded, the existing previous file is still present. So, there's no effect. The settings will still be present and functional if the following conditions are true: <ul><li>the content of the `PolicyDefinitions` folder is removed</li><li>the new templates are populated</li><li>some group policies are still configured by using the settings from parentalcontrols.ADMX</li></ul> However, they can't be reconfigured without either using a custom ADMX or deleting the whole policy that stores the setting. |
 | WindowsStore.admx| Was added, that directly replaces WinStoreUI.admx (obtained from Windows 2012/8 RTM ADMX and wasn't present in 2012 R2/8.1)| The **EnableWindowsStoreOnWTG** setting in the key named `Software\Policies\Microsoft\WindowsStore` that has the value name of **EnableWindowsStoreOnWTG** is deprecated. It prevents the setting from being reconfigurable without either using a custom ADMX or deleting the whole policy that stores the setting. Also, the DisableAutoDownload setting value is changed from 3 (winStoreUI) to 4 (WindowsStore). It causes the original setting to be superseded and appear under extra registry settings. It also causes the original setting to become unchangeable. However, it will still be set. See [Appendix 4 WinStoreUI upgrade to WindowsStore](#appendix-4-winstoreui-upgrade-to-windowsstore). If both files are present at the same time, the GPMC fails to load. It's because the namespaces of both files are also duplicates. It causes the error while generating the settings `reportNamespace` 'Microsoft.Policies.WindowsStore' is already defined as the target namespace for another file in the store. File \\\\\<Domain Name>\SysVol\<DomainName>\Policies\PolicyDefinitions\WinStoreUI.admx, line 4, column 80 |
-||||
-
+  
 ## Known ADMX file content change issues in Windows 10 RTM
 
 | Filename| Change| Possible effect |
@@ -107,8 +105,7 @@ To manage this situation, an administrator could delete the Group policy, if it'
 | Snis.admx| This file was removed and now only delivered with Server Operating Systems only| When an ADMX has been removed from the RTM build of templates, all settings that may have been configured from previous versions of the file will become stagnant. If the PolicyDefinitions folder has been upgraded, the existing previous file will remain present. So, there's no effect. The settings remain present and functional if the following conditions are true: <ul><li>the content of the PolicyDefinitions folder is removed</li><li>the new templates are populated</li><li>there are group policies still configured by using the settings from the Snis.ADMX</li></ul> However, you can't reconfigure them without using one of the following methods: <ul><li>using a custom ADMX</li><li>reinserting the file from a backup</li><li>deleting the whole policy that stores the setting.</li></ul> |
 | TerminalServer.admx| Changed Policy setting **Optimize visual experience when using RemoteFX** (TS_RemoteDesktopVirtualGraphics), removed typing error from **...ScreeenImageQuality...** to **...ScreenImageQuality...**| This setting has been changed internally and its name reference is only used to link the ADMX file to the ADML content. This change has no impact to the actual settings configured or the use of the settings in the policy. |
 | WinStoreUI.admx| The ADMX file has been deprecated.| This file was removed from Windows 10 RTM. If the Microsoft Store was configured using Windows Server 2012 R2, these settings will become extra registry settings. The settings are still present and functional. But you can't reconfigure them without either using a custom ADMX or deleting the whole policy that stores the setting. Note: This file was replaced in Windows 10 build 1511 with the file WindowsStore.ADMX. Read the details of that file in the next section. |
-||||
-
+  
 ## ADMX source file references
 
 |Filename|Reference Build|Revision Number|Digital Signal Date|
@@ -118,8 +115,7 @@ To manage this situation, an administrator could delete the Group policy, if it'
 | [Windows10-ADMX.msi](https://www.microsoft.com/download/details.aspx?id=48257)| RTM| {79A07922-2B64-445E-B6DD-5578B607A411}| ‎Monday, ‎August ‎3, ‎2015 6:07:15 AM |
 | [Windows10_Version_1511_ADMX.msi](https://www.microsoft.com/download/details.aspx?id=48257)| 1511| {095735F1-0D68-4941-A4CE-16BDEC8CAF21}| ‎Tuesday, ‎November ‎17, ‎2015 7:38:18 AM |
 | [Windows 10 and Windows Server 2016 ADMX.msi](https://www.microsoft.com/download/details.aspx?id=53430)| 1607| {7848F166-A24F-4AE3-AEC9-6622770F8A85}| ‎Monday December ‎19, ‎2016 2:07:42 PM, ‎ |
-|||||
-
+  
 ### Other references
 
 - [How to create and manage the Central Store for Group Policy Administrative Templates in Windows](https://support.microsoft.com/help/3087759/how-to-create-and-manage-the-central-store-for-group-policy-administrative-templates-in-windows)
@@ -132,91 +128,91 @@ To manage this situation, an administrator could delete the Group policy, if it'
 
 ### Appendix 1 Windows Defender
 
-:::image type="content" source="media/known-issues-for-group-policy-clients/windows-defender-1.png" alt-text="Windows Defender setting 1":::
+:::image type="content" source="media/known-issues-for-group-policy-clients/windows-defender-1.png" alt-text="Screenshot shows the Display notifications to clients when they need to perform actions policy is enabled.":::
 
 The same setting (without editing the policy) after an ADMX upgrade to 1607d
 
-:::image type="content" source="media/known-issues-for-group-policy-clients/windows-defender-2.png" alt-text="Windows Defender setting 2":::
+:::image type="content" source="media/known-issues-for-group-policy-clients/windows-defender-2.png" alt-text="Screenshot shows the Suppress all the notifications policy is disabled.":::
 
 ### Appendix 2 Windows Explorer
 
 If the SmartScreen setting is enabled, and the **Require approval from an administrator before running downloaded unknown software** option is selected, you see:
 
-:::image type="content" source="media/known-issues-for-group-policy-clients/windows-explorer-1.png" alt-text="Windows Explorer setting 1":::
+:::image type="content" source="media/known-issues-for-group-policy-clients/windows-explorer-1.png" alt-text="Screenshot shows the Configure Windows SmartScreen policy is enabled and there is a Pick one of the following settings box with 1 item under this policy.":::
 
 After you upgrade the templates directly without changing the policy, you see:
 
-:::image type="content" source="media/known-issues-for-group-policy-clients/windows-explorer-2.png" alt-text="Windows Explorer setting 2":::
+:::image type="content" source="media/known-issues-for-group-policy-clients/windows-explorer-2.png" alt-text="Screenshot shows the Display names for some settings cannot be found under Extra Registry Settings. 3 settings are listed under this item.":::
 
 If you select the second option ("Give a warning"), you see:
 
-:::image type="content" source="media/known-issues-for-group-policy-clients/windows-explorer-3.png" alt-text="Windows Explorer setting 3":::
+:::image type="content" source="media/known-issues-for-group-policy-clients/windows-explorer-3.png" alt-text="Screenshot of the Configure Windows SmartScreen setting window in Group Policy Object Editor if you select the second option.":::
 
 However, in the settings tab of GPMC, you see:
 
-:::image type="content" source="media/known-issues-for-group-policy-clients/windows-explorer-4.png" alt-text="Windows Explorer setting 4":::
+:::image type="content" source="media/known-issues-for-group-policy-clients/windows-explorer-4.png" alt-text="Screenshot shows the Configure Windows SmartScreen policy is enabled and there is a Pick one of the following settings box under this policy.":::
 
 > [!NOTE]
 > No items are listed under **Pick one of the following settings**.
 
 After the templates are upgraded, you see:
 
-:::image type="content" source="media/known-issues-for-group-policy-clients/windows-explorer-5.png" alt-text="Windows Explorer setting 5":::
+:::image type="content" source="media/known-issues-for-group-policy-clients/windows-explorer-5.png" alt-text="Screenshot shows the Configure Windows SmartScreen policy is enabled and it is empty under this policy.":::
 
 You now enable the policy and select to disable the smart screen, as shown:
 
-:::image type="content" source="media/known-issues-for-group-policy-clients/windows-explorer-6.png" alt-text="Windows Explorer setting 6":::
+:::image type="content" source="media/known-issues-for-group-policy-clients/windows-explorer-6.png" alt-text="Screenshot of the Configure Windows SmartScreen setting window in Group Policy Object Editor when you select the Turn off SmartScreen option.":::
 
 After you make this setting, you see the following in the report:
 
-:::image type="content" source="media/known-issues-for-group-policy-clients/windows-explorer-7.png" alt-text="Windows Explorer setting 7":::
+:::image type="content" source="media/known-issues-for-group-policy-clients/windows-explorer-7.png" alt-text="Screenshot shows the Configure Windows SmartScreen policy is enabled. Turn off SmartScreen is listed under the Pick one of the following settings box.":::
 
 After you upgrade the templates to build 1607, the settings report reads as follows:
 
-:::image type="content" source="media/known-issues-for-group-policy-clients/windows-explorer-8.png" alt-text="Windows Explorer setting 8":::
+:::image type="content" source="media/known-issues-for-group-policy-clients/windows-explorer-8.png" alt-text="Screenshot shows the Configure Windows SmartScreen policy is disabled.":::
 
 If you now edit the setting, you see:
 
-:::image type="content" source="media/known-issues-for-group-policy-clients/windows-explorer-9.png" alt-text="Windows Explorer setting 9":::
+:::image type="content" source="media/known-issues-for-group-policy-clients/windows-explorer-9.png" alt-text="Screenshot of the Configure Windows SmartScreen setting window in Group Policy Object Editor. The value is set to Disabled.":::
 
 ### Appendix 3 Windows Update
 
 After the policy definitions are upgraded to at least the Windows 10 RTM build, and you configure the Windows Update settings to defer upgrades, you see:
 
-:::image type="content" source="media/known-issues-for-group-policy-clients/windows-update-1.png" alt-text="Windows Update 1":::
+:::image type="content" source="media/known-issues-for-group-policy-clients/windows-update-1.png" alt-text="Screenshot shows the Defer Upgrades and Updates policy is enabled and 3 items are listed under this policy.":::
 
 After the PolicyDefinitions folder is upgraded to build 1611, the settings become extra registry settings, as shown:
 
-:::image type="content" source="media/known-issues-for-group-policy-clients/windows-update-2.png" alt-text="Windows Update 2":::
+:::image type="content" source="media/known-issues-for-group-policy-clients/windows-update-2.png" alt-text="Screenshot shows the Display names for some settings cannot be found under Extra Registry Settings. 5 settings are listed under this item.":::
 
 ### Appendix 4 WinStoreUI upgrade to WindowsStore
 
 Enabling the Microsoft Store options by using the Windows Server 2012 R2 build of ADMX provides the report:
 
-:::image type="content" source="media/known-issues-for-group-policy-clients/winstoreui-upgrade-to-windowsstore-1.png" alt-text="WinStoreUI upgrade to WindowsStore 1":::
+:::image type="content" source="media/known-issues-for-group-policy-clients/winstoreui-upgrade-to-windowsstore-1.png" alt-text="Screenshot shows 3 policies are enabled.":::
 
 After the ADMX files are replaced in the central store by build 1511, you see:
 
-:::image type="content" source="media/known-issues-for-group-policy-clients/winstoreui-upgrade-to-windowsstore-2.png" alt-text="WinStoreUI upgrade to WindowsStore 2":::
+:::image type="content" source="media/known-issues-for-group-policy-clients/winstoreui-upgrade-to-windowsstore-2.png" alt-text="Screenshot shows the Turn off the Store application policy is enabled and Display names for some settings cannot be found under Extra Registry Settings. 7 settings are listed.":::
 
 ### Appendix 5 Error reporting
 
 In Windows Server 2012 R2, you receive the following report if you enable **Configure Default consent**:
 
-:::image type="content" source="media/known-issues-for-group-policy-clients/error-reporting-1.png" alt-text="Error reporting 1":::
+:::image type="content" source="media/known-issues-for-group-policy-clients/error-reporting-1.png" alt-text="Screenshot shows the Turn off the Configure Default consent policy is enabled. The box under this policy shows that Consent level is Send all data.":::
 
 If errorreporting.admx is replaced, the report becomes as follows:
 
-:::image type="content" source="media/known-issues-for-group-policy-clients/error-reporting-2.png" alt-text="Error reporting 2":::
+:::image type="content" source="media/known-issues-for-group-policy-clients/error-reporting-2.png" alt-text="Screenshot shows An error has occurred while collecting data for Administrative Templates. Registry value DefaultConsent is of unexpected type.":::
 
 You can also see the image:
 
-:::image type="content" source="media/known-issues-for-group-policy-clients/error-reporting-3.png" alt-text="Error reporting 3":::
+:::image type="content" source="media/known-issues-for-group-policy-clients/error-reporting-3.png" alt-text="Screenshot shows 3 policies are enabled: Turn off Automatic Download of updates, Allow Store to install apps on Windows To Go workspaces and Turn off the Store application.":::
 
 After WinStoreUI is removed and WindowsStore is added, you see:
 
-:::image type="content" source="media/known-issues-for-group-policy-clients/error-reporting-4.png" alt-text="Error reporting 4":::
+:::image type="content" source="media/known-issues-for-group-policy-clients/error-reporting-4.png" alt-text="Screenshot shows the Turn off the Store application policy is enabled and Display names for some settings cannot be found under Extra Registry Settings. 2 settings are listed.":::
 
 After both ADMX/L templates are present in the policy definitions folder, you see:
 
-:::image type="content" source="media/known-issues-for-group-policy-clients/error-reporting-5.png" alt-text="Error reporting 5":::
+:::image type="content" source="media/known-issues-for-group-policy-clients/error-reporting-5.png" alt-text="Screenshot shows a namespace error has occurred while collecting data for Administrative Templates. ":::

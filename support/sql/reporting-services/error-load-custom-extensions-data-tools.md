@@ -2,10 +2,9 @@
 title: Error when you load custom extensions in Data Tools
 description: This article provides a resolution for the problem where you receive an error message when you try to load custom extensions in report server projects in SQL Server 2012 Data Tools.
 ms.date: 01/14/2021
-ms.prod-support-area-path: Reporting Services
+ms.custom: sap:Reporting Services
 ms.reviewer: ramakoni, muddin
-ms.topic: troubleshooting
-ms.prod: sql 
+ms.topic: troubleshooting 
 ---
 # Error (The selected data extension \<Custom Extension Name> is not installed or cannot be loaded) when you load custom extensions in SQL Server 2012 Data Tools
 

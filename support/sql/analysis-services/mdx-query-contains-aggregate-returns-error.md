@@ -2,9 +2,8 @@
 title: MDX query contains Aggregate returns error
 description: This article describes a problem that occurs if the set in the Aggregate function contains a calculated member.
 ms.date: 11/10/2020
-ms.prod-support-area-path: Analysis Services
+ms.custom: sap:Analysis Services
 ms.reviewer: yinnw
-ms.prod: sql
 ---
 # An MDX query that contains an Aggregate function returns error for the cell values in SQL Server Analysis Services
 

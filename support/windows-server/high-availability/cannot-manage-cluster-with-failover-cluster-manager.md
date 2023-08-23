@@ -1,7 +1,7 @@
 ---
 title: Can't manage cluster with failover cluster manager
 description: Helps fix an error that you receive when managing cluster by using failover cluster management console.
-ms.date: 09/08/2020
+ms.date: 12/9/2021
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -32,8 +32,7 @@ An error occurred connecting to the cluster '.'.
 An error occurred trying to display the cluster information.  
 Connection to the cluster is not allowed since you are not an administrator on the cluster node(s) (Node name)  
 
-![error that we get when we try to manage cluster ](./media/cannot-manage-cluster-with-failover-cluster-manager/error-message-dialog.png)
-
+:::image type="content" source="media/cannot-manage-cluster-with-failover-cluster-manager/error-message-dialog.png" alt-text="Screenshot of the Error window which shows The operation has failed error message.":::
 or
 
 When you run the Cluster validation, you receive the following error:

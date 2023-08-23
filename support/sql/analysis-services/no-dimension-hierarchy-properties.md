@@ -2,9 +2,8 @@
 title: No properties and members of Dimension Hierarchy
 description: This article provides a workaround for the no results error that occurs when you try to get the properties and members of a Dimension Hierarchy by using XMLA script.
 ms.date: 08/05/2020
-ms.prod-support-area-path: Analysis Services
+ms.custom: sap:Analysis Services
 ms.reviewer: deepeshs, jburchel
-ms.prod: sql
 ---
 # No results for XMLA script query for properties/members of a Dimension Hierarchy
 

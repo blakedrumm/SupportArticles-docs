@@ -1,7 +1,7 @@
 ---
 title: troubleshoot AD replication error 5 Access is denied
 description: Discusses the Access is denied error 5 when Active Directory replications fail. This issue can occur in Windows Server 2012 R2, Windows Server 2012, Windows Server 2008 R2, Windows Server 2008, Windows Server 2003 R2, Windows Server 2003, or Microsoft Windows 2000 Server.
-ms.date: 09/08/2020
+ms.date: 04/28/2023
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -85,8 +85,7 @@ The following table summarizes Active Directory events that frequently cite the 
 |1655|NTDS General|Active Directory tried to communicate with the following global catalog and the attempts were unsuccessful.|
 |1925|NTDS KCC|The attempt to establish a replication link for the following writable directory partition failed.|
 |1926|NTDS KCC|The attempt to establish a replication link to a read-only directory partition with the following parameters failed.|
-||||
-
+  
 ### Symptom 5
 
 When you right-click the connection object from a source domain controller in Active Directory Sites and Services and then select Replicate Now, the process fails, and you receive the following error:
@@ -100,7 +99,7 @@ Access is denied.
 
 The following screenshot represents a sample of the error:
 
-![Sample of the error](./media/replications-fail-with-error-5/replicate-now-window.png)
+:::image type="content" source="media/replications-fail-with-error-5/replicate-now-window.png" alt-text="Screenshot of the Replicate Now window which shows a sample of the error.":::
 
 ## Workaround
 
@@ -429,3 +428,7 @@ Checking machine account for DC \<DC name> on DC \<DC Name>
 \* Missing SPN :HOST/\<hostname>.\<DNS domain name>/\<NetBIOS domain name>  
 \* Missing SPN :GC/\<hostname>.\<DNS domain name>/\<DNS domain name>
 Unable to verify the machine account (\<DN path for Dc machine account>) for \<DC Name> on \<DC name>.
+
+## Data collection
+
+If you need assistance from Microsoft support, we recommend you collect the information by following the steps mentioned in [Gather information by using TSS for Active Directory replication issues](../../windows-client/windows-troubleshooters/gather-information-using-tss-ad-replication.md).

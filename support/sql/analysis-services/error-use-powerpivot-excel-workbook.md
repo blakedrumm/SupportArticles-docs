@@ -2,8 +2,7 @@
 title: Error when you use PowerPivot for Excel workbook
 description: This article provides a resolution for the problem that occurs when you try to use a PowerPivot for Excel workbook as a data source in SQL Server Analysis Services.
 ms.date: 11/10/2020
-ms.prod-support-area-path: Analysis Services
-ms.prod: sql
+ms.custom: sap:Analysis Services
 ---
 # Error message when you use a PowerPivot for Excel workbook as a data source in SQL Server Analysis Services
 

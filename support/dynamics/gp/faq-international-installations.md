@@ -13,15 +13,15 @@ _Original KB number:_ &nbsp; 887108
 
 ## Introduction
 
-To access the latest information on multilingual installations, see [Multilingual installs in Microsoft Dynamics GP - What you need to know!!](https://community.dynamics.com/gp/b/dynamicsgp/posts/what-you-should-know-about-multilingual-environments-in-microsoft-dynamics-gp).
+To access the latest information on multilingual installations, see [Multilingual installs in Microsoft Dynamics GP - What you need to know!!](https://community.dynamics.com/blogs/post/?postid=a3fe78ae-d265-4672-8282-a10600329784).
 
-A Multilingual Installation is an environment in which multiple language release installations (unique language code folders) share the same DYNAMICS database, and potentially the same company databases.  Each unique release contains specific words and phrases to match the language of that country. As an example, the United Kingdom installation uses "cheque" and a U.S. installation uses the word "check". There are 27 unique languages to choose from when you install Microsoft Dynamics GP.
+A Multilingual Installation is an environment in which multiple language release installations (unique language code folders) share the same DYNAMICS database, and potentially the same company databases.  Each unique release contains specific words and phrases to match the language of that country/region. As an example, the United Kingdom installation uses "cheque" and a U.S. installation uses the word "check". There are 27 unique languages to choose from when you install Microsoft Dynamics GP.
 
 ## More information
 
 **Q1: What is the difference between a localized release and a translated release of Microsoft Dynamics GP?**  
 
-A1: A translated release is translated from English into another language. Each translated release of Microsoft Dynamics GP requires a different set of installation CDs. A localized release is selected during the Microsoft Dynamics GP installation process. A localized release has features that meet the legal and business requirements of the country that was selected during installation. The localized versions that are offered during the installation process depend on the language of Microsoft Dynamics GP that is being installed. For example, the United States-English version of Microsoft Dynamics GP offers 27 localized versions.
+A1: A translated release is translated from English into another language. Each translated release of Microsoft Dynamics GP requires a different set of installation CDs. A localized release is selected during the Microsoft Dynamics GP installation process. A localized release has features that meet the legal and business requirements of the country/region that was selected during installation. The localized versions that are offered during the installation process depend on the language of Microsoft Dynamics GP that is being installed. For example, the United States-English version of Microsoft Dynamics GP offers 27 localized versions.
 
 > [!NOTE]
 > Translated releases were introduced in Microsoft Business Solutions-Great Plains 7.0.
@@ -36,8 +36,7 @@ A2: The translated releases that are available per release are listed in the fol
 |8.0|French-Canadian, Spanish-Latin America|
 |9.0|French-France, French-Canadian, Spanish-Latin America, Spanish-Iberia, German, Dutch-Netherlands|
 |10.0|French-Canadian, Spanish-Latin America|
-|||
-
+  
 **Q3:What does "translated" mean within Microsoft Dynamics GP releases?**  
 
 A3: "Translated" means that the user interface has been translated to a language other than English. The user interface includes the installation windows, the program menus and windows, and reports.
@@ -48,11 +47,11 @@ For example, if you've a United States installation and a French Canadian instal
 
 However, if you enter an item from the French Canadian installation as "une petite fenetre," both installations will view the item as "une petite fenetre."
 
-**Q4:Are there any differences between the Microsoft Dynamics GP installations for different countries?**  
+**Q4:Are there any differences between the Microsoft Dynamics GP installations for different countries/regions?**  
 
-A4: There are two differences between the various localized releases. The following differences are based on the country that is selected during the installation.
+A4: There are two differences between the various localized releases. The following differences are based on the country/region that is selected during the installation.
 
-- The following list contains the countries and regions that are available as localized releases during the Microsoft Dynamics GP installation. The various localized releases contain some words and phrases that are changed to match the language of that country. For example, the United Kingdom installation uses "cheque" instead of "check."
+- The following list contains the countries/regions that are available as localized releases during the Microsoft Dynamics GP installation. The various localized releases contain some words and phrases that are changed to match the language of that country/region. For example, the United Kingdom installation uses "cheque" instead of "check."
 
   - Andean (new in Microsoft Dynamics GP 10.0)
   - Argentina (new in Microsoft Dynamics GP 10.0)
@@ -64,7 +63,7 @@ A4: There are two differences between the various localized releases. The follow
   - China
   - France
   - Germany
-  - Hong Kong
+  - Hong Kong SAR
   - Indonesia
   - Japan
   - Latin America
@@ -81,7 +80,7 @@ A4: There are two differences between the various localized releases. The follow
   - Thailand
   - United Kingdom and Ireland
   - United States
-- Based on the country that you select during the installation, different additional sub-features will be available. For example, if you install a Canadian client, you'll have **Canadian Payroll** as an installation option.
+- Based on the country/region that you select during the installation, different additional sub-features will be available. For example, if you install a Canadian client, you'll have **Canadian Payroll** as an installation option.
 
 - Starting with Microsoft Dynamics GP 9.0, you must create all additional sub-feature tables by using the Microsoft Dynamics GP Utilities program. Therefore, multilingual installations in which different additional sub-features are also installed have special requirements. First, you must install the server components of Microsoft Dynamics GP for each region. Then, you must run Microsoft Dynamics GP Utilities to create the tables.
 
@@ -129,7 +128,7 @@ In a multilingual install audit trail, codes across companies will be identical 
 > [!NOTE]
 > If this steps aren't followed, there can be differences between the audit trail codes from various Dynamics.dic files, from Dynamics..Messages table, and from \<CompanyDB>..SY01000 table which could lead to various issues.
 
-If the secondary language folder was installed before the first real company was created, then it doesn't synchronize correctly and audit trail codes may be incorrect. You can synchronize the audit trail codes in the secondary language code folder by doing the following steps: (Refer to [Multilingual Installs in Microsoft Dynamics GP - What You Need To Know!!](https://community.dynamics.com/gp/b/dynamicsgp/archive/2018/05/01/what-you-should-know-about-multilingual-environments-in-microsoft-dynamics-gp) to see the below steps in more detail in 'Answer 4' section of the blog.)
+If the secondary language folder was installed before the first real company was created, then it doesn't synchronize correctly and audit trail codes may be incorrect. You can synchronize the audit trail codes in the secondary language code folder by doing the following steps: (Refer to [Multilingual Installs in Microsoft Dynamics GP - What You Need To Know!!](https://community.dynamics.com/blogs/post/?postid=a3fe78ae-d265-4672-8282-a10600329784) to see the below steps in more detail in 'Answer 4' section of the blog.)
 
 1. Make a current backup of the company and Dynamics databases.
 2. Delete the Dynamics..MESSAGES table to clear it out.  

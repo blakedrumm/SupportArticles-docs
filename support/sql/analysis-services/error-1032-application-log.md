@@ -3,8 +3,7 @@ title: Error 1032 in the application log
 description: This article provides a workaround for the problem that occurs when you try to run instances of SQL Server or SQL Server Analysis Services on a computer that is running Windows Server 2012.
 ms.date: 11/04/2020
 ms.reviewer: ramakoni
-ms.prod-support-area-path: Analysis Services
-ms.prod: sql
+ms.custom: sap:Analysis Services
 ---
 # Error 1032 messages in the application log in Windows Server 2012
 

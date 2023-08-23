@@ -1,7 +1,7 @@
 ---
 title: Printer redirection and drive redirection don't work
 description: Fixes the printer redirection failure issues and hard drive redirection failure issues because of incorrect registry settings.
-ms.date: 09/08/2020
+ms.date: 4/20/2022
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -10,7 +10,7 @@ ms.topic: troubleshooting
 ms.prod: windows-server
 localization_priority: medium
 ms.reviewer: kaushika
-ms.custom: sap:errors-and-troubleshooting:-general-issues, csstroubleshoot
+ms.custom: sap:errors-and-troubleshooting-general-issues, csstroubleshoot
 ms.technology: windows-server-printing
 ---
 # Printer redirection and drive redirection don't work in a Terminal Server session

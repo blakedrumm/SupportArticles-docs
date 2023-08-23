@@ -1,7 +1,7 @@
 ---
 title: Active Directory replication Event ID 2042 (It has been too long since this machine replicated)
 description: Helps you troubleshoot Active Directory replication Event ID 2042.
-ms.date: 12/07/2020
+ms.date: 04/28/2023
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -152,7 +152,6 @@ Membership in **Domain Admins**, or equivalent, is the minimum required to compl
     |`/regkey`|Enables (+) and disables (-) the value for the **Strict Replication Consistency** registry entry in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NTDS\Parameters`.|
     |\<hostname>|Substitute the name of a single domain controller, or use an asterisk character (*) to apply the change to all domain controllers in the forest. For the domain controller name, you can use the Domain Name System (DNS) name, the distinguished name of the domain controller computer object, or the distinguished name of the domain controller server object.|
     |`+allowDivergent`|Enables replication to start again with the replication partner that had lingering objects. You should run this command only after all the lingering objects have been removed. After replication is running properly again, use the `-allowDivergent` switch to prevent divergent replication from occurring.|
-    |||
 
 > [!NOTE]
 > If you did not use an asterisk character (*) to apply the change to all domain controllers, repeat step 2 for every domain controller on which you want to allow divergent replication.
@@ -173,3 +172,7 @@ repadmin /regkey dc1.contoso.com -allowDivergent
 
 > [!NOTE]
 > If you did not remove all the lingering objects, attempting replication might result in replication of a lingering object. If strict replication consistency is enabled on the destination domain controller, replication with the source domain controller will be blocked again.
+
+## Data collection
+
+If you need assistance from Microsoft support, we recommend you collect the information by following the steps mentioned in [Gather information by using TSS for Active Directory replication issues](../../windows-client/windows-troubleshooters/gather-information-using-tss-ad-replication.md).

@@ -2,9 +2,8 @@
 title: Can't correctly translate character data
 description: This article helps you work around a problem that causes incorrect translation of client data when using SQL Server ODBC driver.
 ms.date: 11/03/2020
-ms.prod-support-area-path: MDAC and ADO
+ms.custom: sap:MDAC and ADO
 ms.reviewer: bartd, rajeevp
-ms.prod: sql
 ---
 # You can't correctly translate character data from a client to a server by using the SQL Server ODBC driver if the client code page differs from the server code page
 

@@ -30,7 +30,7 @@ You connect a computer that's running Windows 8 (or a later version) to a networ
 You notice the following behavior:
 
 - The default browser (for example, **Internet Explorer** or **Edge**) opens, and shows a web page such as a sign-in page for the network or the MSN portal page.
-- The network icon on the Task Bar shows an alert symbol (for example,:::image type="content" source="./media/internet-explorer-edge-open-connect-corporate-public-network/network-status-alert.png" alt-text="Network status alert" border="false":::). If you hover over the icon, you see a message such as "No connectivity" or "Limited Internet access."
+- The network icon on the Task Bar shows an alert symbol (for example,:::image type="icon" source="media/internet-explorer-edge-open-connect-corporate-public-network/network-status-alert.png" border="false":::). If you hover over the icon, you see a message such as "No connectivity" or "Limited Internet access."
 
 After you sign in to the network, you can use the network in the usual manner. After you use the network for a few seconds, the network alert on the Task Bar disappears.
 
@@ -54,7 +54,7 @@ The active probe process consists of the following steps:
 
 - Windows 10 or later versions:
    1. NCSI sends a DNS request to resolve the address of the `www.msftconnecttest.com` FQDN.
-   2. If NCSI receives a valid response from a DNS server, NCSI sends a plain HTTP GET request to `http://www.msftconnecttest.com`/connecttest.txt.
+   2. If NCSI receives a valid response from a DNS server, NCSI sends a plain HTTP GET request to `http://www.msftconnecttest.com/connecttest.txt`.
    3. If NCSI successfully downloads the text file, it makes sure that the file contains Microsoft Connect Test.
    4. NCSI sends another DNS request to resolve the address of the `dns.msftncsi.com` FQDN.
 
@@ -63,7 +63,7 @@ The active probe process consists of the following steps:
 
 - Windows 8.1 or earlier versions:
   1. NCSI sends a DNS request to resolve the address of the `www.msftncsi.com` FQDN.
-  2. If NCSI receives a valid response from a DNS server, NCSI sends a plain HTTP GET request to `http://www.msftncsi.com`/ncsi.txt.
+  2. If NCSI receives a valid response from a DNS server, NCSI sends a plain HTTP GET request to `http://www.msftncsi.com/ncsi.txt`.
   3. If NCSI successfully downloads the text file, it makes sure that the file contains Microsoft NCSI.
   4. NCSI sends another DNS request to resolve the address of the `dns.msftncsi.com` FQDN.
 
@@ -105,7 +105,7 @@ In some cases, such as when you connect to a network that uses a proxy server to
 > - \*.msftncsi.com
 > - \*.msftconnecttest.com
 >
->For more information, see [KB 2778122, Using authenticated proxy servers together with Windows 8](/troubleshoot/windows-client/networking/use-authenticated-proxy-servers)
+>For more information, see [KB 2778122, Using authenticated proxy servers together with Windows 8](use-authenticated-proxy-servers.md)
 
 ## Workaround
 

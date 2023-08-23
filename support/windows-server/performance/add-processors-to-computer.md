@@ -1,7 +1,7 @@
 ---
 title: Add processors to a computer
 description: Describes how to add processors to a computer.
-ms.date: 09/17/2020
+ms.date: 3/24/2022
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -22,7 +22,7 @@ _Original KB number:_ &nbsp; 888729
 
 ## Supported processors
 
-The following list contains information about the number of processors that are supported in the various versions of Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Vista, Windows 7 and in Windows XP Professional x64 Edition: 
+The following list contains information about the number of processors that are supported in the various versions of Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Vista, Windows 7 and in Windows XP Professional x64 Edition:
 
 | Client SKUs| Maximum Physical Processors Supported |
 |---|---|
@@ -41,8 +41,7 @@ The following list contains information about the number of processors that are 
 |Windows 7 Professional Edition|2|
 |Windows 7 Enterprise Edition|2|
 |Windows 7 Ultimate Edition|2|
-|||
-
+  
 | Server SKUs| Maximum Physical Processors Supported |
 |---|---|
 |Windows Server 2003 Web Edition|2|
@@ -67,8 +66,7 @@ The following list contains information about the number of processors that are 
 |Windows Server 2008 R2 Enterprise x64 Edition|8|
 |Windows Server 2008 R2 Datacenter x64 Edition|64|
 |Windows Server 2008 R2 Itanium Edition|64|
-|||
-
+  
 ## Add processors to a computer
 
 To add more processors to a computer that has only one processor, the following conditions must be true:

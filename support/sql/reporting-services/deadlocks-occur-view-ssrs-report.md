@@ -2,9 +2,8 @@
 title: Deadlocks occur when you view an SSRS report
 description: This article provides resolutions for the deadlocks that occur when you try to view an SSRS report in SharePoint integrated mode. You receive a time-out error when you try to view the report from a customized SharePoint page.
 ms.date: 07/22/2020
-ms.prod-support-area-path: Reporting Services
+ms.custom: sap:Reporting Services
 ms.reviewer: calton
-ms.prod: sql
 ---
 # Database deadlocks occur when you try to view an SSRS report in the SharePoint integrated mode after you update a data source
 

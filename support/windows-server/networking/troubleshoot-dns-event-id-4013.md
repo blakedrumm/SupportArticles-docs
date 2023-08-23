@@ -1,7 +1,7 @@
 ---
 title: Troubleshoot DNS Event ID 4013
 description: Solves an issue that the DNS server can't load AD-integrated DNS zones.
-ms.date: 09/08/2020
+ms.date: 3/24/2022
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -49,7 +49,6 @@ _Original KB number:_ &nbsp; 2001093
     | 000025f5| f5 25 00 00| 9717| DNS_ERROR_DS_UNAVAILABLE| The directory service is unavailable |
     | 0000232d| 2d 23 00 00| 9005| DNS_ERROR_RCODE_REFUSED| DNS operation refused. |
     | 0000232a| 2a 23 00 00| 9002| DNS_ERROR_RCODE_SERVER_FAILURE| DNS server failure. |
-    ||||||
 
 ### Example customer scenarios
 
@@ -107,7 +106,7 @@ DNS Event ID 4013 in the DNS event log indicates that DNS service startup was de
 Multiple conditions can exacerbate the following issues:
 
 - slow Windows startup
-- the logging of DNS event 4013 on DNS servers that are configured to host AD-integrated zones, which implicitly reside on computers acting as domain controllers. 
+- the logging of DNS event 4013 on DNS servers that are configured to host AD-integrated zones, which implicitly reside on computers acting as domain controllers.
 
 These conditions include:
 

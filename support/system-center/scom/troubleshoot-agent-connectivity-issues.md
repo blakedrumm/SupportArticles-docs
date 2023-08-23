@@ -2,7 +2,6 @@
 title: Troubleshoot agent connectivity issues
 description: Troubleshoot issues that Operations Manager agents have problem connecting to the management server in System Center 2012 Operations Manager and later versions.
 ms.date: 08/22/2020
-ms.prod-support-area-path:
 ---
 # Troubleshoot agent connectivity issues in Operations Manager
 
@@ -74,7 +73,7 @@ According to IANA standards, the output should look like this:
 If you see a different **Start Port**, the problem may be that the firewall isn't configured correctly to allow traffic through these ports. You can change the configuration on the firewall or run the following command to set the high range ports back to their default values:
 
 ```console
-netsh int ipv4 set dynamicport tcp start=49152 num=16383
+netsh int ipv4 set dynamicport tcp start=49152 num=16384
 ```
 
 You can also configure the RPC dynamic port range through the registry. For more information, see [How to configure RPC dynamic port allocation to work with firewalls](https://support.microsoft.com/help/154596).
@@ -469,4 +468,3 @@ Other OpsMgr Connector error events and the corresponding troubleshooting sugges
 | 21022|No certificate was specified. This Health Service will be unable to communicate with other health services unless those health services are in a domain that has a trust relationship with this domain. If this health service has to communicate with health services in untrusted domains, please configure a certificate.|Check the certificate.|
 | 21035| Registration of an SPN for this computer with the "%1" service class failed with error "%2." This may cause Kerberos authentication to or from this Health Service to fail.|This indicates a problem with SPN registration. Investigate SPNs for Kerberos authentication.|
 | 21036|The certificate that is specified in the registry at `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft Operations Manager\3.0\Machine Settings` cannot be used for authentication. The error is %1(%2).|This is usually a missing or unassociated private key. Investigate the certificate. Re-import the certificate, or create a new certificate and import it.|
-||||

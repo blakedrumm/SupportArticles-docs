@@ -1,7 +1,7 @@
 ---
 title: Recommended antivirus exclusions for Hyper-V hosts
 description: Describes the recommended antivirus exclusions for Hyper-V hosts. The purpose is for optimal operation of Hyper-V and the running virtual machines.
-ms.date: 09/08/2020
+ms.date: 8/16/2022
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -17,7 +17,7 @@ ms.technology: hyper-v
 
 This article describes the recommended antivirus exclusions for Hyper-V hosts for optimal operation.
 
-_Applies to:_ &nbsp; Windows 10, version 2004, Windows 10, version 1909, Windows Server 2019, Windows Server 2016, Windows Server 2012 R2  
+_Applies to:_ &nbsp; Windows 10, version 2004, Windows 10, version 1909, Windows Server 2022, Windows Server 2019, Windows Server 2016, Windows Server 2012 R2  
 _Original KB number:_ &nbsp; 3105657
 
 ## Summary
@@ -62,6 +62,9 @@ All directories that contain the following files:
 - Virtual Optical Disk images (`*.iso`)
 
 - Resilient Change Tracking file (`*.rct`)
+
+- Modified Region Table file (`*.mrt`)
+
 - Device state file (`*.vsv`)
 
     The processes that create, open, or update the file: vmms.exe, vmwp.exe, vmcompute.exe.
@@ -70,7 +73,11 @@ All directories that contain the following files:
 
     The processes that create, open, or update the file: vmwp.exe
 
-- VM Configuration file (`*.vmcx`)
+- VM Configuration file (`*.xml`)
+
+    The processes that create, open, or update the file: vmms.exe
+
+- VM Configuration v2 file (`*.vmcx`)
 
     The processes that create, open, or update the file: vmms.exe
 

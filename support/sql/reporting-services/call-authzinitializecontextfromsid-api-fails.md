@@ -2,9 +2,8 @@
 title: A call to AuthzInitializeContextFromSid fails
 description: This article provides resolutions for the problem that you may experience with the AuthzInitializeContextFromSid API function call during the delivery of an e-mail subscription.
 ms.date: 09/21/2020
-ms.prod-support-area-path: Reporting Services
+ms.custom: sap:Reporting Services
 ms.reviewer: matthofa, prabagar
-ms.prod: sql
 ---
 # A call to the AuthzInitializeContextFromSid API function fails during the delivery of an e-mail subscription in SQL Server Reporting Services
 

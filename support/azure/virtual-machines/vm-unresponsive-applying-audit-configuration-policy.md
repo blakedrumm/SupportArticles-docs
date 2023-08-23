@@ -5,9 +5,9 @@ services: virtual-machines, azure-resource-manager
 documentationcenter: ''
 author: genlin
 manager: dcscontentpm
-editor: ''
 tags: azure-resource-manager
 ms.service: virtual-machines
+ms.subservice: vm-cannot-start-stop
 ms.collection: windows
 ms.workload: na
 ms.tgt_pltfrm: vm-windows
@@ -24,9 +24,9 @@ This article provides steps to resolve issues where the virtual machine (VM) bec
 
 When you use [Boot diagnostics](./boot-diagnostics.md) to view the screenshot of the VM, you will see that the screenshot displays that the operating system (OS) was unresponsive during a boot with the message **Applying Audit Policy Configuration policy**.
 
-  ![The OS booting with the message: “Applying Audit Policy Configuration policy”](./media/vm-unresponsive-applying-audit-configuration-policy/1.png)
+  :::image type="content" source="media/vm-unresponsive-applying-audit-configuration-policy/applying-audit-policy-configuration-policy.png" alt-text="Screenshot shows the O S is unresponsive during a boot, with the message: Applying Audit Policy Configuration policy." border="false":::
 
-  ![The OS booting in Windows Server 2012 with the message: “Applying Audit Policy Configuration policy”](./media/vm-unresponsive-applying-audit-configuration-policy/2.png)
+  :::image type="content" source="media/vm-unresponsive-applying-audit-configuration-policy/applying-audit-policy-configuration-policy-windows-server-2012.png" alt-text="Screenshot shows the Windows Server 2012 O S is unresponsive during a boot, with the message: Applying Audit Policy Configuration policy." border="false":::
 
 ## Cause
 
@@ -61,7 +61,7 @@ Here’s the problematic policy:
 1. On the repair VM, open the **Registry Editor**.
 1. Locate the key **HKEY_LOCAL_MACHINE** and select **File > Load Hive** from the menu.
 
-   ![The navigation within Registry Editor to load a hive.](./media/vm-unresponsive-applying-audit-configuration-policy/3.png)
+   :::image type="content" source="media/vm-unresponsive-applying-audit-configuration-policy/load-hive.png" alt-text="Screenshot shows steps to load a hive in the Registry Editor.":::
 
    - You can use Load Hive to load registry keys from an offline system. In this case, the system is the broken disk attached to the repair VM.
    - System-wide settings are stored on **HKEY_LOCAL_MACHINE** and can be abbreviated as **HKLM**.
@@ -97,7 +97,7 @@ Here’s the problematic policy:
 
       - In the command, replace `<BOOT PARTITON>` with the letter of the partition in the attached disk that contains the boot folder.
 
-        ![Figure 4 shows the output of listing the BCD store in a Generation 1 VM, which lists under Windows Boot Loader the identifier number.](./media/vm-unresponsive-applying-audit-configuration-policy/4.png)
+        :::image type="content" source="media/vm-unresponsive-applying-audit-configuration-policy/command-output.png" alt-text="Screenshot shows the output of the command, which lists the identifier number under the Windows Boot Loader.":::
 
    1. For a Generation 2 VM, enter the following command and note the identifier listed:
 
@@ -110,7 +110,7 @@ Here’s the problematic policy:
 1. Run the following commands:
 
    **Enable the Serial Console**:
-   
+
    ```
    bcdedit /store <VOLUME LETTER WHERE THE BCD FOLDER IS>:\boot\bcd /ems {<BOOT LOADER IDENTIFIER>} ON 
    bcdedit /store <VOLUME LETTER WHERE THE BCD FOLDER IS>:\boot\bcd /emssettings EMSPORT:1 EMSBAUDRATE:115200
@@ -149,7 +149,7 @@ Here’s the problematic policy:
    ```
    REG UNLOAD HKLM\BROKENSYSTEM
    ```
-   
+
 ### Rebuild the virtual machine
 
 1. Use [step 5 of the VM Repair Commands](./repair-windows-vm-using-azure-virtual-machine-repair-commands.md#repair-process-example) to rebuild the VM.
@@ -182,3 +182,5 @@ To resolve this problem, you would need first to gather the memory dump file for
 1. On the repair VM, go to windows folder in the attached OS disk. If the driver letter that is assigned to the attached OS disk is labeled as *F*, then you need to go to `F:\Windows`.
 1. Locate the `memory.dmp` file, and then [submit a support ticket](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) with the memory dump file.
 1. If you are having trouble locating the `memory.dmp` file, then use [non-maskable interrupt (NMI) calls in serial console](./serial-console-windows.md#use-the-serial-console-for-nmi-calls) instead. Follow the guide to [generate a crash dump file using NMI calls here](/windows/client-management/generate-kernel-or-complete-crash-dump).
+
+[!INCLUDE [Azure Help Support](../../includes/azure-help-support.md)]

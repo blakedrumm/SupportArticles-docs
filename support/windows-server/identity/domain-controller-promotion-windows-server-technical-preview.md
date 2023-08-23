@@ -1,7 +1,7 @@
 ---
 title: Domain controller promotion process shows the Windows Server Technical Preview option in the Domain and Forest functional level list
 description: Provides a resolution for the issue Domain controller promotion process shows the Windows Server Technical Preview option in the Domain and Forest functional level list.
-ms.date: 09/14/2020
+ms.date: 12/9/2021
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -30,7 +30,7 @@ Consider the following scenario:
 
 However, on the second page of the DC promotion Wizard, you notice that both the Forest and Domain functional levels show an incorrect version of Windows, as in the following screenshot:
 
-:::image type="content" source="./media/domain-controller-promotion-windows-server-technical-preview/dc-options.png" alt-text="Screenshot of dc promotion wizard.":::
+:::image type="content" source="media/domain-controller-promotion-windows-server-technical-preview/dc-options.png" alt-text="Domain Controller Options page shows wrong Windows version.":::
 
 You expect the DC Promotion Wizard to show **Windows Server 2016** instead of **Windows Server Technical Preview**.
 

@@ -2,10 +2,9 @@
 title: Error when you run the DQS Cleansing transformation
 description: This article provides two workarounds for the problem where an error is logged in the SSIS log on SQL Server 2012.
 ms.date: 01/14/2021
-ms.prod-support-area-path: Data Quality Services
+ms.custom: sap:Data Quality Services
 ms.reviewer: smat
-ms.topic: troubleshooting
-ms.prod: sql 
+ms.topic: troubleshooting 
 ---
 # Error (DQS Cleansing failed the pre-execute phase) when you run the DQS Cleansing transformation in SQL Server 2012
 

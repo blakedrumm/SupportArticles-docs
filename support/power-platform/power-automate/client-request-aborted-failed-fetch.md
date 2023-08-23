@@ -1,7 +1,7 @@
 ---
 title: Client Request Aborted or Failed to fetch
 description: Provides a solution to errors that occur when you create or save flows or connections, or when navigate pages within the Power Automate product.
-ms.reviewer: 
+ms.reviewer: anaggar
 ms.topic: troubleshooting
 ms.date: 3/31/2021
 ms.subservice: power-automate-connections
@@ -21,7 +21,7 @@ When creating or saving flows or connections, or when navigating pages within th
 - > "Client Request Aborted"
 - > "Network Error"
 
-:::image type="content" source="media/client-request-aborted-failed-fetch/network-error.png" alt-text="Network error example.":::
+:::image type="content" source="media/client-request-aborted-failed-fetch/network-error.png" alt-text="Screenshot shows an example of the network error.":::
 
 ## Cause
 

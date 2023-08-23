@@ -7,8 +7,12 @@
     href: could-not-verify-account-reset-pwd.md
   - name: Maximum number of devices is reached
     href: maximum-number-of-devices-joined-workplace.md
+  - name: Troubleshoot data freshness alerts in Azure AD Connect Health
+    href: aad-connect-health-data-freshness.md
   - name: Unable to register a device
     href: cant-connect-service-error-register-device.md
+  - name: Understand AD FS sign-in events in Azure AD with Connect Health
+    href: understand-ad-fs-sign-in-events-azure-ad-connect-health.md
   - name: Understand Azure AD Connect 1.4 and device disappearance
     href: reference-connect-device-disappearance.md
   - name: Sign-in and Multi-factor Authentication
@@ -36,12 +40,25 @@
   items:
   - name: Troubleshoot adding apps
     href: troubleshoot-adding-apps.md
-  - name: Troubleshoot sign-in to SAML-based SSO apps
+    items: 
+      - name: Application takes a long time to appear
+        href: app-takes-long-time-appear.md
+      - name: Application doesn't appear
+        href: app-doesnt-appear.md
+      - name: Unable to delete an application
+        href: unable-delete-app.md
+      - name: Send notification details to Microsoft support
+        href: send-notification-details.md
+  - name: Troubleshoot sign-in to apps
     items:
       - name: Error AADSTS50003 - certificate or key not configured
         href: error-code-AADSTS50003-cert-or-key-not-configured.md
-      - name: Error AADSTS50011 - reply URL mismatch
+      - name: Error AADSTS50011 - reply URL mismatch (SAML)
         href: error-code-AADSTS50011-reply-url-mismatch.md
+      - name: Error AADSTS50011 - redirect URI mismatch (OIDC/OAuth2)
+        href: error-code-AADSTS50011-redirect-uri-mismatch.md
+      - name: Error AADSTS50020 - guest sign-in to resource tenant fails
+        href: error-code-AADSTS50020-user-account-identity-provider-does-not-exist.md
       - name: Error AADSTS50105 - user not assigned a role
         href: error-code-AADSTS50105-user-not-assigned-role.md
       - name: Error AADSTS650056 - misconfigured app
@@ -70,8 +87,14 @@
   - name: Server Error in '/' Application error in application
     href: server-error-application.md
 
-- name: Directories, Domains, and Objects
+- name: Azure AD Directories, Domains, and Objects
   items:
+  - name: Devices
+    items:
+      - name: No local administrator group privileges on Azure AD-joined device
+        href: no-local-admin-privileges-azure-ad-joined-device.md
+      - name: Pending devices
+        href: pending-devices.md
   - name: Can't delete a directory using portal
     href: cannot-delete-directory-azure-portal.md
   - name: Can't open Azure AD Module PowerShell
@@ -82,8 +105,6 @@
     href: method-invocation-failed-error.md
   - name: Password changes aren't saved
     href: pwd-change-not-save.md
-  - name: Pending devices
-    href: pending-devices.md
   - name: Perform a Workplace Join using DRS
     href: cant-perform-workplace-join.md
   - name: Remove user from recycle bin
@@ -94,6 +115,8 @@
     href: term-cmdlet-name-not-recognized-aad-cmdlet.md
   - name: Troubleshoot dynamic groups
     href: troubleshoot-dynamic-groups.md
+  - name: Troubleshoot user creation and deletion issues
+    href: troubleshoot-user-creation-deletion-issues.md
 
 - name: Governance, Compliance and Reporting 
   items:
@@ -101,7 +124,6 @@
     items:
       - name: Unknown Actors in Audit Reports
         href: unknown-actors-in-audit-reports.md
-
   - name: Sign-in Activity Reports
     items:
       - name: Verify 1st party Microsoft apps in sign-in reports
@@ -117,6 +139,8 @@
     href: adal-authenticate-android-devices-fail.md
   - name: Can't perform a Workplace Join
     href: confirm-signin-info-workplace-join.md
+  - name: MFA fails because five registered devices already use authenticator apps
+    href: cant-set-up-mfa-five-devices-registered.md
   - name: Can't sync SystemMailbox or DiscoveryMailboxSearch accounts
     href: unable-sync-system-discovery-mailbox.md
   - name: Can't verify account when resetting password
@@ -153,8 +177,6 @@
     href: user-displayed-disabled-or-enabled-mfa.md
   - name: Troubleshoot account lockout
     href: account-lockout-adfs-window-server.md
-  - name: Troubleshoot MFA issues
-    href: troubleshoot-azure-mfa-issue.md
   - name: Troubleshooting MFA issues
     href: troubleshoot-azure-mfa-issue.md
   - name: User name or password is incorrect
@@ -168,16 +190,36 @@
 
 - name: User Provisioning and Synchronization
   items:
+  - name: Password writeback
+    items:
+    - name: General troubleshooting steps
+      href: password-writeback-general-troubleshooting-steps.md
+    - name: Access rights and permissions
+      href: password-writeback-access-rights-permissions.md
+    - name: Error code 8023062C - insecure password reset or change
+      href: password-writeback-error-code-8023062c.md
+    - name: Error code SSPR_009 - synced Azure AD admin can't do cloud reset
+      href: password-writeback-error-code-sspr-009.md
+    - name: Error code SSPR_0029 - on-premises configuration not set up
+      href: password-writeback-error-code-sspr-0029.md
+    - name: Admin password reset on Microsoft 365 admin center
+      href: password-writeback-microsoft-365-admin-center.md
+    - name: Initial sign-in delays after forced password change
+      href: password-writeback-servers-need-time-catch-up.md
+    - name: On-premises policy disallows password reset
+      href: password-writeback-not-compliant-on-premises-ad-pwd-policy.md
   - name: Administrator credentials error
     href: admin-credentials-supplied-not-valid.md
+  - name: Azure AD Connect services don't start
+    href: services-sync-not-start.md
   - name: Azure AD Connect hangs during importing
     href: aad-management-agent-hangs-during-import.md
   - name: Azure AD Connect won't work after upgrading
     href: cannot-work-automatic-upgrade.md
   - name: Can't connect to Azure RMS
-    href: fail-connect-azure-information-protection-PowerShell.md
+    href: fail-connect-azure-information-protection-powerShell.md
   - name: Can't enable Device writeback
-    href: Cannot-enable-device-writeback.md
+    href: cannot-enable-device-writeback.md
   - name: Can't manage or remove objects
     href: cannot-manage-objects.md
   - name: Can't run DirSyncConfigShell.psc1
@@ -218,6 +260,8 @@
     href: unable-communicate-windows-service.md
   - name: Logon failure with 1789 error
     href: error-code-1789-configuration-wizard.md
+  - name: Model database corruption in SQLLocalDB
+    href: resolve-model-database-corruption-sqllocaldb.md
   - name: Must join domain error when installing sync tool
     href: computer-must-joined-domain.md
   - name: Number is added to username
@@ -236,6 +280,8 @@
     href: pwd-not-sync.md
   - name: Password sync fails with event ID 611 
     href: pwd-hash-sync-stops-work.md
+  - name: Permission-issue 8344 (insufficient access rights to perform the operation)
+    href: troubleshoot-permission-issue-sync-service-manager.md
   - name: ProxyAddresses attribute in Azure AD
     href: proxyaddresses-attribute-populate.md
   - name: Request isn't processed when resetting password
@@ -246,12 +292,12 @@
     href: cannot-run-scripts-powershell.md
   - name: Separate passwords required
     href: separate-pwds-required-computer-work-account.md
+  - name: Size limit was exceeded
+    href: size-limit-exceeded.md
   - name: Slow performance and high CPU usage
     href: slow-performance-high-cpu-usage.md
-  - name: Sync services don't start
-    href: services-sync-not-start.md
-  - name: Troubleshoot Azure AD Connect installation issues
-    href: installation-issues.md
+  - name: Troubleshoot Azure AD Connect version upgrading issues
+    href: troubleshoot-aad-connect-fails-to-install-upgraded-version.md
   - name: Troubleshoot Azure AD Sync installation issues
     href: installation-configuration-wizard-errors.md
   - name: Troubleshoot Azure AD Connect objects and attributes
@@ -288,7 +334,11 @@
     href: enable-disable-trace-online-services.md
   - name: IdFix.exe is not a valid Win32 application
     href: idfix-not-valid-win32-application.md
+  - name: IPv6 Support in Azure AD
+    href: azure-ad-ipv6-support.md
   - name: Security context is not associated in IdFix
     href: security-context-not-associate-domian.md
+  - name: Send Microsoft Authenticator logs and get an incident ID
+    href: send-microsoft-authenticator-logs.md  
   - name: Support data collection
     href: support-data-collection-diagnostic-logs.md

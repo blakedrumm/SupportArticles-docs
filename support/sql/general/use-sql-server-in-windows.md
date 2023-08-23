@@ -1,11 +1,14 @@
 ---
 title: SQL Server in Windows operating system
 description: This article describes how to use SQL Server in Windows 8, Windows 8.1, Windows Server 2012, and Windows Server 2012 R2 environments.
-ms.date: 09/16/2021
-ms.prod-support-area-path: Installation, Patching and Upgrade
-ms.reviewer: ramakoni
-ms.prod: sql
+ms.date: 05/30/2022
+ms.custom: sap:Installation, Patching and Upgrade
+ms.reviewer: ramakoni, randolphwest
 ---
+
+<!---Internal note: The screenshots in the article are being or were already updated. Please contact "gsprad" and "christys" for triage before making the further changes to the screenshots.
+--->
+
 # Using SQL Server in Windows
 
 This article contains guidance about how to use different versions of Microsoft SQL Server on a computer that is running Windows operating system.
@@ -20,21 +23,21 @@ _Original KB number:_ &nbsp; 2681562
 
 How to use this article:
 
-1. Find out the minimum requirements for the SQL Server version you are trying to install for the corresponding OS.
+1. 1. Find out the minimum requirements for the SQL Server version you are trying to install for the corresponding OS.
 
-    |Windows Version/SQL Version --> |SQL Server 2019|SQL Server 2017|SQL Server 2016 |SQL Server 2014 |SQL Server 2012 |SQL Server 2008 R2 |SQL Server 2008|More Information/Limitations|
-    |---|---|---|---|---|---|---|---|---|
-    |Windows Server 2022  |Yes  (RTM) |Yes  (RTM) | Not supported | Not supported | Not supported |Not supported |Not supported |[Additional information for Windows Server 2022 environments](#minimum-sql-server-version-requirements-for-windows-server-2022)|
-    |Windows 10 |Yes  (RTM) |Yes  (RTM) |Yes (SP2) |Yes (SP3) |Yes (SP4) |Not supported |Not supported |[Additional information for Windows 10 environments](#minimum-sql-server-version-requirements-for-windows-10-and-windows-server-2016)|
-    |Windows Server 2019  |Yes  (RTM) |Yes  (RTM) |Yes (SP2) |Yes (SP3) |Yes (SP4) |Not supported |Not supported |[Additional information for Windows Server 2019 environments](#minimum-sql-server-version-requirements-for-windows-server-2019)|
-    |Windows Server 2016  |Yes  (RTM) |Yes  (RTM) |Yes (SP2) |Yes (SP3) |Yes (SP4) |Not supported |Not supported |[Additional information for Windows Server 2016 environments](#minimum-sql-server-version-requirements-for-windows-10-and-windows-server-2016)|
-    |Windows 8.1  |No |Yes  (RTM) |Yes (SP2) |Yes (SP3) |Yes (SP4) |Yes (SP3)  |Yes (SP4)|[Additional information for Windows 8.1 environments](#minimum-sql-server-version-requirements-for-windows-server-2012-r2-or-windows-81)|
-    |Windows Server 2012 R2 |No  |Yes  (RTM) |Yes (SP2) |Yes (SP3) |Yes (SP4) |Yes (SP3)  |Yes (SP4) |[Additional information for Windows Server 2012 R2 environments](#minimum-sql-server-version-requirements-for-windows-server-2012-r2-or-windows-81)|
-    |Windows 8 |No |Yes  (RTM)  |Yes (SP2) |Yes (SP3) |Yes (SP4) |Yes (SP3)  |Yes (SP4) |[Additional information for Windows 8 environments](#minimum-sql-server-version-requirements-for-windows-server-2012-or-windows-8)|
-    |Windows Server 2012 |No |Yes  (RTM) |Yes (SP2) |Yes (SP3) |Yes (SP4) |Yes (SP3)  |Yes (SP4) |[Additional information for Windows Server 2012 environments](#minimum-sql-server-version-requirements-for-windows-server-2012-or-windows-8)|
-    |Hardware and Software Requirements page |[SQL Server 2019](/sql/sql-server/install/hardware-and-software-requirements-for-installing-sql-server-ver15) |[SQL Server 2017](/sql/sql-server/install/hardware-and-software-requirements-for-installing-sql-server)  |[SQL Server 2016](/sql/sql-server/install/hardware-and-software-requirements-for-installing-sql-server)  |[SQL Server 2014](/previous-versions/sql/2014/sql-server/install/hardware-and-software-requirements-for-installing-sql-server)  |[SQL Server 2012](/previous-versions/sql/sql-server-2012/ms143506(v=sql.110))  |[SQL Server 2008 R2](/previous-versions/sql/sql-server-2008-r2/ms143506%28v%3dsql.105%29)  |[SQL Server 2008](/previous-versions/sql/sql-server-2008/ms143506%28v%3dsql.100%29) |
-    |||||||||
-
+   |Windows Version/SQL Version |SQL Server 2022|SQL Server 2019|SQL Server 2017|SQL Server 2016 |SQL Server 2014 |SQL Server 2012 |SQL Server 2008 R2 |SQL Server 2008|More Information/Limitations|
+   |---| -------- |---|---|---|---|---|---|---|---|
+   |Windows Server 2022  |Yes  (RTM) |Yes  (RTM) |Yes  (RTM) | Not supported | Not supported | Not supported |Not supported |Not supported |[Additional information for Windows Server 2022 environments](#minimum-sql-server-version-requirements-for-windows-server-2022-and-windows-11)|
+   |Windows 11 |Yes  (RTM)|Yes  (RTM) |Yes  (RTM) |Not supported |Not supported |Not supported |Not supported |Not supported |[Additional information for Windows 11 environments](#minimum-sql-server-version-requirements-for-windows-server-2022-and-windows-11)|
+   |Windows 10 |Yes  (RTM) |Yes  (RTM) |Yes  (RTM) |Yes (SP2) |Yes (SP3) |Yes (SP4) |Not supported |Not supported |[Additional information for Windows 10 environments](#minimum-sql-server-version-requirements-for-windows-10-and-windows-server-2016)|
+   |Windows Server 2019  |Yes  (RTM) |Yes  (RTM) |Yes  (RTM) |Yes (SP2) |Yes (SP3) |Yes (SP4) |Not supported |Not supported |[Additional information for Windows Server 2019 environments](#minimum-sql-server-version-requirements-for-windows-server-2019)|
+   |Windows Server 2016  |Yes  (RTM) |Yes  (RTM) |Yes  (RTM) |Yes (SP2) |Yes (SP3) |Yes (SP4) |Not supported |Not supported |[Additional information for Windows Server 2016 environments](#minimum-sql-server-version-requirements-for-windows-10-and-windows-server-2016)|
+   |Windows 8.1  |No|No |Yes  (RTM) |Yes (SP2) |Yes (SP3) |Yes (SP4) |Yes (SP3)  |Yes (SP4)|[Additional information for Windows 8.1 environments](#minimum-sql-server-version-requirements-for-windows-server-2012-r2-or-windows-81)|
+   |Windows Server 2012 R2 |No|No  |Yes  (RTM) |Yes (SP2) |Yes (SP3) |Yes (SP4) |Yes (SP3)  |Yes (SP4) |[Additional information for Windows Server 2012 R2 environments](#minimum-sql-server-version-requirements-for-windows-server-2012-r2-or-windows-81)|
+   |Windows 8 |No|No |Yes  (RTM)  |Yes (SP2) |Yes (SP3) |Yes (SP4) |Yes (SP3)  |Yes (SP4) |[Additional information for Windows 8 environments](#minimum-sql-server-version-requirements-for-windows-server-2012-or-windows-8)|
+   |Windows Server 2012 |No|No |Yes  (RTM) |Yes (SP2) |Yes (SP3) |Yes (SP4) |Yes (SP3)  |Yes (SP4) |[Additional information for Windows Server 2012 environments](#minimum-sql-server-version-requirements-for-windows-server-2012-or-windows-8)|
+   |Hardware and Software Requirements page |[SQL Server 2022](/sql/sql-server/install/hardware-and-software-requirements-for-installing-sql-server-2022?view=sql-server-ver16&preserve-view=true)|[SQL Server 2019](/sql/sql-server/install/hardware-and-software-requirements-for-installing-sql-server-ver15) |[SQL Server 2017](/sql/sql-server/install/hardware-and-software-requirements-for-installing-sql-server)  |[SQL Server 2016](/sql/sql-server/install/hardware-and-software-requirements-for-installing-sql-server)  |[SQL Server 2014](/previous-versions/sql/2014/sql-server/install/hardware-and-software-requirements-for-installing-sql-server)  |[SQL Server 2012](/previous-versions/sql/sql-server-2012/ms143506(v=sql.110))  |[SQL Server 2008 R2](/previous-versions/sql/sql-server-2008-r2/ms143506%28v%3dsql.105%29)  |[SQL Server 2008](/previous-versions/sql/sql-server-2008/ms143506%28v%3dsql.100%29) ||
+   
 1. To find answers to the following questions, review the corresponding link under Hardware and Software Requirements page.
 
     - Which editions of SQL Server are compatible with which versions of Windows?
@@ -52,15 +55,16 @@ How to use this article:
     1. The **Hardware and Software Requirements** page for SQL 2016 confirms that SQL Server 2016 Developer edition is supported on Windows 10 Professional.
   
     1. The More Information/Limitations column for Windows Server 2016 do not call out any additional known issues for this configuration.
-    
-## Minimum SQL Server version requirements for Windows Server 2022
 
-This section describes the minimum version requirements to install SQL Server on a computer that is running Windows Server 2022.
+## Minimum SQL Server version requirements for Windows Server 2022 and Windows 11
 
-Before you install SQL Server on a computer that is running Windows Server 2022 you must make sure that you fulfill the following minimum requirements, as appropriate for your situation.
+This section describes the minimum version requirements to install SQL Server on a computer that is running Windows Server 2022 or Windows 11.
 
+Before you install SQL Server on a computer that is running Windows Server 2022 or Windows 11, you must make sure that you fulfill the following minimum requirements, as appropriate for your situation.
+
+- **For SQL Server 2022 on Windows**
+   The release is supported at the SQL Server 2022 on Windows RTM Release version.
 - **For SQL Server 2019 on Windows**
-
     The release is supported at the SQL Server 2019 on Windows RTM Release version.
 
 - **For SQL Server 2017 on Windows**
@@ -69,7 +73,7 @@ Before you install SQL Server on a computer that is running Windows Server 2022 
 
 - **For SQL Server 2016** and older versions
 
-    SQL Server 2016 and older versions are not supported on Windows Server 2022.
+    SQL Server 2016 and older versions are not supported on Windows Server 2022 or Windows 11.
   
 ## Minimum SQL Server version requirements for Windows Server 2019
 
@@ -77,8 +81,9 @@ This section describes the minimum version requirements to install SQL Server on
 
 Before you install SQL Server on a computer that is running Windows Server 2019 you must make sure that you fulfill the following minimum requirements, as appropriate for your situation.
 
+- **For SQL Server 2022 on Windows**  
+   The release is supported at the SQL Server 2022 on Windows RTM Release version.
 - **For SQL Server 2019 on Windows**
-
     The release is supported at the SQL Server 2019 on Windows RTM Release version.
 
 - **For SQL Server 2017 on Windows**
@@ -100,7 +105,7 @@ Before you install SQL Server on a computer that is running Windows Server 2019 
     > [!NOTE]
     >
     > - Make sure that you check known setup issues when you install SQL Server 2012 on Windows 10 or Windows Server 2016.
-    > - The Books Online topic **Hardware and Software Requirements for Installing SQL Server 2012** has not yet been updated to reflect the support for Windows Server 2016.
+    > - The Books Online topic **Hardware and Software Requirements for Installing SQL Server 2012** has not yet been updated to reflect the support for Windows Server 2016 and Windows Server 2019.
 
 - **For SQL Server 2008 R2**
 
@@ -116,9 +121,10 @@ This section describes the minimum version requirements to install SQL Server on
 
 Before you install SQL Server on a computer that is running Windows 10 or Windows Server 2016, you must make sure that you fulfill the following minimum requirements, as appropriate for your situation.
 
+- **For SQL Server 2022 on Windows**  
+   The release is supported at the SQL Server 2019 on Windows Server 2016 RTM Release version and Windows 10 TH1 1507 or greater versions.
 - **For SQL Server 2019 on Windows**
-
-    The release is supported at the SQL Server 2019 on Windows RTM Release version. 
+-  The release is supported at the SQL Server 2019 on Window Server 2016 RTM Release version and Windows 10 TH1 1507 or greater versions.
 
 - **For SQL Server 2017 on Windows**
 
@@ -140,7 +146,7 @@ Before you install SQL Server on a computer that is running Windows 10 or Window
   >
   > - Make sure that you check known setup issues when you install SQL Server 2012 on Windows 10 or Windows Server 2016.
   >
-  > - The Books Online topic **Hardware and Software Requirements for Installing SQL Server 2012** has not yet been updated to reflect the support for Windows Server 2016.
+  > - The Books Online topic **Hardware and Software Requirements for Installing SQL Server 2012** has not yet been updated to reflect the support for Windows Server 2016 and Windows Server 2019.
 
 - **For SQL Server 2008 R2**
 
@@ -156,8 +162,9 @@ This section describes the minimum version requirements for installing SQL Serve
 
 Before you install SQL Server on a computer that is running Windows Server 2012 R2 or Windows 8.1, you must make sure that you fulfill the following minimum requirements, as appropriate for your situation:
 
+- **For SQL Server 2022 on Windows**  
+   SQL Server 2022 is not supported on Windows 8.1 or Windows Server 2012 R2.
 - **For SQL Server 2019 on Windows**
-
     SQL Server 2019 is not supported on Windows 8.1 or Windows Server 2012 R2.
 
 - **For SQL Server 2017 on Windows**
@@ -201,8 +208,9 @@ This section describes the minimum version requirements to install SQL Server on
 
 Before you install SQL Server on a computer that is running Windows Server 2012 or Windows 8, you must make sure that you fulfill the following minimum requirements, as appropriate for your situation:
 
+- **For SQL Server 2022 on Windows**
+   SQL Server 2022 is not supported on Windows 8.1 or Windows Server 2012 R2
 - **For SQL Server 2019 on Windows**
-
     SQL Server 2019 is not supported on Windows 8.1 or Windows Server 2012 R2.
 
 - **For SQL Server 2017 on Windows**
@@ -231,7 +239,7 @@ Before you install SQL Server on a computer that is running Windows Server 2012 
   > [!NOTE]
   > The RTM installation of the product is supported. However, you have to install the respective service packs after the initial setup is complete. You will see the following message on the Solution Center page:
 
-  :::image type="content" source="media/use-sql-server-in-windows/problem-details-sql-server-2008-r2.png" alt-text="Screenshot of the setup problem details for SQL Server 2008 R2: Microsoft SQL Server (2008 and 2008 R2) has known compatibility issues." border="false":::
+  :::image type="content" source="media/use-sql-server-in-windows/problem-details-sql-server-2008-r2.svg" alt-text="Screenshot of the setup problem details for SQL Server 2008 R2: Microsoft SQL Server (2008 and 2008 R2) has known compatibility issues." border="false":::
 
   For more information, see [How to obtain the latest service pack for SQL Server 2008 R2](https://support.microsoft.com/help/2527041).
 
@@ -242,14 +250,14 @@ Before you install SQL Server on a computer that is running Windows Server 2012 
   > [!NOTE]
   > The RTM installation of the product is supported. However, you have to install the respective service packs after the initial setup is complete. Your SQL server 2008 installation is not supported unless you apply Service Pack 4 after you install the RTM edition. You will see the following message on the Solution Center page.
 
-  :::image type="content" source="media/use-sql-server-in-windows/problem-details-sql-server-2008.png" alt-text="Screenshot of the setup problem details for SQL Server 2008: Microsoft SQL Server (2008 and 2008 R2) has known compatibility issues." border="false":::
+  :::image type="content" source="media/use-sql-server-in-windows/problem-details-sql-server-2008.svg" alt-text="Screenshot of the setup problem details for SQL Server 2008: Microsoft SQL Server (2008 and 2008 R2) has known compatibility issues." border="false":::
 
   For more information, see [How to obtain the latest service pack for SQL Server 2008](https://support.microsoft.com/help/968382).
 
   > [!IMPORTANT]
   > The following dialog box appears in SQL Server 2008 R2 and SQL Server 2008 when you run the Setup program.
 
-  :::image type="content" source="media/use-sql-server-in-windows/program-has-compatibility-issues.png" alt-text="Screenshot of the Program Compatibility Assistant dialog box, which shows This program has compatibility problems." border="false":::
+  :::image type="content" source="media/use-sql-server-in-windows/program-has-compatibility-issues.svg" alt-text="Screenshot of the Program Compatibility Assistant dialog box, which shows This program has compatibility problems." border="false":::
 
   After the SQL Server Setup program is finished, you have to install service packs before you run SQL Server on this version of Windows.
 
@@ -311,13 +319,11 @@ The following table summarizes how versions of SQL Server work with some new fea
 |Resilient File System (ReFS)||||ReFS is not supported in SQL 2012 and all other down-level versions. SQL Server 2014 supports ReFS.| |
 |Mitigation of RAM Hardware Errors|LazyWriter|Checksum page sniffer|SQL Server 2012||When SQL Server 2012 is installed on a Windows 2012 operating system with hardware that supports bad memory diagnostics, you will notice new error messages like 854, 855, and 856 instead of the 832 errors that LazyWriter usually generates.|
 |Number of instances per cluster|High availability|Failover Clustering|SQL Server 2012|25 per failover cluster when you use drive letters and up to 50 if you are using SMB file share storage| |
-|Cluster Share Volumes (CSV's)||||Beginning in SQL Server 2014, AlwaysOn Failover Cluster Instances supports Clustered Shared Volumes (CSV) in both Windows Server 2008 R2 and Windows Server 2012. For more information on CSV, see [Understanding Cluster Shared Volumes in a Failover Cluster](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/dd759255(v=ws.11)). CSVs are not supported in versions prior to SQL Server 2014.| |
-|||||||
+|Cluster Share Volumes (CSV's)||||Beginning in SQL Server 2014, Always On Failover Cluster Instances supports Clustered Shared Volumes (CSV) in both Windows Server 2008 R2 and Windows Server 2012. For more information on CSV, see [Understanding Cluster Shared Volumes in a Failover Cluster](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/dd759255(v=ws.11)). CSVs are not supported in versions prior to SQL Server 2014.| |
 
 ## SQL Server 2005 information
 
 This section provides support information about instances of SQL Server 2005 in Windows 8.1 or Windows 8 environments. It also describes the options that are available for customers who are using SQL Server 2005.
-  
 Microsoft SQL Server 2005 (the release version and service packs) and earlier versions of SQL Server are not supported on Windows 10, Windows Server 2016, Windows Server 2012 R2, Windows Server 2012, Windows 8.1, or Windows 8. You will receive a warning in the Action Center if Windows 10, Windows 8.1, or Windows 8 detects an instance of SQL Server 2005.
 
 To resolve this issue, upgrade or remove the existing instance of SQL Server 2005. For information about how to upgrade SQL Server, see [Upgrade to SQL Server](/sql/database-engine/install-windows/upgrade-sql-server).
@@ -326,7 +332,6 @@ To resolve this issue, upgrade or remove the existing instance of SQL Server 200
 > This link points to SQL Server 2014. You can use the version picker tool at the top of the MSDN link (Other Versions) for information about other versions.
 
 For information about the Express editions of SQL Server, go to the following Microsoft websites:
-  
 - [SQL Server 2014 Service Pack 2 Express Edition](https://www.microsoft.com/download/details.aspx?id=53167)
 
 - [SQL Server 2012 Service Pack 3 (SP3) Express Edition](https://www.microsoft.com/download/details.aspx?id=50003)
@@ -381,3 +386,4 @@ For more information about how to uninstall an existing instance of SQL Server 2
 - SQL Server 2016 Web
 - SQL Server 2017 on Windows (all editions)
 - SQL Server 2019 on Windows
+

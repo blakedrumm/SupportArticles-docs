@@ -1,7 +1,7 @@
 ---
 title: Activation failures around January 8, 2019, on volume-licensed Windows 7 Service Pack 1 KMS clients
 description: Provides a solution to an issue where users may receive the Windows Activation or (Windows is not genuine) notifications starting at or after 10:00 UTC, January 8, 2019.
-ms.date: 12/07/2020
+ms.date: 04/28/2023
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -41,21 +41,21 @@ For Windows editions that experience activation and "not genuine" errors that ar
 
 1. You receive a **Windows is not genuine** error message after you log on.
 
-    :::image type="content" source="./media/activation-failures-not-genuine-notifications-volume-licensed-kms-client/error-message-for-step-1.jpg" alt-text="Screenshot of error message." border="false":::
+    :::image type="content" source="media/activation-failures-not-genuine-notifications-volume-licensed-kms-client/windows-is-not-genuine-error-message.png" alt-text="Screenshot of Windows is not genuine error message." border="false":::
 
 2. A **This copy of windows is not genuine** watermark appears in the bottom-right corner of the Windows desktop on a black background.
 
-    :::image type="content" source="./media/activation-failures-not-genuine-notifications-volume-licensed-kms-client/screenshot-of-the-watermark.jpg" alt-text="Screenshot of the watermark." border="false":::
+    :::image type="content" source="media/activation-failures-not-genuine-notifications-volume-licensed-kms-client/watermark.png" alt-text="Screenshot of the watermark appears in the bottom-right corner of the Windows desktop.":::
 
 3. The `slmgr /dlv` output reports error 0xC004F200.
 
-    :::image type="content" source="./media/activation-failures-not-genuine-notifications-volume-licensed-kms-client/command-output-error-0xc004f200.png" alt-text="Screenshot of the command output." border="false":::
+    :::image type="content" source="media/activation-failures-not-genuine-notifications-volume-licensed-kms-client/command-output-error-0xc004f200.png" alt-text="Screenshot of the command output, which reports error 0xC004F200.":::
 
 4. Activations that are made by using the `slmgr /ato` command fails and return the following message:
 
     > Windows is running within the non-genuine notification period. Run 'slui.exe' to go online and validate Windows.
 
-    :::image type="content" source="./media/activation-failures-not-genuine-notifications-volume-licensed-kms-client/activation-failure.jpg" alt-text="Screenshot of the error." border="false":::
+    :::image type="content" source="media/activation-failures-not-genuine-notifications-volume-licensed-kms-client/activation-failure.png" alt-text="Screenshot of the message that returns after using the command.":::
 
 5. The following events are logged in the event log.
 
@@ -65,8 +65,7 @@ For Windows editions that experience activation and "not genuine" errors that ar
 |Application|Microsoft-Windows-Security-SPP|8208|Acquisition of genuine ticket failed (hr=0xC004C4A2) for template Id 66c92734-d682-4d71-983e-d6ec3f16059f|
 |Application|Windows Activation Technologies|13|Genuine validation result: hrOffline = 0x00000000, hrOnline =0xC004C4A2|
 |Application|Microsoft-Windows-Security-SPP|8196|License Activation Scheduler (sppuinotify.dll) was not able to automatically activate. Error code:  0xC004F200:|
-|||||
-
+  
 ## Cause
 
 A recent update to the Microsoft Activation and Validation unintentionally caused a "not genuine" error on volume-licensed Windows 7 clients that had [KB971033](https://support.microsoft.com/help/971033) installed. The change was introduced at 10:00:00 UTC on January 8, 2019, and was reverted at 4:30:00 UTC on January 9, 2019.
@@ -151,9 +150,12 @@ The following table lists the KMS client keys for each edition of Windows 7.
 |Windows 7 Enterprise|33PXH-7Y6KF-2VJC9-XBBR8-HVTHH|
 |Windows 7 Enterprise N|YDRBP-3D83W-TY26F-D46B2-XCKRJ|
 |Windows 7 Enterprise E|C29WB-22CC8-VJ326-GHFJW-H9DH4|
-|||
-
+  
 > [!NOTE]
 >
 > - Scripts that contain the KMS client setup key must target the corresponding operating system edition.
 > - For services that do not have [KB 971033](https://support.microsoft.com/help/971033) installed but experience the issue that is mentioned in the [Symptoms](#symptoms) section, you can also rebuild activation-related files and reactivate the system by using the script that is mentioned in the list of reactivation commands.
+
+## Data collection
+
+If you need assistance from Microsoft support, we recommend you collect the information by following the steps mentioned in [Gather information by using TSS for deployment-related issues](../windows-troubleshooters/gather-information-using-tss-deployment.md).

@@ -2,9 +2,8 @@
 title: Error message when Report Server service starts
 description: This article helps you resolve the problem that occurs when you reset Report Server service account. 
 ms.date: 09/21/2020
-ms.prod-support-area-path: Reporting Services
+ms.custom: sap:Reporting Services
 ms.reviewer: lukaszp
-ms.prod: sql
 ---
 # Error message when the Report Server service starts or when you try to access the Reporting Services Web site or Power BI Report Server: 'Key not valid for use in specified state'
 

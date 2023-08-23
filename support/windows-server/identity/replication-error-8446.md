@@ -1,7 +1,7 @@
 ---
 title: Troubleshoot AD replication error 8446
 description: Describes the symptoms, cause, and resolution steps for issues when Active Directory replication fails with error 8446.
-ms.date: 09/08/2020
+ms.date: 04/28/2023
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -67,7 +67,6 @@ This article describes the symptoms, cause, and resolution steps for issues when
     |---|---|---|
     | NTDS Replication| 1699| The local domain controller failed to retrieve the changes requested for the following directory partition. As a result, it was unable to send the change requests to the domain controller at the following network address. 8446 The replication operation failed to allocate memory |
     | NTDS General| 1079| Active Directory could not allocate enough memory to process replication tasks. Replication might be affected until more memory is available Increase the amount of physical memory or virtual memory and restart this domain controller |
-    ||||  
 
 4. When you try to manually initiate replication using Repadmin or Active Directory Sites and Services, you get the following error message:
 
@@ -155,7 +154,7 @@ These steps are not needed for Window Server 2008 and later.
 
     Add the "Database Cache Size" counter.   In the following example, the database cache size grows at an increasing trend of Virtual Bytes and Working Set of the LSASS Process eventually consuming all 2 GB of available virtual memory allocated to the LSASS process.  You will encounter the 8446 replication failure once this virtual address space is consumed.  Refer to the " LSASS ESE Database cache is not limited by default" section of the article for detailed instructions on how to avoid this condition.  
 
-    ![Screenshot of database cache size increasing trend](./media/replication-error-8446/memory.jpg)
+    :::image type="content" source="media/replication-error-8446/memory-lsass-process.png" alt-text="Screenshot of the database cache size which grows at an increasing trend.":::
 
 ### LSASS ESE Database cache is not limited by default
 
@@ -173,3 +172,7 @@ You can use the "EDB max buffers" registry value for limiting ESE cache allocati
 You may apply the following values as start for an optimization, depending is the /3GB boot.ini switch is use or not:
 >
 > Without /3GB switch: "EDB max buffers", Reg_DWord: 157286 (1.2 GB); expected LSASS consumption ~1.5 GB With /3GB switch: "EDB max buffers", Reg_DWord: 235929 (1.8 GB); expected LSASS consumption ~2.1 GB
+
+## Data collection
+
+If you need assistance from Microsoft support, we recommend you collect the information by following the steps mentioned in [Gather information by using TSS for Active Directory replication issues](../../windows-client/windows-troubleshooters/gather-information-using-tss-ad-replication.md).

@@ -9,9 +9,9 @@ metadata:
   services: virtual-machines
   ms.service: virtual-machines #Required; service per approved list. service slug assigned to your service by ACOM.
   ms.topic: landing-page # Required
-  author: v-miegge  #Required; your GitHub user alias, with correct capitalization.
+  author: genlin  #Required; your GitHub user alias, with correct capitalization.
   ms.author: genli #Required; microsoft alias of author; optional team alias.
-  ms.date: 08/26/2021
+  ms.date: 03/31/2023
 
 # linkListType: architecture | concept | deploy | download | get-started | how-to-guide | learn | overview | quickstart | reference | tutorial | video | whats-new
 
@@ -25,7 +25,7 @@ landingContent:
       - linkListType: how-to-guide
         links:
           - text: Documentation for creating and managing VMs
-            url: https://docs.microsoft.com/azure/virtual-machines/
+            url: /azure/virtual-machines/
 
   # Card
   - title: Troubleshoot deployment failures
@@ -155,6 +155,12 @@ landingContent:
             url: ./performance-diagnostics.md
           - text:  Troubleshoot performance issues through Monitoring
             url: ./troubleshoot-performance-virtual-machine-linux-windows.md
+          - text:  Isolate bottlenecks on Linux virtual machines
+            url: ./troubleshoot-performance-bottlenecks-linux.md
+          - text:  Troubleshoot high-CPU issues on Azure Windows virtual machines
+            url: ./troubleshoot-high-cpu-issues-azure-windows-vm.md 
+          - text:  Azure VM is unavailable for 15 minutes
+            url: ./azure-vm-unavailable.md                        
        
    # Card
   - title: VM Extension issues
@@ -165,5 +171,12 @@ landingContent:
             url: /azure/virtual-machines/extensions/troubleshoot
           - text:  Installing the extension in your VM
             url: /azure/virtual-machines/extensions/diagnostics-windows
+          - text:  Multiple certificates on IaaS VM that uses extensions
+            url: ./multiple-certificates-iaas-vm-extensions.md
+          - text:  Troubleshoot extension certificate issues on Windows VM
+            url: ./troubleshoot-extension-certificates-issues-windows-vm.md
           - text:  Custom Script Extension for Windows
             url: /azure/virtual-machines/extensions/custom-script-windows#tips-and-tricks
+
+                        
+            

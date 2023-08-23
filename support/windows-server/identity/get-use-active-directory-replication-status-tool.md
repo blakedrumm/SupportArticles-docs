@@ -1,7 +1,7 @@
 ---
 title: How to get and use the Active Directory Replication Status Tool
 description: Describes how to get and use the Active Directory Replication Status Tool.
-ms.date: 2/10/2021
+ms.date: 06/08/2023
 author: Deland-Han
 ms.author: delhan
 manager: dcscontentpm
@@ -15,14 +15,13 @@ ms.technology: windows-server-active-directory
 ---
 # How to get and use the Active Directory Replication Status Tool
 
-This article introduces the Active Directory Replication Status Tool ([ADREPLSTATUS](https://www.microsoft.com/download/details.aspx?id=30005)). This tool helps administrators identify, prioritize, and fix Active Directory replication errors on a single domain controller (DC) or an all DCs that are in an Active Directory domain or forest.
+> [!IMPORTANT]
+> As of June 2nd, 2023, the Active Directory Replication Status Tool is no longer available for download. The following article is provided for historical purposes only.
+
+This article introduces the Active Directory Replication Status Tool (ADREPLSTATUS). This tool helps administrators identify, prioritize, and fix Active Directory replication errors on a single domain controller (DC) or any DCs in an Active Directory domain or forest.
 
 _Applies to:_ &nbsp; Windows Server 2019, Windows Server 2016, Windows Server 2012 R2  
 _Original KB number:_ &nbsp; 4469274
-
-You can find [ADREPLSTATUS](https://www.microsoft.com/download/details.aspx?id=30005) on the Microsoft Download Center. You can also find it in Microsoft Operations Management Suite (OMS), Microsoft’s all-in-one cloud IT management solution.
-
-If you run the tool and then receive a message that the license has expired, please download and install the tool again. [ADREPLSTATUS](https://www.microsoft.com/download/details.aspx?id=30005) was recently updated on the Microsoft Download Center.
 
 ## Features
 
@@ -40,23 +39,23 @@ If you run the tool and then receive a message that the license has expired, ple
 
 The ADREPLSTATUS user interface consists of a toolbar and Microsoft Office-style ribbon to expose different features. The **Replication Status Viewer** tab displays the replication status for all DCs in the forest. The following screenshot shows ADREPLSTATUS highlighting a DC that hasn't replicated in Tombstone Lifetime number of days (identified here by the black color-coding).
 
-:::image type="content" source="./media/get-use-active-directory-replication-status-tool/replication-status-viewer-tab.png" alt-text="The screenshot shows ADREPLSTATUS highlighting a DC that hasn't replicated in Tombstone Lifetime number of days." border="false":::
+:::image type="content" source="media/get-use-active-directory-replication-status-tool/replication-status-viewer-tab.png" alt-text="ADREPLSTATUS highlights a DC that hasn't replicated in Tombstone Lifetime number of days." border="false":::
 
 ### Error only
 
 By using the **Errors Only** button (upper-right of image below), you can filter out healthy DCs to focus on destination DCs that are reporting replication errors:
 
-:::image type="content" source="./media/get-use-active-directory-replication-status-tool/using-errors-only-button.png" alt-text="Filter out healthy DCs by using the Errors Only button." border="false":::
+:::image type="content" source="media/get-use-active-directory-replication-status-tool/using-errors-only-button.png" alt-text="Filter out healthy DCs by using the Errors Only button." border="false":::
 
 ### Replication error analysis
 
 The Replication Error Guide has a **Detected Errors Summary** view that records each unique replication error that occurs on the set of DCs that are targeted by the administrator.
 
-:::image type="content" source="./media/get-use-active-directory-replication-status-tool/detected-errors-summary.png" alt-text="Detected Errors Summary view that records each unique replication error." border="false":::
+:::image type="content" source="media/get-use-active-directory-replication-status-tool/detected-errors-summary.png" alt-text="Detected Errors Summary view that records each unique replication error." border="false":::
 
 Selecting any of the replication error codes loads the recommended troubleshooting content for that error. For example, the following is a screenshot for when the TechNet Article for Active Directory Replication Error 1256 is displayed:
 
-:::image type="content" source="./media/get-use-active-directory-replication-status-tool/ad-replication-error-1256.png" alt-text="Screenshot for when the TechNet Article for Active Directory Replication Error 1256 is displayed." border="false":::
+:::image type="content" source="media/get-use-active-directory-replication-status-tool/ad-replication-error-1256.png" alt-text="The TechNet article for Active Directory Replication Error 1256 is displayed." border="false":::
 
 The goals for this tool are to help administrators identify and fix Active Directory replication errors before they cause user and application failures or outages, or lingering objects cause short or long-term replication failures, and to give administrators more insight into the operation of Active Directory replication in their environments.
 
@@ -76,3 +75,7 @@ The current version of ADREPLSTATUS as of this posting is 2.2.20717.1 (as report
 > The time that's needed to provide a solution depends on the team's workload as well as problem complexity and cause. Code defects in the ADREPLSTATUS tool can typically be resolved relatively quickly. Tool failures due to external causes may take longer, unless a workaround can be found.
 >
 > The ADREPLSTATUS team can't fix Active Directory replication errors that are identified by the ADREPLSTATUS tool. Contact your support provider to fix the issue. You may also submit and research replication errors at [this TechNet Windows Server forum](https://social.technet.microsoft.com/Forums/en-US/home?forum=winserverDS).
+
+## Data collection
+
+If you need assistance from Microsoft support, we recommend you collect the information by following the steps mentioned in [Gather information by using TSS for Active Directory replication issues](../../windows-client/windows-troubleshooters/gather-information-using-tss-ad-replication.md).
